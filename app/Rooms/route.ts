@@ -27,7 +27,6 @@ const client = new Client('https://us-atl-3b185468.colyseus.cloud');
   //Create a new game
   export async function POST(request: Request) {
    
-  
     var room: Room;
 
     const mypost = await request.json();
@@ -35,19 +34,16 @@ const client = new Client('https://us-atl-3b185468.colyseus.cloud');
         let playerid = mypost.playerId;
         let playerName = mypost.playerName;
         let hostIp = mypost.playerIp;
-        
-       
-        
+         
         room = await client.joinOrCreate(roomName, { "ip": hostIp , "name": playerName , "playerId":playerid});
            
             room.state.players.onAdd(function (player: any , sessionId: string) {
-              console.log(player, "has been added at", sessionId);
-              
-              room.state.players.forEach((Player: any) => console.log(Player.toJSON()));
+             // console.log(player, "has been added at", sessionId);
+             // room.state.players.forEach((Player: any) => console.log(Player.toJSON()));
               players = room.state.players;
-              console.log('fuck',players);
-              // add your player entity to the game world!
-              // add via redux to some object?
+             // console.log(players);
+             // add your player entity to the game world!
+             // add via redux to some object?
                });
 
                room.state.players.onRemove((player: any, sessionId: string) => {

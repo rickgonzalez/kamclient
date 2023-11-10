@@ -3,14 +3,15 @@ import  {Client, Room, RoomAvailable } from "colyseus.js";
 import React, { useState } from 'react';
 import *  as Core from '@colyseus/core';
 import { matchMaker } from "@colyseus/core";
-
+import { NextResponse } from 'next/server'
 
 const client = new Client('https://us-atl-3b185468.colyseus.cloud');
 
 var mystate: unknown;
 
 var myRoomObject: any = {};
-var myroom : any; 
+
+var players: any;
 
 //Get Room info and players
 export async function GET(request: Request, {params}:{params:{roomid:string}}) {
@@ -41,26 +42,37 @@ export async function GET(request: Request, {params}:{params:{roomid:string}}) {
   export async function POST(request: Request, {params}:{params:{roomid:string}}): Promise<Response> {
    
     const mypost = await request.json();
-    
-    var newroom: Room;
-    
+    var room: Room;
     let roomid = params.roomid;
-    
+    let playerid = mypost.playerId;
     let playerName = mypost.playerName;
-    let playerId = mypost.playerId;
     let hostIp = mypost.playerIp;
 
 
         try {
-           newroom =  await client.joinById(roomid, { ip: hostIp , name: playerName, playerId: playerId });
-            
-          } catch (e) {
+           room =  await client.joinById(roomid, { ip: hostIp , name: playerName, playerId: playerid });
+           room.state.players.onAdd(function (player: any , sessionId: string) {
+           players = room.state.players;
+            // add your player entity to the game world!
+            // add via redux to some object?
+            });
+
+              room.state.players.onRemove((player: any, sessionId: string) => {
+              console.log(player, "has been removed at", sessionId);
+               delete player[sessionId];
+           
+               // remove your player entity from the game world!
+             });
+          
+             return NextResponse.json({players});
+          
+            } catch (e) {
             console.error  ("error joining room ", e);
             return Response.json({ 'error':e });
           } 
 
           
-        return Response.json(newroom.state.toJSON())
+       
   }
 
 
