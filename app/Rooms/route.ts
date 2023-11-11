@@ -6,8 +6,8 @@ import { NextResponse } from 'next/server'
 var players: any;
 
 
+const client = new Client(process.env.COLYSEUS_HOST);
 
-const client = new Client('https://us-atl-3b185468.colyseus.cloud');
 //const [state, setState] = useState(room.state && room.state);
 
   export async function GET(request: Request) {

@@ -5,41 +5,51 @@ import *  as Core from '@colyseus/core';
 import { matchMaker } from "@colyseus/core";
 import { NextResponse } from 'next/server'
 
-const client = new Client('https://us-atl-3b185468.colyseus.cloud');
+const client = new Client(process.env.COLYSEUS_HOST);
 
 var mystate: unknown;
 
 var myRoomObject: any = {};
-
 var players: any;
+var revisedPlayers: any = {};
+var matchroom: any;
 
 //Get Room info and players
 export async function GET(request: Request, {params}:{params:{roomid:string}}) {
-  var myroom: Room;
+ 
+  var room: Room;
+  let roomid = params.roomid;
+  let playerid = '000';
+  let playerName = 'auditor';
+ 
+      try {
+         room =  await client.joinById(roomid, { name: playerName, playerId: playerid });
+         room.state.players.onAdd(function (player: any , sessionId: string) {       
+         players = room.state.players;
+         room.leave();
+         // revisedPlayers = players.filter((item: { name: string; }) => player.name !== "auditor");
+         //  const revisedPlayers = players.filter(((player: any) => player.name !== "auditor"));
+         //  console.log(revisedPlayers);
+          // var key = sessionId;
+          // delete players[key];
+       
+           });
+       
+           return NextResponse.json({players});
+        
+          } catch (e) {
+          console.error  ("error joining room ", e);
+          return Response.json({ 'error':e });
+        } 
 
-  client.getAvailableRooms().then(rooms => {
-      rooms.forEach((myroom) => { 
-        if (myroom.roomId == params.roomid){
-            myRoomObject.name = myroom.name;
-            myRoomObject.id = myroom.roomId;
-            myRoomObject.clients = myroom.clients;
-            } 
-      });
-  
-  }).catch(e => {
-    console.error(e);
-    return Response.json({ 'error':e });
-  });
 
-  return Response.json({ myRoomObject });
+
  }  
  
  
 
 //Player Joins Game
-
-
-  export async function POST(request: Request, {params}:{params:{roomid:string}}): Promise<Response> {
+ export async function POST(request: Request, {params}:{params:{roomid:string}}): Promise<Response> {
    
     const mypost = await request.json();
     var room: Room;
@@ -58,7 +68,7 @@ export async function GET(request: Request, {params}:{params:{roomid:string}}) {
             });
 
               room.state.players.onRemove((player: any, sessionId: string) => {
-              console.log(player, "has been removed at", sessionId);
+              //console.log(player, "has been removed at", sessionId);
                delete player[sessionId];
            
                // remove your player entity from the game world!
