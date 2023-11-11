@@ -14,7 +14,7 @@ var players: any;
 var revisedPlayers: any = {};
 var matchroom: any;
 
-//Get Room info and players
+//Get Room players
 export async function GET(request: Request, {params}:{params:{roomid:string}}) {
  
   var room: Room;

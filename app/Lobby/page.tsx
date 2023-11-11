@@ -7,8 +7,8 @@ import React, { useState } from 'react';
 
 export default function Lobby() {
     var [roomId] = useState('');
-    var client = new Colyseus.Client('https://us-atl-3b185468.colyseus.cloud');
-    
+   
+    const client = new Colyseus.Client(process.env.COLYSEUS_HOST);
    async function createRoom() {
         try {
             const room = await client.joinOrCreate("my_room", { name: "Rick"});
