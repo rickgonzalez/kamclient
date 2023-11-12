@@ -14,7 +14,7 @@ export default function Lobby() {
             const room = await client.joinOrCreate("my_room", { name: "Rick"});
             roomId = room.roomId
             console.log("joined successfully", roomId);
-            console.log("Object - Room ", room);
+            console.log("Object  Room ", room);
           
           } catch (e) {
             console.error("join error", e);
