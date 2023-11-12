@@ -1,5 +1,5 @@
 
-
+"use client"
 
 import  {Client, Room} from "colyseus.js";
 import { NextResponse } from 'next/server'
