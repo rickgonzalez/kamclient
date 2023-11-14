@@ -1,8 +1,17 @@
+import { store } from '../store'
+import { Provider } from 'react-redux'
 import Image from 'next/image'
 
+
+
+
 export default function Home() {
+
+ 
   return (
-    
+
+
+
 <section className="Hero relative h-screen w-screen bg-[#000000] bg-opacity-100">
   
   
@@ -87,43 +96,3 @@ export default function Home() {
 }
 
 
-
-
-// <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-       
-
-
-// <a
-//   href="Lobby"
-//   className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-//   target="_self"
-//   rel="noopener noreferrer"
-// >
-//   <h2 className={`mb-3 text-2xl font-semibold`}>
-//     Lobby{' '}
-//     <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-//       -&gt;
-//     </span>
-//   </h2>
-//   <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-//     Visit the game server lobby.
-//   </p>
-// </a>
-
-// <a
-//   href="https://kamioza.com/"
-//   className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-//   target="_blank"
-//   rel="noopener noreferrer"
-// >
-//   <h2 className={`mb-3 text-2xl font-semibold`}>
-//     Kamioza{' '}
-//     <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-//       -&gt;
-//     </span>
-//   </h2>
-//   <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-//     Our stories and announcements.
-//   </p>
-// </a>
-// </div>
