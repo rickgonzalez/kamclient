@@ -1,7 +1,7 @@
 
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Provider } from 'react-redux'
+
 //import type { providers } from './types'
 
 interface provider {
@@ -11,6 +11,20 @@ interface provider {
   providerUrl: string
   providerPort: number
 } 
+
+
+  interface roomsById {
+          room:{
+            roomId: string
+            name: string
+            createdAt: string
+            maxClients: number
+            clients: number
+            private: boolean
+            locked: boolean
+          }
+        }
+       
 
 //const providerRespone: provider[];
 
@@ -24,17 +38,13 @@ export const providersApi = createApi({
     getProvidersByName: builder.query<provider[],string>({
       query: (name) => `kam/${name}`,
     }),
-    // getPosts: build.query<PostsResponse, void>({
-    //     query: () => ({ url: 'posts' }),
-    //     providesTags: (result = []) => [
-    //       ...result.map(({ id }) => ({ type: 'Posts', id } as const)),
-    //       { type: 'Posts' as const, id: 'LIST' },
-    //     ],
-    //   }),
+    getRooms: builder.query<roomsById, string>({
+        query: (resource) => `${resource}`,
+    }),
   }),
   
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetProvidersByNameQuery } = providersApi
+export const { useGetProvidersByNameQuery, useGetRoomsQuery} = providersApi
