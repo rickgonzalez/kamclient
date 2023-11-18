@@ -1,6 +1,6 @@
 'use client'
 import NetworkList from './components/NetworkList';
-import Testtable from './components/Testtable';
+import RoomsList from './components/RoomsList';
 import KamNavBar from './components/Navbar';
 import {
   Box,
@@ -40,7 +40,7 @@ export default function Lobby() {
  return (
   
     <Box>
-      {KamNavBar()}
+      <KamNavBar currentPage = "Lobby"></KamNavBar>
       <Flex bg="#011627" p={4} color="white">
         <Box>
           <Heading size="xl">Azaria Lobby</Heading>
@@ -67,15 +67,17 @@ export default function Lobby() {
           <NetworkList></NetworkList>
           </Box>
           <Box p={4} borderBottom="1px solid #eee">
-            <Heading size="sm">Sponsored Networks</Heading>
+            <Heading size="sm">Selected Network</Heading>
           </Box>
           <Box p={4}>
-          <p>These are the ones subscribed</p>
+          <p>Add create room here</p>
           </Box>
         </Box>
-        <Box flex={2}>
-        <Testtable></Testtable>
+       
+       <Box m={4} flex={2}>
+        <RoomsList></RoomsList>
         </Box>
+        
       </Flex>
     </Box>
 

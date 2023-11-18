@@ -7,7 +7,7 @@ import KamNavBar from './components/Navbar';
 export default function Home() {
  return (
 <section className="Hero relative h-screen w-screen bg-[#000000] bg-opacity-100">
-  {KamNavBar()}
+  <KamNavBar currentPage = "/"></KamNavBar>
   <div className="h-[90%]">
     <div className="ContentArea relative h-full">
       <div className="h-full">
