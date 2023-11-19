@@ -26,6 +26,8 @@ interface provider {
         }
        
 
+             
+
 //const providerRespone: provider[];
 
 
@@ -41,10 +43,15 @@ export const providersApi = createApi({
     getRooms: builder.query<roomsById, string>({
         query: (resource) => `${resource}`,
     }),
+    getRoomInfo: builder.query<any, string>({
+      query: (roomid) => `/colyseus/api/room?roomId=${roomid}`,
+  }),
   }),
   
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetProvidersByNameQuery, useGetRoomsQuery} = providersApi
+export const { useGetProvidersByNameQuery, useGetRoomsQuery, useGetRoomInfoQuery} = providersApi
+
+// {{base_url}}/colyseus/api/room?roomId=cv-pceGeZ
