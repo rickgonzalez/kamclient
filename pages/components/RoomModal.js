@@ -25,7 +25,7 @@ import {
  
 export function RoomModal(props) {
  
-  const myPlayers = function(myroom){
+  const MyPlayers = function(myroom){
     const { data, error, isLoading  } = useGetRoomInfoQuery(myroom)
     if(!isLoading && !error){
       const myPlayers = Object.entries(data.state.players).map(e => e[1]);
@@ -72,7 +72,7 @@ export function RoomModal(props) {
                 </Tr>
               </Thead>
               <Tbody>
-              {myPlayers(props._roomid)}
+              {MyPlayers(props._roomid)}
               </Tbody>
             </Table>
             <ModalFooter>
