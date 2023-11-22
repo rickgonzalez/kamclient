@@ -12,7 +12,7 @@ export default function Home() {
     <div className="ContentArea relative h-full">
       <div className="h-full">
         <div className="flex h-full w-screen items-end justify-end">
-          <Image alt="Azaria Image" src="https://azariaimages.s3.amazonaws.com/azpostclrs2.png" className="absolute top-0 h-[90%] w-screen object-contain object-top sm:h-full sm:w-screen-1/2" />
+          <Image alt="Azaria Image" width={400} height={900} src="https://azariaimages.s3.amazonaws.com/azpostclrs2.png" className="absolute top-0 h-[90%] w-screen object-contain object-top sm:h-full sm:w-screen-1/2" />
         </div>
         <div className="absolute bottom-0 flex">
         </div>
