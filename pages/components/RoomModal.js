@@ -23,7 +23,7 @@ import {
   import { useDisclosure } from '@chakra-ui/react'
   import {useGetRoomInfoQuery} from '@/services/providers'
  
-export function RoomModal(props) {
+export default function RoomModal(props) {
  
   const MyPlayers = function(myroom){
     const { data, error, isLoading  } = useGetRoomInfoQuery(myroom)
