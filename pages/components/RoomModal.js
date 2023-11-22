@@ -16,14 +16,13 @@ import {
     Tfoot,
     Tr,
     Th,
-    Td,
-    TableCaption,
-    TableContainer,
+    Td
   } from '@chakra-ui/react'
   import { useDisclosure } from '@chakra-ui/react'
   import {useGetRoomInfoQuery} from '@/services/providers'
  
-export default function RoomModal(props) {
+
+export function RoomModal({roomId, name, clients, createdAt, locked}) {
  
   const MyPlayers = function(myroom){
     const { data, error, isLoading  } = useGetRoomInfoQuery(myroom)
@@ -55,12 +54,12 @@ export default function RoomModal(props) {
         <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset='slideInBottom' scrollBehavior='inside'>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Room {props._roomid}</ModalHeader>
+            <ModalHeader>Room {roomId}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-            <p>Room Type: {props._name}</p>
-            <p>Number of clinets: {props._clients}</p>
-            <p>Created: {props._createdAt}</p>
+            <p>Room Type: {name}</p>
+            <p>Number of clinets: {clients}</p>
+            <p>Created: {createdAt}</p>
             <Divider />
            {/* <PlayerList ></PlayerList> */}
             </ModalBody>
@@ -72,7 +71,7 @@ export default function RoomModal(props) {
                 </Tr>
               </Thead>
               <Tbody>
-              {MyPlayers(props._roomid)}
+              {MyPlayers(roomId)}
               </Tbody>
             </Table>
             <ModalFooter>
@@ -87,3 +86,4 @@ export default function RoomModal(props) {
     )
   }
 
+ // roomId, name, clients, createdAt, locked

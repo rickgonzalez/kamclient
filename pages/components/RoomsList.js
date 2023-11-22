@@ -23,7 +23,7 @@ export default function RoomsList() {
 
 const { data, error, isLoading  } = useGetRoomsQuery("Rooms");
 
-const renderRooms = () => {
+const RenderRooms = () => {
   if(!isLoading && !error){
 
    // const myRooms = Object.entries(data.roomsById).map((e) => ( { [e[0]]: e[1] } ));
@@ -37,7 +37,7 @@ const renderRooms = () => {
         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{name}</td>
         <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{maxClients}</td>
         <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{clients}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200"><RoomModal _roomid = {roomId} _name = {name} _clients = {clients} _createdAt = {createdAt} _locked ={locked}></RoomModal></td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200"><RoomModal roomId = {roomId} name = {name} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></td>
         </tr>
       
         })
@@ -60,7 +60,7 @@ const renderRooms = () => {
         <Th>Action</Th>
       </Tr>
     </Thead>
-             {renderRooms()}
+             {RenderRooms()}
       </Table>
       </TableContainer>
       </Box>     
@@ -69,3 +69,6 @@ const renderRooms = () => {
      )
    }
    
+  //  _roomid = {roomId} _name = {name} _clients = {clients} _createdAt = {createdAt} _locked ={locked}
+
+  // <RoomModal></RoomModal>
