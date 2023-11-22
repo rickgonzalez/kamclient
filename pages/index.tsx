@@ -1,6 +1,6 @@
 
 import Image from 'next/image'
-import KamNavBar from './components/Navbar';
+import KamNavBar from '../components/Navbar';
 
 
 

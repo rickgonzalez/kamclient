@@ -1,7 +1,7 @@
 'use client'
-import NetworkList from './components/NetworkList';
-import RoomsList from './components/RoomsList';
-import KamNavBar from './components/Navbar';
+import NetworkList from '../components/NetworkList';
+import RoomsList from '../components/RoomsList';
+import KamNavBar from '../components/Navbar';
 import {
   Box,
   Button,

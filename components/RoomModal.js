@@ -21,9 +21,9 @@ import {
   import { useDisclosure } from '@chakra-ui/react'
   import {useGetRoomInfoQuery} from '@/services/providers'
  
+ export function RoomModal({roomId, name, clients, createdAt, locked}) {
+//can use props here instead and just go props.roomId...
 
-export function RoomModal({roomId, name, clients, createdAt, locked}) {
- 
   const MyPlayers = function(myroom){
     const { data, error, isLoading  } = useGetRoomInfoQuery(myroom)
     if(!isLoading && !error){
