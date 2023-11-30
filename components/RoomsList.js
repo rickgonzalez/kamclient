@@ -32,12 +32,12 @@ const RenderRooms = () => {
     return(
      
       myRooms && myRooms.map(({roomId,name,maxClients, clients, createdAt, locked}) => {
-      return <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" key={roomId} >
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{roomId}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{name}</td>
-        <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{maxClients}</td>
-        <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{clients}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200"><RoomModal roomId = {roomId} name = {name} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></td>
+      return <tr className="hover:bg-gray-100 dark:hover:bg-gray-700" key={roomId} >
+        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{roomId}</td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{name}</td>
+        <td className="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{maxClients}</td>
+        <td className="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{clients}</td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200"><RoomModal roomId = {roomId} name = {name} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></td>
         </tr>
       
         })

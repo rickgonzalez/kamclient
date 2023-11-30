@@ -2,26 +2,20 @@
 import NetworkList from '../components/NetworkList';
 import RoomsList from '../components/RoomsList';
 import KamNavBar from '../components/Navbar';
+import RoomAddDrawer from '../components/RoomAddDrawer';
+
 import {
   Box,
-  Button,
-  Center,
   Divider,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
-  Input,
-  List,
-  ListIcon,
-  ListItem,
   Spacer,
   Stat,
   StatLabel,
   StatNumber,
 } from '@chakra-ui/react'
 
-import React, { useState } from 'react'
+import React from 'react'
 
 export const PostsCountStat = () => {
   // const { data: posts } = useGetPostsQuery()
@@ -70,7 +64,7 @@ export default function Lobby() {
             <Heading size="sm">Selected Network</Heading>
           </Box>
           <Box p={4}>
-          <p>Add create room here</p>
+         <RoomAddDrawer></RoomAddDrawer>
           </Box>
         </Box>
        
