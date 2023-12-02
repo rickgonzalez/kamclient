@@ -17,8 +17,7 @@ import {
     Radio,
     RadioGroup,
     Stack,
-    Divider,
-    Spacer
+    Divider
   } from '@chakra-ui/react'
 
 import { useDisclosure } from '@chakra-ui/react'
@@ -32,10 +31,15 @@ export default function RoomAddDrawer() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const [value, setValue] = React.useState('1')
-    const [addRoom, result] = usePostNewRoomMutation()
+  
+    const [
+      addRoom, // This is the mutation trigger
+      mutationResult,
+     // { isLoading: isUpdating }, // This is the destructured mutation result
+    ] = usePostNewRoomMutation()
 
-
-   async function  ProcessRoom({aroom}) {
+  
+    const ProcessRoom = async (aroom) => {
            //In here get the data and then pass to addRoom
             let playerId = '88b098defB751B7401B5f6d8976F'
             let playerName = 'Pete'
@@ -43,13 +47,17 @@ export default function RoomAddDrawer() {
             let roomName = aroom
             let roomType = 'public'
             let roomMaxPlayers = 50
-          
-          let myresult = addRoom({playerId, playerName, playerIp,roomName,roomType,roomMaxPlayers})
-          console.dir('this is myresult -->',myresult)
-          console.log('here is a result >>',result);   
+         
+            await addRoom({playerId, playerName, playerIp,roomName,roomType,roomMaxPlayers})
+           
+              if(mutationResult.status = 'fulfilled' && mutationResult.isSuccess){
+                  console.log(JSON.parse(JSON.stringify(mutationResult)))
+                  //create a post process call with the session and roomId to accept the reservation
+              }
+            
     } 
 
-
+      
 
     return (
       <>
@@ -98,9 +106,3 @@ export default function RoomAddDrawer() {
     )
   }
 
-//onClick={ProcessRoom('AzariaRoom')}
- // processRoom(roomName)
-  //  const [
-  //       addRoom, // This is the mutation trigger
-  //       { isLoading: isUpdating }, // This is the destructured mutation result
-  //     ] = usePostNewRoomMutation()

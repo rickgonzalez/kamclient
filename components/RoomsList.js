@@ -60,7 +60,9 @@ const RenderRooms = () => {
         <Th>Action</Th>
       </Tr>
     </Thead>
+    <Tbody>
              {RenderRooms()}
+     </Tbody>        
       </Table>
       </TableContainer>
       </Box>     

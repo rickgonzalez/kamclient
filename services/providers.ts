@@ -61,6 +61,7 @@ export const providersApi = createApi({
         method: 'POST',
         body,
     }),
+   //   transformResponse: (response: { data: any }, meta, arg) => response.data,
       invalidatesTags: ['Rooms'],
     }),
 
