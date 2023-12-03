@@ -19,16 +19,36 @@ import {
     Td
   } from '@chakra-ui/react'
   import { useDisclosure } from '@chakra-ui/react'
-  import {useGetRoomInfoQuery} from '@/services/providers'
+  import {useGetRoomInfoQuery,usePostJoinRoomMutation} from '@/services/providers'
+  import JoinRoom from './JoinRoom'
+  import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
+
+  var client = new Colyseus.Client('ws://localhost:2567'); 
  
+  
  export function RoomModal({roomId, name, clients, createdAt, locked}) {
 //can use props here instead and just go props.roomId...
+
+
+  const HandleJoin = (myroomid) => {
+  try {
+   
+    console.log('looking to join room ', myroomid)       
+    JoinRoom(myroomid, {"name":"Rick"});            
+    
+    } catch (e) {
+      console.error("join error", e);
+    }
+
+}
+
 
   const MyPlayers = function(myroom){
     const { data, error, isLoading  } = useGetRoomInfoQuery(myroom)
     if(!isLoading && !error){
       const myPlayers = Object.entries(data.state.players).map(e => e[1]);
-    //thought to add key to 
+    //  console.log (myPlayers);
+      //thought to add key to 
      // const myKeys =  Object.keys(data.state.players);
 
       return(
@@ -78,7 +98,7 @@ import {
               <Button colorScheme='blue' mr={3} onClick={onClose}>
                 Close
               </Button>
-              <Button variant='ghost'>Launch</Button>
+              <Button variant='ghost' onClick={() => HandleJoin(roomId)} >Launch</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

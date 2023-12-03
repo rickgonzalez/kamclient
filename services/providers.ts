@@ -29,9 +29,6 @@ interface provider {
           playerId: string
           playerName: string
           playerIp: string
-          roomName: string
-          roomType: string
-          roomMaxPlayers: number
         } 
              
 
@@ -43,7 +40,7 @@ export const providersApi = createApi({
   reducerPath: 'providersApi',
   
   baseQuery: fetchBaseQuery({ baseUrl: 'https://us-atl-3b185468.colyseus.cloud/' }),
-  tagTypes: ['Rooms'],
+  tagTypes: ['Rooms', 'RoomDetail'],
   endpoints: (builder) => ({
     getProvidersByName: builder.query<provider[],string>({
       query: (name) => `kam/${name}`,
@@ -54,6 +51,7 @@ export const providersApi = createApi({
     }),
     getRoomInfo: builder.query<any, string>({
       query: (roomid) => `/colyseus/api/room?roomId=${roomid}`,
+      providesTags: ['RoomDetail'],
     }),
     postNewRoom: builder.mutation<newroom, string>({
      query: (body) => ({
@@ -61,16 +59,22 @@ export const providersApi = createApi({
         method: 'POST',
         body,
     }),
-   //   transformResponse: (response: { data: any }, meta, arg) => response.data,
       invalidatesTags: ['Rooms'],
     }),
-
+    postJoinRoom: builder.mutation<newroom, any>({
+      query: ({ body, roomid }) => ({
+         url: `/matchmake/joinById/${roomid}`,
+         method: 'POST',
+         body,
+     }),
+       invalidatesTags: ['RoomDetail'],
+     }),
   }),
   
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetProvidersByNameQuery, useGetRoomsQuery, useGetRoomInfoQuery, usePostNewRoomMutation} = providersApi
+export const { useGetProvidersByNameQuery, useGetRoomsQuery, useGetRoomInfoQuery, usePostNewRoomMutation, usePostJoinRoomMutation} = providersApi
 
 // {{base_url}}/colyseus/api/room?roomId=cv-pceGeZ

@@ -41,6 +41,8 @@ export default function RoomAddDrawer() {
   
     const ProcessRoom = async (aroom) => {
            //In here get the data and then pass to addRoom
+            let mybody = new Object();
+                mybody.playerId
             let playerId = '88b098defB751B7401B5f6d8976F'
             let playerName = 'Pete'
             let playerIp = '10.10.0.0.9'
