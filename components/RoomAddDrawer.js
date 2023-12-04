@@ -91,7 +91,7 @@ export default function RoomAddDrawer() {
               <FormControl>
                 <FormLabel>Room Name</FormLabel>
                 <Input placeholder='Enter Name...' />
-                <FormHelperText>We'll say something now. We need to cover Locked/private, </FormHelperText>
+                <FormHelperText></FormHelperText>
               </FormControl>
               
             </DrawerBody>
