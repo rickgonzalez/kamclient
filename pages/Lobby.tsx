@@ -15,7 +15,7 @@ import {
   StatNumber,
 } from '@chakra-ui/react'
 
-import React from 'react'
+import React, { useState } from 'react'
 
 export const PostsCountStat = () => {
   // const { data: posts } = useGetPostsQuery()
@@ -31,6 +31,8 @@ export const PostsCountStat = () => {
  }
 
 export default function Lobby() {
+  const [count, setCount] = useState(0);
+
  return (
   
     <Box>

@@ -30,17 +30,7 @@ import {
 //can use props here instead and just go props.roomId...
 
 
-  const HandleJoin = (myroomid) => {
-  try {
-   
-    console.log('looking to join room ', myroomid)       
-    JoinRoom(myroomid, {"name":"Rick"});            
-    
-    } catch (e) {
-      console.error("join error", e);
-    }
 
-}
 
 
   const MyPlayers = function(myroom){
@@ -64,8 +54,6 @@ import {
    }
 
 
-
-  
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <>
@@ -98,7 +86,7 @@ import {
               <Button colorScheme='blue' mr={3} onClick={onClose}>
                 Close
               </Button>
-              <Button variant='ghost' onClick={() => HandleJoin(roomId)} >Launch</Button>
+              <JoinRoom myroomid = {roomId}></JoinRoom>
             </ModalFooter>
           </ModalContent>
         </Modal>

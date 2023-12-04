@@ -1,5 +1,6 @@
 
 
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 //import type { providers } from './types'
@@ -31,6 +32,14 @@ interface provider {
           playerIp: string
         } 
              
+        interface joinroom {
+          playerId: string
+          playerName: string
+          playerIp: string
+          roomId:string
+        } 
+
+
 
 //const providerRespone: provider[];
 
@@ -61,11 +70,11 @@ export const providersApi = createApi({
     }),
       invalidatesTags: ['Rooms'],
     }),
-    postJoinRoom: builder.mutation<newroom, any>({
-      query: ({ body, roomid }) => ({
-         url: `/matchmake/joinById/${roomid}`,
+    postJoinRoom: builder.mutation<joinroom, Partial<joinroom> & Pick<joinroom, 'roomId'>>({
+      query: ({ roomId, ...mybody }) => ({
+         url: `/matchmake/joinById/${roomId}`,
          method: 'POST',
-         body,
+         body: mybody,
      }),
        invalidatesTags: ['RoomDetail'],
      }),
@@ -78,3 +87,6 @@ export const providersApi = createApi({
 export const { useGetProvidersByNameQuery, useGetRoomsQuery, useGetRoomInfoQuery, usePostNewRoomMutation, usePostJoinRoomMutation} = providersApi
 
 // {{base_url}}/colyseus/api/room?roomId=cv-pceGeZ
+
+// `/matchmake/joinById/`,
+//${body.roomId}
