@@ -13,9 +13,9 @@ export default function JoinRoom(myroomid) {
                 mybody.roomId = myroomid.myroomid
 
                 console.log('looking to join room ', myroomid)
-                let myreturn = joinRoom(mybody,myroomid);
+                let myreturn = await joinRoom(mybody,myroomid);
                
-                //console.dir(myreturn);
+                console.log(myreturn);
                 //const { data, error } = usePromise(joinRoom(mybody,myroomid));
                
                 }
