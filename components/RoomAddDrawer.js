@@ -1,23 +1,24 @@
 import * as React from 'react'
 
 import {
-    Drawer,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton,
-    FormControl,
-    FormLabel,
-    FormHelperText,
     Text,
     Button,
     Input,
     Radio,
     RadioGroup,
     Stack,
-    Divider
+    Divider,
+    Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+  Container,
+  Wrap,
+  WrapItem,
+  Center,
+  VStack
   } from '@chakra-ui/react'
 
 import { useDisclosure } from '@chakra-ui/react'
@@ -63,48 +64,56 @@ export default function RoomAddDrawer() {
 
     return (
       <>
-        <Button ref={btnRef} colorScheme='blue' onClick={onOpen}>
-          Create Room
-        </Button>
-        <Drawer
-          isOpen={isOpen}
-          placement='right'
-          onClose={onClose}
-          finalFocusRef={btnRef}
-        >
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerCloseButton />
-            <DrawerHeader>Create your Room</DrawerHeader>
-  
-            <DrawerBody>
-            <RadioGroup onChange={setValue} value={value}>
-              <Stack direction='row'>
-                <Radio value='1'>Standard</Radio>
-                <Radio value='2'>Private</Radio>
-              </Stack>
-            </RadioGroup>
-            <Divider />
-            <Text>
-              ..
-            </Text>
-              <FormControl>
-                <FormLabel>Room Name</FormLabel>
-                <Input placeholder='Enter Name...' />
-                <FormHelperText></FormHelperText>
-              </FormControl>
-              
-            </DrawerBody>
-  
-            <DrawerFooter>
-              <Button variant='outline' mr={3} onClick={onClose}>
-                Cancel
-              </Button>
-              <Button colorScheme='blue' onClick={() => ProcessRoom('AzariaRoom')} >Save</Button>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
+      <Accordion defaultIndex={[0]} allowMultiple>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex='1' textAlign='left'>
+                  Add New Room
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+             <VStack
+            spacing={4}
+            align='stretch'
+          >
+                  
+                  <Input placeholder='friendly name' />
+                  
+                  <RadioGroup onChange={setValue} value={value}>
+                      <Stack direction='row'>
+                        <Radio value='1'>Private</Radio>
+                        <Radio value='2'>Public</Radio>
+                      </Stack>
+                </RadioGroup>
+                <Wrap>
+                  <WrapItem>
+                    <Center w='300px' h='80px'>
+                    </Center>
+                  </WrapItem>
+                  <WrapItem>
+                      <Box display='flex' mt='2' alignItems='center'>
+                          <Button colorScheme='blue' onClick={() => ProcessRoom('AzariaRoom')} >Save</Button>
+                      </Box>
+                  </WrapItem>
+                 
+                </Wrap>
+                
+            </VStack>   
+                
+                
+                
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
       </>
     )
   }
 
+ // <Button colorScheme='blue' onClick={() => ProcessRoom('AzariaRoom')} >Save</Button>
+
+//  You can create a new room on this server and then share it out for
+//               friends to connect to.
+         

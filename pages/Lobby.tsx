@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import NetworkList from '../components/NetworkList';
 import RoomsList from '../components/RoomsList';
 import KamNavBar from '../components/Navbar';
@@ -51,7 +51,7 @@ export default function Lobby() {
       <Divider />
 
 
-      <p>This was the add post lists</p>
+      <p>section</p>
       <Divider />
 
       <Flex wrap="wrap">

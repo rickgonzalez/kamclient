@@ -1,7 +1,8 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-
+import { Avatar, AvatarBadge, AvatarGroup, Wrap, WrapItem } from '@chakra-ui/react'
+import PlayerAuth from './PlayerAuth'
 export default function KamNavBar(props) {
 
   let currentPage = props.currentPage;
@@ -15,6 +16,7 @@ export default function KamNavBar(props) {
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Lobby</Link>
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Market</Link>
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="https://www.kamiozablog.com/">Blog</Link>
+          <PlayerAuth></PlayerAuth>
         </div>
         )
     
@@ -25,6 +27,7 @@ export default function KamNavBar(props) {
           <Link className="font-medium text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="" aria-current="page">Lobby</Link>
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Market</Link>
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="https://www.kamiozablog.com/">Blog</Link>
+          <PlayerAuth></PlayerAuth>
         </div>
         )
 
@@ -35,6 +38,7 @@ export default function KamNavBar(props) {
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Lobby</Link>
           <Link className="font-medium text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="" aria-current="page">Market</Link>
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="https://www.kamiozablog.com/">Blog</Link>
+          <PlayerAuth></PlayerAuth>
         </div>
         )
      
@@ -45,6 +49,7 @@ export default function KamNavBar(props) {
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Lobby</Link>
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Market</Link>
           <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="https://www.kamiozablog.com/">Blog</Link>
+          <PlayerAuth></PlayerAuth>
         </div>
         )
     }
