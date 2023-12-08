@@ -33,9 +33,9 @@ const RenderRooms = () => {
     return(
      
       myRooms && myRooms.map(({roomId,name,maxClients, clients, createdAt, locked}) => {
-        let proomId = roomId.split(',')
-        let p1roomId = proomId[0]
-        let p2roomId = proomId[1]
+       
+        let p1roomId = roomId.slice(9)
+        let p2roomId = roomId.slice(0, 9)
       return <tr className="hover:bg-gray-100 dark:hover:bg-gray-700" key={roomId} >
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{p1roomId}</td>
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{p2roomId}</td>

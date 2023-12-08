@@ -36,7 +36,7 @@ interface provider {
         interface joinroom {
           playerId: string
           playerName: string
-          playerIp: string
+          ip: string
           roomId:string
         } 
 

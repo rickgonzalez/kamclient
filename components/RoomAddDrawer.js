@@ -82,9 +82,9 @@ export default function RoomAddDrawer() {
           //     console.log(JSON.parse(JSON.stringify(mutationResult)))
           //     //create a post process call with the session and roomId to accept the reservation
           // }
-        console.log(myResponse.data);
+        
         let myReservation = myResponse.data;
-        console.log(myReservation);
+        console.dir(myReservation);
         await ConsumeReservation(myReservation);
 
 
