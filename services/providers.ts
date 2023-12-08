@@ -29,7 +29,7 @@ interface provider {
         interface newroom {
           playerId: string
           playerName: string
-          playerIp: string
+          ip: string
           fname: string
         } 
              
