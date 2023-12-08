@@ -20,41 +20,56 @@ import {
     Button,
     Flex,
     Heading,
-    IconButton,
-    BsThreeDotsVertical
+    IconButton
   } from '@chakra-ui/react'
 
-import { useDisclosure } from '@chakra-ui/react'
+  import {useRef} from 'react'
+  import {useSelector, useDispatch} from 'react-redux'
+  import {SET_PLAYER} from '../services/reducers/playerSlice'
+
+
+import { useDisclosure } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function PlayerAuth() {
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = React.useRef()
-    const [value, setValue] = React.useState('')
-    const [player, setPlayer] = React.useState(
-        {
-            name: 'Cruiser',
-            email: 'rcgonzalez.home@gmail.com',
-            id: '', 
-            playerip:'',
-            verToken: ''  
-        }
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const btnRef = React.useRef();
+    const [value, setValue] = React.useState('');
+    const dispatch = useDispatch();
+    const myplayer = useSelector((state) => state.player);
+   
 
-    )
   
- // console.log(uuidv4());
+  
   
     const AuthUser = async (myname) => {
-           //In here get the data and then pass to addRoom
-            
+    
+           //In here get the data and then pass to addRoom the joinRoom
+          // console.log('orig player ',state.player);
             let playerId = uuidv4();
-            let playerName = myname
-            let playerIp = '10.10.0.0.9'
+            let playerName = myname;
+            let playerIp = '10.10.0.0.9';
+           
+            //Authenticate Playere  
+            let playerAuthenticated = true;
+           // setPlayer({id:playerId, playerip:playerIp, name:playerName});
             
-            setPlayer({id:playerId, playerip:playerIp, name:playerName,});
-            console.log(player);
+              dispatch(SET_PLAYER({
+                name: playerName,
+                email: 'bm@tribevest.com',
+                id: playerId, 
+                playerip: playerIp,
+                verToken: 'ver100001000',
+                isAuthenticated: playerAuthenticated 
+              }));
+
+            
+           
+           // setAuth(true);
          
+           
+
             // await addRoom({playerId, playerName, playerIp,roomName,roomType,roomMaxPlayers})
            
             //   if(mutationResult.status = 'fulfilled' && mutationResult.isSuccess){
@@ -70,9 +85,10 @@ export default function PlayerAuth() {
     return (
         <>
           <WrapItem>
-           <Avatar onClick={onOpen} size='sm' src='https://bit.ly/broken-link' />
+           <Avatar onClick={onOpen} size='sm' name= {myplayer.name} src='https://bit.ly/broken-link' />
           </WrapItem>
           <Drawer
+            size={'md'}
             isOpen={isOpen}
             placement='right'
             onClose={onClose}
@@ -84,26 +100,31 @@ export default function PlayerAuth() {
               <DrawerHeader>Your account</DrawerHeader>
     
               <DrawerBody>
-              <Flex spacing='4'>
-                <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                    <Avatar  size='sm' name={player.name} src='https://bit.ly/broken-link' />
+              <VStack
+                    spacing={4}
+                    align='stretch'
+                >
+                   
+
+
+                    <Avatar  size='sm' name={myplayer.name} src='https://bit.ly/broken-link' />
 
                     <Box>
                     <Heading size='sm'>{value}</Heading>
-                    <Text fontSize='sm'>{player.id}</Text>
                     </Box>
                     <Box>
-                    <Text  fontSize='sm'>{player.playerip}</Text>
+                    <Text fontSize='sm'>{myplayer.id}</Text>
+                    </Box>
+                    <Box>
+                    <Text  fontSize='sm'>{myplayer.playerip}</Text>
                     </Box>
                     <Box>
                     <Input value={value} onChange={handleChange}  placeholder='Name' />
                     </Box>
                    
-                </Flex>
-                
-                </Flex>
                
-              </DrawerBody>
+                </VStack>   
+                </DrawerBody>
     
               <DrawerFooter>
                 <Button variant='outline' mr={3} onClick={onClose}>

@@ -1,7 +1,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Avatar, AvatarBadge, AvatarGroup, Wrap, WrapItem } from '@chakra-ui/react'
+
 import PlayerAuth from './PlayerAuth'
 export default function KamNavBar(props) {
 

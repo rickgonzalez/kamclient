@@ -18,20 +18,44 @@ import {
   Wrap,
   WrapItem,
   Center,
-  VStack
+  VStack,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
   } from '@chakra-ui/react'
 
 import { useDisclosure } from '@chakra-ui/react'
-
+import {useSelector} from 'react-redux'
 import {usePostNewRoomMutation} from '@/services/providers'
 
+import * as Colyseus from "colyseus.js"; 
+
+var client = new Colyseus.Client('ws://localhost:2567'); 
+
+
+
+export async function ConsumeReservation(reservation){
+    try {
+      const room = await client.consumeSeatReservation(reservation);
+      console.log("joined successfully", room);
+    
+    } catch (e) {
+      console.error("join error", e);
+    }
+  }
 
 
 export default function RoomAddDrawer() {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = React.useRef()
+    const myplayer = useSelector((state) => state.player);
+
+   //const [roomName, setRoomName] = React.useState('AzariaRoom');
+    const [friendlyName, setRoomFname] = React.useState('');
     const [value, setValue] = React.useState('1')
+    const btnRef = React.useRef();
+   
   
     const [
       addRoom, // This is the mutation trigger
@@ -41,26 +65,47 @@ export default function RoomAddDrawer() {
 
   
     const ProcessRoom = async (aroom) => {
-           //In here get the data and then pass to addRoom
-            let mybody = new Object();
-                mybody.playerId
-            let playerId = '88b098defB751B7401B5f6d8976F'
-            let playerName = 'Pete'
-            let playerIp = '10.10.0.0.9'
-            let roomName = aroom
-            let roomType = 'public'
-            let roomMaxPlayers = 50
-         
-            await addRoom({playerId, playerName, playerIp,roomName,roomType,roomMaxPlayers})
+     
+      console.log('adding room ...')
+      if (myplayer.isAuthenticated){
+        let playerId = myplayer.id
+        let playerName = myplayer.name
+        let playerIp = myplayer.playerip
+        let roomName = 'AzariaRoom'
+        let fname = aroom
+        let roomType = 'public'
+        let roomMaxPlayers = 50
+     
+        let myResponse = await addRoom({playerId, playerName, playerIp,fname,roomName,roomType,roomMaxPlayers})
+       
+          // if(mutationResult.status = 'fulfilled' && mutationResult.isSuccess){
+          //     console.log(JSON.parse(JSON.stringify(mutationResult)))
+          //     //create a post process call with the session and roomId to accept the reservation
+          // }
+        console.log(myResponse.data);
+        let myReservation = myResponse.data;
+        console.log(myReservation);
+        await ConsumeReservation(myReservation);
+
+
+        
+      }else {
+        console.log('player is not authenticated');
+        // Statusbar =  <Alert status='error'>
+        //                   <AlertIcon />
+        //                   <AlertTitle>You Are Not Authenticated</AlertTitle>
+        //                   <AlertDescription>Please authenticate using your profile icon in the header bar.</AlertDescription>
+        //                 </Alert>
+        
+        // return(
+        //   statusbar
+        // )
+      }
            
-              if(mutationResult.status = 'fulfilled' && mutationResult.isSuccess){
-                  console.log(JSON.parse(JSON.stringify(mutationResult)))
-                  //create a post process call with the session and roomId to accept the reservation
-              }
-            
+         
     } 
 
-      
+    const handleChange = (event) => setRoomFname(event.target.value)
 
     return (
       <>
@@ -80,7 +125,7 @@ export default function RoomAddDrawer() {
             align='stretch'
           >
                   
-                  <Input placeholder='friendly name' />
+                  <Input placeholder='friendly name' onChange={handleChange} value={friendlyName} />
                   
                   <RadioGroup onChange={setValue} value={value}>
                       <Stack direction='row'>
@@ -95,7 +140,7 @@ export default function RoomAddDrawer() {
                   </WrapItem>
                   <WrapItem>
                       <Box display='flex' mt='2' alignItems='center'>
-                          <Button colorScheme='blue' onClick={() => ProcessRoom('AzariaRoom')} >Save</Button>
+                          <Button colorScheme='blue' onClick={() => ProcessRoom(friendlyName)} >Save</Button>
                       </Box>
                   </WrapItem>
                  
