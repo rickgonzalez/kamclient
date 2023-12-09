@@ -28,14 +28,14 @@ interface provider {
        
         interface newroom {
           playerId: string
-          playerName: string
+          name: string
           ip: string
           fname: string
         } 
              
         interface joinroom {
           playerId: string
-          playerName: string
+          name: string
           ip: string
           roomId:string
         } 

@@ -28,6 +28,7 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import {useSelector} from 'react-redux'
 import {usePostNewRoomMutation} from '@/services/providers'
+import { useRouter } from 'next/router'
 
 import * as Colyseus from "colyseus.js"; 
 
@@ -49,6 +50,7 @@ export async function ConsumeReservation(reservation){
 export default function RoomAddDrawer() {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const router = useRouter();
     const myplayer = useSelector((state) => state.player);
 
    //const [roomName, setRoomName] = React.useState('AzariaRoom');
@@ -65,30 +67,29 @@ export default function RoomAddDrawer() {
 
   
     const ProcessRoom = async (aroom) => {
-     
       console.log('adding room ...')
       if (myplayer.isAuthenticated){
         let playerId = myplayer.id
-        let playerName = myplayer.name
-        let playerIp = myplayer.playerip
+        let name = myplayer.name
+        let ip = myplayer.playerip
         let roomName = 'AzariaRoom'
         let fname = aroom
         let roomType = 'public'
         let roomMaxPlayers = 50
-     
-        let myResponse = await addRoom({playerId, playerName, playerIp,fname,roomName,roomType,roomMaxPlayers})
-       
-          // if(mutationResult.status = 'fulfilled' && mutationResult.isSuccess){
-          //     console.log(JSON.parse(JSON.stringify(mutationResult)))
-          //     //create a post process call with the session and roomId to accept the reservation
-          // }
-        
-        let myReservation = myResponse.data;
-        console.dir(myReservation);
-        await ConsumeReservation(myReservation);
+            
+            try {
 
-
-        
+                let myResponse = await addRoom({playerId,name,ip,fname,roomName,roomType,roomMaxPlayers})
+                let myReservation = myResponse.data;
+                console.dir(myReservation);
+                await ConsumeReservation(myReservation);
+                router.push('/Gameroom')
+                    
+          
+            } catch (e) {
+              console.error("join error", e);
+            }
+              
       }else {
         console.log('player is not authenticated');
         // Statusbar =  <Alert status='error'>

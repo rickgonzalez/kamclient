@@ -85,7 +85,7 @@ export default function PlayerAuth() {
     return (
         <>
           <WrapItem>
-           <Avatar onClick={onOpen} size='sm' name= {myplayer.name} src='https://bit.ly/broken-link' />
+           <Avatar onClick={onOpen} size='sm' name= {myplayer.name} src='' />
           </WrapItem>
           <Drawer
             size={'md'}
@@ -107,7 +107,7 @@ export default function PlayerAuth() {
                    
 
 
-                    <Avatar  size='sm' name={myplayer.name} src='https://bit.ly/broken-link' />
+                    <Avatar  size='sm' name={myplayer.name} src='' />
 
                     <Box>
                     <Heading size='sm'>{value}</Heading>
