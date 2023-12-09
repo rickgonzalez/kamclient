@@ -26,22 +26,19 @@ import {
   import {useRef} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
   import {SET_PLAYER} from '../services/reducers/playerSlice'
-
+ 
 
 import { useDisclosure } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function PlayerAuth() {
-
+    
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
     const [value, setValue] = React.useState('');
     const dispatch = useDispatch();
     const myplayer = useSelector((state) => state.player);
-   
-
-  
-  
+    const ipAddress = '';
   
     const AuthUser = async (myname) => {
     
@@ -49,7 +46,7 @@ export default function PlayerAuth() {
           // console.log('orig player ',state.player);
             let playerId = uuidv4();
             let playerName = myname;
-            let playerIp = '10.10.0.0.9';
+            let playerIp = ipAddress;
            
             //Authenticate Playere  
             let playerAuthenticated = true;
