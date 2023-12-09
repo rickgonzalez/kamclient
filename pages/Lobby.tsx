@@ -3,7 +3,7 @@ import NetworkList from '../components/NetworkList';
 import RoomsList from '../components/RoomsList';
 import KamNavBar from '../components/Navbar';
 import RoomAddDrawer from '../components/RoomAddDrawer';
-import type { NextRequest } from 'next/server'
+
 
 import {
   Box,
@@ -31,16 +31,12 @@ export const PostsCountStat = () => {
    )
  }
 
- export async function ProcessIp(req:NextRequest){
-  console.log('ip--->',req.ip);
-  console.log('cookies--->',req.cookies);
-}
 
 
-export default function Lobby(req: NextRequest) {
+export default function Lobby() {
   const [count, setCount] = useState(0);
-  const [ipAddress, setIpAddress] = useState('none')
-  ProcessIp(req);
+
+
  
 
  return (

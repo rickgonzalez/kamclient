@@ -23,13 +23,14 @@ import {
     IconButton
   } from '@chakra-ui/react'
 
-  import {useRef} from 'react'
+  //import {useRef} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
   import {SET_PLAYER} from '../services/reducers/playerSlice'
- 
-
+ var http = require('http');
+//import {http} from 'http'
 import { useDisclosure } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
+
 
 export default function PlayerAuth() {
     
@@ -38,43 +39,33 @@ export default function PlayerAuth() {
     const [value, setValue] = React.useState('');
     const dispatch = useDispatch();
     const myplayer = useSelector((state) => state.player);
-    const ipAddress = '';
-  
-    const AuthUser = async (myname) => {
+    var ipAddress = undefined;
+
+
     
-           //In here get the data and then pass to addRoom the joinRoom
-          // console.log('orig player ',state.player);
-            let playerId = uuidv4();
-            let playerName = myname;
-            let playerIp = ipAddress;
-           
-            //Authenticate Playere  
-            let playerAuthenticated = true;
-           // setPlayer({id:playerId, playerip:playerIp, name:playerName});
-            
-              dispatch(SET_PLAYER({
-                name: playerName,
-                email: 'bm@tribevest.com',
-                id: playerId, 
-                playerip: playerIp,
-                verToken: 'ver100001000',
-                isAuthenticated: playerAuthenticated 
-              }));
-
-            
-           
-           // setAuth(true);
+      const AuthUser = async (myname) => {
+      
+          http.get({'host': 'api.ipify.org?format=json', 'port': 80, 'path': '/'}, function(resp) {
+            resp.on('data', async function(data) {
+              console.log("My public IP address is: " + String(data));
+                    
+                    let playerId = uuidv4();
+                    let playerName = myname;
+                    let playerIp = String(data);
+                    let playerAuthenticated = true;
+                   
+                    dispatch(SET_PLAYER({
+                      name: playerName,
+                      email: 'bm@tribevest.com',
+                      id: playerId, 
+                      playerip: playerIp,
+                      verToken: 'ver100001000',
+                      isAuthenticated: playerAuthenticated 
+                    }));
+            });
+          });
          
-           
-
-            // await addRoom({playerId, playerName, playerIp,roomName,roomType,roomMaxPlayers})
-           
-            //   if(mutationResult.status = 'fulfilled' && mutationResult.isSuccess){
-            //       console.log(JSON.parse(JSON.stringify(mutationResult)))
-            //       //create a post process call with the session and roomId to accept the reservation
-            //   }
-            
-    } 
+      } 
 
     const handleChange = (event) => setValue(event.target.value)
       
