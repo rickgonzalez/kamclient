@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as Colyseus from "colyseus.js"; 
 
-var client = new Colyseus.Client('ws://localhost:2567'); 
+var client = new Colyseus.Client('wss://localhost:2567'); 
 
 
 

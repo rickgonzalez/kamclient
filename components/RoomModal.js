@@ -23,7 +23,7 @@ import {
   import JoinRoom from './JoinRoom'
   import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
 
-  var client = new Colyseus.Client('ws://localhost:2567'); 
+  var client = new Colyseus.Client('wss://localhost:2567'); 
  
   
  export function RoomModal({roomId, name, clients, createdAt, locked}) {
