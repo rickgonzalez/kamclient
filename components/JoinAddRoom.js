@@ -52,17 +52,18 @@ export default function JoinRoom(myroomid, fname) {
                       }
              
                       if(myReservation){
+                        console.log('myReservation',myReservation);
                         dispatch(SET_RESERVATION({
                             clients: 0,
                             locked: false,
                             private: false,
                             maxClients: 50,
                             unlisted: false,
-                            createdAt: myReservation.createdAt,
+                            createdAt: myReservation.room.createdAt,
                             name: 'AzariaRoom',
-                            processId: myReservation.processId,
+                            processId: myReservation.room.processId,
                             publicAddress: 'us-atl-3b185468.colyseus.cloud',
-                            roomId: myReservation.roomId,
+                            roomId: myReservation.room.roomId,
                             sessionId: myReservation.sessionId
                         }));
                       }

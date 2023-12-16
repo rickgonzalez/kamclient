@@ -20,7 +20,7 @@ import {
   WrapItem
 } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 
 import {SET_ACTIVEROOM} from '../services/reducers/roomSlice'
@@ -56,87 +56,77 @@ const [messagesVal, setMessagesVal] = useState('');
 const [userMessage, setUserMessage] = useState(''); 
 const dispatch = useDispatch();
 const myPassedRoom = useSelector((state: any) => state.room);
+const ActiveRoomRef = useRef({});
 let ActiveRoom: Colyseus.Room
 
-
-
-                            useEffect(() => {
-                             let myReservation : reservation = {
-                                room:{
-                                  clients: myPassedRoom.clients,
-                                  locked: false,
-                                  private: false,
-                                  maxClients: 50,
-                                  unlisted: false,
-                                  createdAt: myPassedRoom.createdAt,
-                                  name: 'AzariaRoom',
-                                  processId: myPassedRoom.processId,
-                                  publicAddress: myPassedRoom.publicAddress,
-                                  roomId: myPassedRoom.roomId,
-                                },
-                                sessionId: myPassedRoom.sessionId
-                              };
-                             console.log('reservation: ', myReservation);
-                              
-                               const procReservation = async () => {
-                                try {
-                                  ActiveRoom = await client.consumeSeatReservation(myReservation);
-                                  console.log("joined successfully", ActiveRoom);
-
-                                  dispatch(SET_ACTIVEROOM({
-                                    roomid: ActiveRoom.roomId,
-                                    friendly: ActiveRoom.roomId.slice(9),
-                                    reconnectToken: ActiveRoom.reconnectionToken, 
-                                    roomtype: ActiveRoom.name,
-                                    sessionid: ActiveRoom.sessionId,
-                                    private: false
-                                }));
-                                  ActiveRoom.onStateChange.once(function(state) {
-                                      console.log("initial room state:", state);
-                                  });
-                                                         // new room state
-                                  ActiveRoom.onStateChange(function(state) {
-                                    // this signal is triggered on each patch
-                                    setMessagesVal(messagesVal + '' + state)
-                                });
-                
-                                // listen to patches coming from the server
-                                  
-                                //onMessage --- for this room, update the value of the text box messagesVal
-                                ActiveRoom.onMessage("messages", function(message) {
-                                    // var p = document.createElement("p");
-                                    // p.innerText = message;
-                                    // document.querySelector("#messages").appendChild(p);
-                                    setMessagesVal(messagesVal + '' + message);
-                
-                                });
-                
-                                const handleRoomPost = (userMessage: string) => {
-                                          //get the value of the input field and send it as a message to the room
-                                          console.log('sending...', userMessage);
-                                          ActiveRoom.send("message", userMessage);
-                                }
-                        
-                                
-                                } catch (e) {
-                                  console.error("join error", e);
-                                }
-                              }
-                              procReservation();
-
-                            }, [messagesVal, userMessage ]);
-
-  
-
-  //var RoomFrame = new Colyseus.Room('AzariaRoom');
-
-  //let passedRoom = searchParams.get('reservation');
-//================>
+                    useEffect(() => {
                     
- 
-  
+                      let myReservation : reservation = {
+                        room:{
+                          clients: myPassedRoom.clients,
+                          locked: false,
+                          private: false,
+                          maxClients: 50,
+                          unlisted: false,
+                          createdAt: myPassedRoom.createdAt,
+                          name: 'AzariaRoom',
+                          processId: myPassedRoom.processId,
+                          publicAddress: myPassedRoom.publicAddress,
+                          roomId: myPassedRoom.roomId,
+                        },
+                        sessionId: myPassedRoom.sessionId
+                      };
+                      console.log('reservation: ', myReservation);
                       
+                        const procReservation = async () => {
+                        try {
+                          ActiveRoom = await client.consumeSeatReservation(myReservation);
+                          console.log("joined successfully", ActiveRoom);
+                          ActiveRoomRef.current = ActiveRoom
+                          dispatch(SET_ACTIVEROOM({
+                            roomid: ActiveRoom.roomId,
+                            friendly: ActiveRoom.roomId.slice(9),
+                            reconnectToken: ActiveRoom.reconnectionToken, 
+                            roomtype: ActiveRoom.name,
+                            sessionid: ActiveRoom.sessionId,
+                            private: false
+                        }));
+                          ActiveRoom.onStateChange.once(function(state) {
+                              console.log("initial room state:", state);
+                          });
+                                                  // new room state
+                          ActiveRoom.onStateChange(function(state) {
+                            // this signal is triggered on each patch
+                            setMessagesVal(messagesVal + '' + state)
+                        });
+        
+                        // listen to patches coming from the server
+                          
+                        //onMessage --- for this room, update the value of the text box messagesVal
+                        ActiveRoom.onMessage("messages", function(message) {
+                            // var p = document.createElement("p");
+                            // p.innerText = message;
+                            // document.querySelector("#messages").appendChild(p);
+                            setMessagesVal(messagesVal + '' + message);
+        
+                        });
+        
+                        const handleRoomPost = (userMessage: string) => {
+                                  //get the value of the input field and send it as a message to the room
+                                  console.log('sending...', userMessage);
+                                  ActiveRoom.send("message", userMessage);
+                        }
+                
+                        
+                        } catch (e) {
+                          console.error("join error", e);
+                        }
+                      }
+                      procReservation();
 
+                    }, [messagesVal, userMessage ]);
+
+  
 //================>
   const Gameheader = () => {
      return (
