@@ -107,7 +107,7 @@ let ActiveRoom: Colyseus.Room
                             // var p = document.createElement("p");
                             // p.innerText = message;
                             // document.querySelector("#messages").appendChild(p);
-                            setMessagesVal(messagesVal + '' + message);
+                            setMessagesVal(messagesVal + '' + message.value);
         
                         });
         
@@ -131,8 +131,8 @@ let ActiveRoom: Colyseus.Room
   const Gameheader = () => {
      return (
        <Stat m={4} p={4}>
-         <StatLabel>{''}</StatLabel>
-         <StatNumber>{''}</StatNumber>
+         <StatNumber>{myPassedRoom.roomId}</StatNumber>
+         <StatLabel>{myPassedRoom.createdAt}</StatLabel>
        </Stat>
      )
    }
@@ -145,7 +145,7 @@ let ActiveRoom: Colyseus.Room
       <KamNavBar currentPage = "Gameroom"></KamNavBar>
       <Flex bg="#011627" p={4} color="white">
         <Box>
-          <Heading size="xl">{}</Heading>
+          <Heading size="xl" m={4}>{(myPassedRoom.roomId).slice(9)}</Heading>
         </Box>
         <Spacer />
         <Box>

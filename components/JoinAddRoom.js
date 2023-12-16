@@ -3,7 +3,7 @@ import {usePostNewRoomMutation} from '@/services/providers'
 import {  Button,Spinner } from '@chakra-ui/react'
 import React, {useEffect, useState} from "react";
 import {useSelector,useDispatch} from 'react-redux'
-import {SET_ACTIVEROOM} from '../services/reducers/roomSlice'
+
 import { useRouter } from 'next/router'
 import * as Colyseus from "colyseus.js"; 
 import { SET_RESERVATION } from '@/services/reducers/reservationSlice';
