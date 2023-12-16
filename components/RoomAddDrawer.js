@@ -27,24 +27,14 @@ import {
 
 import { useDisclosure } from '@chakra-ui/react'
 import {useSelector} from 'react-redux'
-import {usePostNewRoomMutation} from '@/services/providers'
+
 import { useRouter } from 'next/router'
 
 import * as Colyseus from "colyseus.js"; 
+import JoinRoom from './JoinAddRoom'
 
 var client = new Colyseus.Client('wss://localhost:2567'); 
 
-
-
-export async function ConsumeReservation(reservation){
-    try {
-      const room = await client.consumeSeatReservation(reservation);
-      console.log("joined successfully", room);
-    
-    } catch (e) {
-      console.error("join error", e);
-    }
-  }
 
 
 export default function RoomAddDrawer() {
@@ -52,6 +42,7 @@ export default function RoomAddDrawer() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const router = useRouter();
     const myplayer = useSelector((state) => state.player);
+ 
 
    //const [roomName, setRoomName] = React.useState('AzariaRoom');
     const [friendlyName, setRoomFname] = React.useState('');
@@ -59,52 +50,20 @@ export default function RoomAddDrawer() {
     const btnRef = React.useRef();
    
   
-    const [
-      addRoom, // This is the mutation trigger
-      mutationResult,
-     // { isLoading: isUpdating }, // This is the destructured mutation result
-    ] = usePostNewRoomMutation()
-
+   
   
-    const ProcessRoom = async (aroom) => {
-      console.log('adding room ...')
-      if (myplayer.isAuthenticated){
-        let playerId = myplayer.id
-        let name = myplayer.name
-        let ip = myplayer.playerip
-        let roomName = 'AzariaRoom'
-        let fname = aroom
-        let roomType = 'public'
-        let roomMaxPlayers = 50
-            
-            try {
-
-                let myResponse = await addRoom({playerId,name,ip,fname,roomName,roomType,roomMaxPlayers})
-                let myReservation = myResponse.data;
-                console.dir(myReservation);
-                await ConsumeReservation(myReservation);
-                router.push('/Gameroom')
-                    
-          
-            } catch (e) {
-              console.error("join error", e);
-            }
-              
-      }else {
-        console.log('player is not authenticated');
-        // Statusbar =  <Alert status='error'>
-        //                   <AlertIcon />
-        //                   <AlertTitle>You Are Not Authenticated</AlertTitle>
-        //                   <AlertDescription>Please authenticate using your profile icon in the header bar.</AlertDescription>
-        //                 </Alert>
-        
-        // return(
-        //   statusbar
-        // )
-      }
-           
-         
-    } 
+    // const ProcessRoom = async (aroom) => {
+    //   console.log('adding room ...')
+    //     if (myplayer.isAuthenticated){
+    //           try {
+    //             router.push('/Gameroom?id='+ 'null' + '&jointype=new' + '&fname='+ aroom);
+    //           } catch (e) {
+    //             console.error("join error", e);
+    //           }
+    //     }else {
+    //       console.log('player is not authenticated');
+    //     }
+    //  } 
 
     const handleChange = (event) => setRoomFname(event.target.value)
 
@@ -141,7 +100,8 @@ export default function RoomAddDrawer() {
                   </WrapItem>
                   <WrapItem>
                       <Box display='flex' mt='2' alignItems='center'>
-                          <Button colorScheme='blue' onClick={() => ProcessRoom(friendlyName)} >Save</Button>
+                          {/* <Button colorScheme='blue' onClick={() => ProcessRoom(friendlyName)} >Join</Button> */}
+                          <JoinRoom myroomid ='new' fName={ friendlyName }></JoinRoom>
                       </Box>
                   </WrapItem>
                  
@@ -158,8 +118,3 @@ export default function RoomAddDrawer() {
     )
   }
 
- // <Button colorScheme='blue' onClick={() => ProcessRoom('AzariaRoom')} >Save</Button>
-
-//  You can create a new room on this server and then share it out for
-//               friends to connect to.
-         

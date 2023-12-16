@@ -30,6 +30,7 @@ interface provider {
           playerId: string
           name: string
           ip: string
+          roomId:string
           fname: string
         } 
              
@@ -38,6 +39,7 @@ interface provider {
           name: string
           ip: string
           roomId:string
+          fname: string
         } 
 
 
@@ -71,7 +73,7 @@ export const providersApi = createApi({
     }),
       invalidatesTags: ['Rooms'],
     }),
-    postJoinRoom: builder.mutation<joinroom, Partial<joinroom> & Pick<joinroom, 'roomId'>>({
+    postJoinRoom: builder.mutation<joinroom, Pick<joinroom, 'roomId'>>({
       query: ({ roomId, ...mybody }) => ({
          url: `/matchmake/joinById/${roomId}`,
          method: 'POST',
