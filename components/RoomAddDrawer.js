@@ -101,7 +101,7 @@ export default function RoomAddDrawer() {
                   <WrapItem>
                       <Box display='flex' mt='2' alignItems='center'>
                           {/* <Button colorScheme='blue' onClick={() => ProcessRoom(friendlyName)} >Join</Button> */}
-                          <JoinRoom myroomid ='new' fName={ friendlyName }></JoinRoom>
+                          <JoinRoom myroomid ='new' fname={ friendlyName }></JoinRoom>
                       </Box>
                   </WrapItem>
                  

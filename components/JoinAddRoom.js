@@ -32,12 +32,15 @@ export default function JoinRoom(myroomid, fname) {
                 mybody.name = myplayer.name;
                 mybody.ip = myplayer.playerip;
                 mybody.roomId = myroomid.myroomid;
-                mybody.fname = myroomid.fName
+                mybody.fname = myroomid.fname;
+                
 
                 console.log('looking to join room ', mybody)
                
                 try {
-                    if(myroomid = 'new'){
+
+                    console.log('...',myroomid);
+                    if(mybody.roomId == 'new'){
                       await addRoom(JSON.stringify(mybody)).then(addMutationResult => {
                         myReservation = addMutationResult.data
                        
@@ -45,14 +48,15 @@ export default function JoinRoom(myroomid, fname) {
                       
                         
                       }else{
-                        await joinRoom(JSON.stringify(mybody)).then(JoinmutationResult => {
+                        
+                        await joinRoom(mybody).then(JoinmutationResult => {
                             myReservation = JoinmutationResult.data
-                          
+                            console.log('myReservation1',myReservation);
                           });
                       }
              
                       if(myReservation){
-                        console.log('myReservation',myReservation);
+                        console.log('myReservation2',myReservation);
                         dispatch(SET_RESERVATION({
                             clients: 0,
                             locked: false,
@@ -69,7 +73,7 @@ export default function JoinRoom(myroomid, fname) {
                       }
                        
                
-                            router.push('/Gameroom?reservation ='+ JSON.stringify(myReservation));
+                            router.push('/Gameroom');
                              
                  
                 } catch (e) {
