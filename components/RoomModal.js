@@ -19,8 +19,8 @@ import {
     Td
   } from '@chakra-ui/react'
   import { useDisclosure } from '@chakra-ui/react'
-  import {useGetRoomInfoQuery} from '@/services/providers'
   import JoinRoom from './JoinAddRoom'
+  import MyPlayers from './RoomInfo'
 
 
 
@@ -33,25 +33,6 @@ import {
 
 
 
-  const MyPlayers = function(myroom){
-    const { data, error, isLoading  } = useGetRoomInfoQuery(myroom)
-    if(!isLoading && !error){
-      const myPlayers = Object.entries(data.state.players).map(e => e[1]);
-     // console.log (myPlayers);
-      //thought to add key to 
-     // const myKeys =  Object.keys(data.state.players);
-
-      return(
-        myPlayers && myPlayers.map(({session, connected, playerName, playerIp}) => {
-          return <Tr  key={session} >
-            <Td >{playerName}</Td>
-            <Td >{playerIp}</Td>
-            <Td >{connected}</Td>
-            </Tr>
-            })
-        )
-      } 
-   }
 
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -79,14 +60,14 @@ import {
                 </Tr>
               </Thead>
               <Tbody>
-              {MyPlayers(roomId)}
+              <MyPlayers myroomid ={roomId}></MyPlayers>
               </Tbody>
             </Table>
             <ModalFooter>
               <Button colorScheme='blue' mr={3} onClick={onClose}>
                 Close
               </Button>
-              <JoinRoom myroomid = {roomId} fname={roomId.slice(9)}></JoinRoom>
+              <JoinRoom myroomid = {roomId} fname={roomId}></JoinRoom>
             </ModalFooter>
           </ModalContent>
         </Modal>

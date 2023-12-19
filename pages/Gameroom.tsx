@@ -23,10 +23,15 @@ import {
   List,
   Container,
   ListIcon,
-  Icon
+  Icon,
+  Table,
+  Tbody,
+  Th,
+  Thead,
+  Tr
 } from '@chakra-ui/react';
 
-import { MdSettings } from 'react-icons/md'
+
 import { LuMegaphone } from "react-icons/lu";
 
 import { ChevronRightIcon } from '@chakra-ui/icons';
@@ -36,10 +41,12 @@ import {useSelector,useDispatch} from 'react-redux';
 import {SET_ACTIVEROOM} from '../services/reducers/roomSlice'
 
 import * as Colyseus from "colyseus.js"; 
-import { json } from 'stream/consumers';
-import { m } from 'framer-motion';
+
+
+import MyPlayers from '../components/RoomInfo'
 
 var client = new Colyseus.Client('wss://localhost:2567');
+
 //var myReservation = new Colyseus.Room(AzariaRoom:any);
 //import { Connection, roomsBySessionId, messageTypesByRoom } from "../components/utils/Types"
 
@@ -71,6 +78,7 @@ const myplayer = useSelector((state: any) => state.player);
 const [userMessage, setUserMessage] = useState(''); 
 const [messageitems, setmessageItems] = useState<messageProperties[]>([]);
 const [currentMessage, setCurrentMessage] = useState('');
+const [currentPost, setCurrentPost] = useState('New Post');
 
 
 
@@ -108,16 +116,14 @@ let ActiveRoom: Colyseus.Room
                         },
                         sessionId: myPassedRoom.sessionId
                       };
-                      console.log('reservation: ', myReservation);
-                      
-                     if(!ReservationProcessed){
+                      if(!ReservationProcessed){
+                              console.log('reservation: ', myReservation);
                               const procReservation = async () => {
                             
-                              setReservationProcessed(true);
-                        
                               try {
                                 ActiveRoom = await client.consumeSeatReservation(myReservation);
                                 console.log("joined successfully", ActiveRoom);
+                                setReservationProcessed(true);
                                 ActiveRoomRef.current = ActiveRoom
                                 dispatch(SET_ACTIVEROOM({
                                   roomid: ActiveRoom.roomId,
@@ -126,54 +132,54 @@ let ActiveRoom: Colyseus.Room
                                   roomtype: ActiveRoom.name,
                                   sessionid: ActiveRoom.sessionId,
                                   private: false
-                              }));
-                                ActiveRoom.onStateChange.once(function(state) {
-                                    console.log("initial room state:", state);
-                                    console.log(state.players);
-                                    console.log(state.roomdetail);
-                                });
-                                                        // new room state
-                                ActiveRoom.onStateChange(function(state) {
-                                  // this signal is triggered on each patch
-                                
-                              });
-              
-                              // listen to patches coming from the server
-                                
-                              //onMessage --- for this room, update the value of the text box messagesVal
-                              ActiveRoom.onMessage("messages", (message) => {
-                                console.log(message); 
-                                
-                                if(message.hasOwnProperty('message')){
-                                // messagesText = messagesText + message.message
-                                messageArray.push(message.message);
-                                setCurrentMessage(message.message);
-                                }else{
-                                  console.log('executing')
-                                  messageArray.push(message);
-                                  setCurrentMessage(message);
-                                  
-                                }
-                                messagesRef.current = messageArray;
-                                setmessageItems( messagesRef.current);
-                                });
-              
-                              const handleRoomPost = (userMessage: string) => {
-                                        //get the value of the input field and send it as a message to the room
-                                        console.log('sending...', userMessage);
-                                        ActiveRoom.send("message", userMessage);
-                              }
-                      
-                              
+                                  }));
+                                      ActiveRoom.onStateChange.once(function(state) {
+                                          console.log("initial room state:", state);
+                                          console.log(state.players);
+                                          console.log(state.roomdetail);
+                                      });
+                                                              // new room state
+                                      ActiveRoom.onStateChange(function(state) {
+                                        // this signal is triggered on each patch
+                                      
+                                      });
+                    
+                                      // listen to patches coming from the server
+                                      //onMessage --- for this room, update the value of the text box messagesVal
+                                      ActiveRoom.onMessage("messages", (message) => {
+                                      console.log(message); 
+                                          if(message.hasOwnProperty('message')){
+                                          // messagesText = messagesText + message.message
+                                          messageArray.push(message.message);
+                                          setCurrentMessage(message.message);
+                                          }else{
+                                            console.log('executing')
+                                            messageArray.push(message);
+                                            setCurrentMessage(message);
+                                          }
+                                      messagesRef.current = messageArray;
+                                      setmessageItems( messagesRef.current);
+                                      });
+                                      const PostCurrentPost  = () => {
+                                        if(currentPost){
+                                          console.log('sending...', currentPost);
+                                          ActiveRoom.send("message", currentPost);
+                                        }
+                                      } 
+                                      PostCurrentPost();
+                                      
                               } catch (e) {
                                 console.error("join error", e);
                               }
+                             
                             }
-                          
+                              
                             procReservation();
+  
                       }
-                   // }
-                    }, [messagesText,userMessage,messageArray, messageitems, messagesRef.current,setmessageItems,setUserMessage,currentMessage ]);
+                      
+                     
+                    }, [messagesText,userMessage,messageArray, messageitems, messagesRef.current,setmessageItems,setUserMessage,currentMessage,currentPost,setCurrentPost]);
 
 
 const MessageList  = () => {
@@ -185,14 +191,9 @@ const MessageList  = () => {
     }
 }           
   
-const PlayerList  = () => {
-  ActiveRoom.state.players
-  if(currentMessage){
-    messagesRef.current
-    setWord('');
-    const listItems = messagesRef.current.map(message => <ListItem><ListIcon as={LuMegaphone} color='green.500' />{message}</ListItem>);
-      return <List>{listItems}</List>;
-  }
+const PostPost  = (post:string) => {
+  console.log('setting Current Post ', post);
+  setCurrentPost(post);
 }  
 
 
@@ -211,6 +212,9 @@ const PlayerList  = () => {
       <>...</>
     )
   }
+
+  const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => setCurrentPost(event.target.value)
+
 
  return (
   
@@ -238,7 +242,7 @@ const PlayerList  = () => {
           <Container overflow={'auto'} maxH={300} maxW='2xl' border='1px' borderColor='gray.200' >
              <Flex color='white'>
                 < Box flex='2' >
-                <Input mt={4} placeholder='Post'  />
+                <Input color={'black'} mt={4} placeholder='Post' defaultValue={currentPost} />
                 </Box>
                 < Box flex='1' >
                 <IconButton
@@ -247,6 +251,7 @@ const PlayerList  = () => {
                   colorScheme='teal'
                   aria-label='Send Room Post'
                   icon={<ChevronRightIcon/>}
+                  onClick={() => PostPost(currentPost)}
                 />
                 </Box>
               </Flex>
@@ -261,7 +266,18 @@ const PlayerList  = () => {
             </Box>
             <Box p={4} borderBottom="1px solid #eee">
                 <Heading size="sm">Players</Heading>
-
+                <Table size='md'>
+              <Thead>
+                <Tr>
+                  <Th>Players</Th>
+                  <Th>IP Address</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+              <MyPlayers myroomid ={myPassedRoom.roomId}></MyPlayers>
+              </Tbody>
+            </Table>
+               
             </Box>
             
             <Box p={1}>
