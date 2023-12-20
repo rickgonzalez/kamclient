@@ -128,12 +128,10 @@ let ActiveRoom = Colyseus.Room.prototype
                     }, []);
 
 
-                     const RoomProcessor = async (mypost: any) => {
-                    
-
-                      if(!ReservationProcessed){
-                      try {
-                      
+                    async function RoomProcessor(mypost: any) {
+                       try {
+                       console.log('receiving...',mypost)
+                       if(!ReservationProcessed){
                             ActiveRoom = await client.consumeSeatReservation(myReservation);
                             console.log("joined successfully", ActiveRoom);
                             setReservationProcessed(true);
@@ -147,7 +145,7 @@ let ActiveRoom = Colyseus.Room.prototype
                               sessionid: ActiveRoom.sessionId,
                               private: false
                               }));
-                       
+                        }
 
                               ActiveRoom.onStateChange.once(function(state) {
                                   console.log("initial room state:", state);
@@ -176,14 +174,25 @@ let ActiveRoom = Colyseus.Room.prototype
                               messagesRef.current = messageArray;
                               setmessageItems( messagesRef.current);
                               });
-                           
-                             
-                          } catch (e) {
-                            console.error("join error", e);
-                          }
-                    } else{
+                              const sendMessage = (mypost: any) => {
+                                try {
+                                  const now = new Date();
+                                  const payload = JSON.parse(mypost || "{}");
+                                  const newMessage = { type: 'messages', message: payload, out: true, now, };
+                                  ActiveRoom.send('messages', payload);
+                            
+                                } catch (e: any) {
+                                  console.log(e.message);
+                                }
+                              }; 
+                              
+                              if(mypost){
+                                sendMessage(mypost)
+                              }  
+                      } catch (e) {
+                        console.error("join error", e);
+                      }
                       
-                    }  
               }
 
 

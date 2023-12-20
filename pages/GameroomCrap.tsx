@@ -118,74 +118,71 @@ let myReservation : reservation = {
 };
 
 let ActiveRoom = Colyseus.Room.prototype
-
+let room = Colyseus.Room.prototype
 
                     useEffect(() => {
                       if(!ReservationProcessed){
-                              console.log('reservation: ', myReservation);
-                              RoomProcessor('');
+                              console.log('reservation: ', myReservation);  
+                            procReservation;
                       }
+                      
+                     
                     }, []);
 
-
-                     const RoomProcessor = async (mypost: any) => {
-                    
-
-                      if(!ReservationProcessed){
-                      try {
+                    async function eatReservation(aReservation: any) {
+                      ActiveRoom = await client.consumeSeatReservation(aReservation);
+                      return ActiveRoom
+                    }
                       
-                            ActiveRoom = await client.consumeSeatReservation(myReservation);
-                            console.log("joined successfully", ActiveRoom);
-                            setReservationProcessed(true);
-                            ActiveRoomRef.current = ActiveRoom
 
-                            dispatch(SET_ACTIVEROOM({
-                              roomid: ActiveRoom.roomId,
-                              friendly: ActiveRoom.roomId.slice(9),
-                              reconnectToken: ActiveRoom.reconnectionToken, 
-                              roomtype: ActiveRoom.name,
-                              sessionid: ActiveRoom.sessionId,
-                              private: false
-                              }));
-                       
+  const procReservation = async (message: any) => {
+        try {
+          room  = await eatReservation(myReservation);
+          console.log("joined successfully", ActiveRoom);
+          setReservationProcessed(true);
+          ActiveRoomRef.current = room
 
-                              ActiveRoom.onStateChange.once(function(state) {
-                                  console.log("initial room state:", state);
-                                  console.log(state.players);
-                                  console.log(state.roomdetail);
-                              });
-                                                      // new room state
-                              ActiveRoom.onStateChange(function(state) {
-                                // this signal is triggered on each patch
-                              
-                              });
-            
-                              // listen to patches coming from the server
-                              //onMessage --- for this room, update the value of the text box messagesVal
-                              ActiveRoom.onMessage("messages", (message) => {
-                              console.log(message); 
-                                  if(message.hasOwnProperty('message')){
-                                      // messagesText = messagesText + message.message
-                                      messageArray.push(message.message);
-                                      setCurrentMessage(message.message);
-                                  }else{
-                                      console.log('executing')
-                                      messageArray.push(message);
-                                      setCurrentMessage(message);
-                                  }
-                              messagesRef.current = messageArray;
-                              setmessageItems( messagesRef.current);
-                              });
-                           
-                             
-                          } catch (e) {
-                            console.error("join error", e);
-                          }
-                    } else{
-                      
-                    }  
-              }
+          dispatch(SET_ACTIVEROOM({
+            roomid: ActiveRoom.roomId,
+            friendly: ActiveRoom.roomId.slice(9),
+            reconnectToken: ActiveRoom.reconnectionToken, 
+            roomtype: ActiveRoom.name,
+            sessionid: ActiveRoom.sessionId,
+            private: false
+            }));
+                room.onStateChange.once(function(state) {
+                    console.log("initial room state:", state);
+                    console.log(state.players);
+                    console.log(state.roomdetail);
+                });
+                                        // new room state
+                room.onStateChange(function(state) {
+                  // this signal is triggered on each patch
+                
+                });
 
+                // listen to patches coming from the server
+                //onMessage --- for this room, update the value of the text box messagesVal
+                room.onMessage("messages", (message) => {
+                console.log(message); 
+                    if(message.hasOwnProperty('message')){
+                    // messagesText = messagesText + message.message
+                    messageArray.push(message.message);
+                    setCurrentMessage(message.message);
+                    }else{
+                      console.log('executing')
+                      messageArray.push(message);
+                      setCurrentMessage(message);
+                    }
+                    messagesRef.current = messageArray;
+                    setmessageItems( messagesRef.current);
+                });
+                 
+        } catch (e) {
+          console.error("join error", e);
+        }
+  }
+              
 
 
 const MessageList  = () => {
@@ -197,13 +194,10 @@ const MessageList  = () => {
     }
 }           
   
-// const PostPost  = (message:string) => {
-   
-//     const room = roomsBySessionId[myPassedRoom.sessionId];
-//     console.log('sessionId...', myPassedRoom.sessionId);
-//     room.send("message", message);
-  
-// } 
+function PostPost(message:string){
+  room.send("message", message);
+
+} 
 
 
 //================>
@@ -270,7 +264,7 @@ const MessageList  = () => {
                   colorScheme='teal'
                   aria-label='Send Room Post'
                   icon={<ChevronRightIcon/>}
-                  onClick={() => RoomProcessor(value)}
+                  onClick={() => PostPost(value)}
                 />
                 </Box>
               </Flex>
@@ -314,4 +308,3 @@ const MessageList  = () => {
 
 
 
-//messagesText,userMessage,messageArray, messageitems, messagesRef.current,setmessageItems,setUserMessage,currentMessage,currentPost,setCurrentPost
