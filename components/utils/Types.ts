@@ -1,55 +1,33 @@
-import { Client, Room } from "colyseus.js";
-import { LimitedArray } from "./LimitedArray";
+import * as Colyseus from "colyseus.js"; 
 
-export type Connection = {
-  sessionId: string;
-  isConnected: boolean;
-  messages: LimitedArray;
-  events: LimitedArray;
-};
 
-// export const baseEndpoint = `${window.location.protocol}//${window.location.host}`;
-// export const endpoint = `${baseEndpoint}${window.location.pathname.replace(/\/+$/, '')}`;
 
-//export const client = new Client(baseEndpoint);
-
-export const global = { connections: [] as Connection[], };
-
-export const roomsBySessionId: { [sessionId: string]: Room } = {};
-export const messageTypesByRoom: { [key: string]: string[] } = {};
-
-let currentColor = -1;
-export const allRoomColors: string[] = [
-  "cyan",
-  "blue",
-  "violet",
-  "fuchsia",
-  "green",
-  "rose",
-  // "sky",
-  // "pink",
-  // "emerald",
-  // "lime",
-  // "indigo",
-  // "teal",
-];
-// ,"stone", "amber", "yellow", "purple"
-
-export function getRoomColorClass(roomId: string) {
-  if (!colorsByRoomId[roomId]) {
-    if (currentColor >= allRoomColors.length) {
-      currentColor = 0;
-    }
-    colorsByRoomId[roomId] = allRoomColors[currentColor];
-    currentColor++;
-  }
-  return "bg-" + colorsByRoomId[roomId] + "-800";
+export interface newMessage {
+    type: string;
+    message: any;
+    out: boolean;
+    now: Date;
 }
-export const colorsByRoomId: {[roomId: string]: string} = {};
 
-export const matchmakeMethods: {[key: string]: string} = {
-	"joinOrCreate": "Join or Create",
-	"create": "Create",
-	"join": "Join",
-	"joinById": "Join by ID",
-};
+export interface RoomContextType {
+    myroom: Colyseus.Room | null;    //may need to add function for sending too!
+    send(message: newMessage): unknown;
+}
+export interface reservation {
+    room:{
+      clients: number,
+      locked: boolean,
+      private: boolean,
+      maxClients: number,
+      unlisted: boolean,
+      createdAt: string,
+      name: string,
+      processId: string,
+      publicAddress: string,
+      roomId: string,
+  }, sessionId: string
+  } 
+
+  export interface messageProperties {
+    message: string;
+  }
