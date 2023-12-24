@@ -18,19 +18,25 @@ export function RoomPoster() {
 
   const sendMessage = (mymessage: any) => {
 		try {
-			const now = new Date();
-			//const payload = JSON.parse(mymessage || "{}");
-      let mymessageobj = new Object();
-      mymessageobj = {
-       'message': mymessage
-      }
+			// const now = new Date();
+			// //const payload = JSON.parse(mymessage || "{}");
+      // let mymessageobj = new Object();
+      // mymessageobj = {
+      //   'message': mymessage
+      // }
 
-      const payload = JSON.stringify(mymessageobj);
-			const newMessage = { type: 'messages', message: payload, out: true, now, };
-			// setMessages([newMessage, ...messages]);
-			// connection.messages.unshift(newMessage);
-      console.log(newMessage)
-			room.send(newMessage);
+      // const payload = JSON.stringify(mymessageobj);
+			// const newMessage = { type: 'messages', message: payload, out: true, now, };
+
+      // console.log(payload);
+      //room.myroom?.send(JSON.parse(JSON.stringify(payload)));
+       
+      room.myroom?.send("messages", { message: mymessage})
+
+
+     //  room.myroom?.send(JSON.stringify(newMessage));
+       //?? room.send(JSON.stringify(mymessageobj));
+      
 
 		} catch (e: any) {
 			console.log(e.message);
@@ -38,7 +44,7 @@ export function RoomPoster() {
 	}
 
   function handleChange(event: any): void {
-    console.log(event.target.value);
+   // console.log(event.target.value);
     setValue(event.target.value);
   }
   return (

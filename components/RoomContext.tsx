@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState,useRef } from 'react';
+import React, { createContext, useContext, useEffect, useState,useRef, useCallback } from 'react';
 import { Client, Room } from "colyseus.js";
 import {useSelector,useDispatch} from 'react-redux';
 import {SET_ACTIVEROOM} from '../services/reducers/roomSlice'
@@ -10,7 +10,8 @@ import {newMessage, RoomContextType, messageProperties, reservation} from '../co
 
 export const RoomContext = createContext<RoomContextType>({
   myroom: null,
-  send:() => { }
+  messages:[''],
+ 
 });
 
 export function useRoom() {
@@ -18,14 +19,22 @@ export function useRoom() {
 }
 
 
+
+
 export function RoomProvider({ children }: { children: React.ReactNode }) {
     const myPassedRoom = useSelector((state: any) => state.room);
     const [currentMessage, setCurrentMessage] = useState('');
-    const [messageitems, setmessageItems] = useState<messageProperties[]>([]);
+   // const [messageitems, setmessageItems] = useState<string[]>(['test']);
+    const [messages, setMessages] = useState<string[]>([]);
+
+
+  
+ 
     const messagesRef = useRef(new Array())
     const dispatch = useDispatch();
     var client = new Client('wss://localhost:2567');
     const [myroom, setRoom] = useState<Room | null>(null);
+   
     let myReservation : reservation = {
         room:{
           clients: myPassedRoom.clients,
@@ -42,131 +51,79 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
         sessionId: myPassedRoom.sessionId
       };
 
-      console.log('reservation being consumed: -->', myReservation)   
+      var temproom = Room.prototype
+      useEffect(() => {
+        console.log('inside useEffect Now')   
+    
+    const RoomProcessor = async () => {
+        console.log('reservation being consumed: -->', myReservation)   
 
-           var temproom = Room.prototype
+        try { 
+            temproom = await client.consumeSeatReservation(myReservation);
+             console.log("joined successfully", temproom);
+             var messagesText = 'You have joined the room'
+             var messageArray: string[] = [messagesText];
+             
+             dispatch(SET_ACTIVEROOM({
+             roomid: temproom.roomId,
+             friendly: temproom.roomId.slice(9),
+             reconnectToken: temproom.reconnectionToken, 
+             roomtype: temproom.name,
+             sessionid: temproom.sessionId,
+             private: false
+             }));
+
+              temproom.onStateChange.once(function(state) {
+                 console.log("initial temproomstate:", state);
+                 
+             });
+                                     // new temproomstate
+             temproom.onStateChange(function(state) {
+                 // this signal is triggered on each patch
+                 console.log('new State came -->',state)
+             });
+     
+             // listen to patches coming from the server
+             //onMessage --- for this room, update the value of the text box messagesVal
+             temproom.onMessage("messages", (message) => {
+             console.dir(message); 
+                 if(message.hasOwnProperty('message')){
+                     // messagesText = messagesText + message.message
+                     messageArray.push(message.message);
+                     setCurrentMessage(message.message);
+                     setMessages(prevItems => [...prevItems, message.message]);
+                  
+                 }else{
+                     console.log('executing')
+                     messageArray.push(message);
+                     setCurrentMessage(message);
+                     setMessages(prevItems => [...prevItems, message]);
+                 }
+             });
             
-            const RoomProcessor = async () => { 
-                try { 
-                           temproom = await client.consumeSeatReservation(myReservation);
-                            console.log("joined successfully", temproom);
-                            var messagesText = 'You have joined the room'
-                            var messageArray: string[] = [messagesText];
-                            
-                            dispatch(SET_ACTIVEROOM({
-                            roomid: temproom.roomId,
-                            friendly: temproom.roomId.slice(9),
-                            reconnectToken: temproom.reconnectionToken, 
-                            roomtype: temproom.name,
-                            sessionid: temproom.sessionId,
-                            private: false
-                            }));
-                             temproom.onStateChange.once(function(state) {
-                                console.log("initial temproomstate:", state);
-                                
-                            });
-                                                    // new temproomstate
-                            temproom.onStateChange(function(state) {
-                                // this signal is triggered on each patch
-                                console.log('new State came -->',state)
-                            });
-                    
-                            // listen to patches coming from the server
-                            //onMessage --- for this room, update the value of the text box messagesVal
-                            temproom.onMessage("messages", (message) => {
-                            console.log(message); 
-                                if(message.hasOwnProperty('message')){
-                                    // messagesText = messagesText + message.message
-                                    messageArray.push(message.message);
-                                    setCurrentMessage(message.message);
-                                }else{
-                                    console.log('executing')
-                                    messageArray.push(message);
-                                    setCurrentMessage(message);
-                                }
-                            messagesRef.current = messageArray;
-                            setmessageItems( messagesRef.current);
-                            });
-                            
-                        setRoom(temproom);
-                        
-                            
-                        } catch (e) {
-                            console.error("join error", e);
-                        }
-            }  
-            
-            RoomProcessor();
+             temproom.onMessage("chat", (message) => {
+              console.dir(message); 
+                     console.log('executing')
+                      messageArray.push(message);
+                      setCurrentMessage(message);
+                      setMessages(prevItems => [...prevItems, message]);
+                  
+              });
+        
+         } catch (e) {console.error("join error", e);}
+         setRoom(temproom);
+       
          
-
-
-
+        }
+        RoomProcessor()
+        .catch(console.error);;
+     }, []);
+     
     return (
-      <RoomContext.Provider value={{myroom,send(_message) {},}}>
+      <RoomContext.Provider value={{myroom, messages}}>
         {children}
       </RoomContext.Provider>
     );
   }
 
 
-
-//   useEffect(() => {
-//     // RoomProcessor();
-    
-                
-     
-//      const RoomProcessor = async () => { 
-//          try { 
-//                      const room = await client.consumeSeatReservation(myReservation);
-//                      console.log("joined successfully", room);
-//                      var messagesText = 'You have joined the room'
-//                      var messageArray: string[] = [messagesText];
-                     
-//                      dispatch(SET_ACTIVEROOM({
-//                      roomid: room.roomId,
-//                      friendly: room.roomId.slice(9),
-//                      reconnectToken: room.reconnectionToken, 
-//                      roomtype: room.name,
-//                      sessionid: room.sessionId,
-//                      private: false
-//                      }));
-             
-                     
-//                      room.onStateChange.once(function(state) {
-//                          console.log("initial room state:", state);
-                         
-//                      });
-//                                              // new room state
-//                      room.onStateChange(function(state) {
-//                          // this signal is triggered on each patch
-//                          console.log('new State came -->',state)
-                     
-//                      });
-             
-//                      // listen to patches coming from the server
-//                      //onMessage --- for this room, update the value of the text box messagesVal
-//                      room.onMessage("messages", (message) => {
-//                      console.log(message); 
-//                          if(message.hasOwnProperty('message')){
-//                              // messagesText = messagesText + message.message
-//                              messageArray.push(message.message);
-//                              setCurrentMessage(message.message);
-//                          }else{
-//                              console.log('executing')
-//                              messageArray.push(message);
-//                              setCurrentMessage(message);
-//                          }
-//                      messagesRef.current = messageArray;
-//                      setmessageItems( messagesRef.current);
-//                      });
-                     
-//                  setRoom(room || null);
-//                  console.log('myroom',myroom);
-                     
-//                  } catch (e) {
-//                      console.error("join error", e);
-//                  }
-//      }  
-     
-//      RoomProcessor();
-//      }, []);

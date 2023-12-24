@@ -11,7 +11,7 @@ export interface newMessage {
 
 export interface RoomContextType {
     myroom: Colyseus.Room | null;    //may need to add function for sending too!
-    send(message: newMessage): unknown;
+    messages: string[]| null;
 }
 export interface reservation {
     room:{

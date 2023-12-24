@@ -27,14 +27,15 @@ import React, {useState,useEffect,useRef, useContext } from 'react';
 import {useSelector} from 'react-redux';
 
 import MyPlayers from '../components/RoomInfo'
-import { RoomContext, useRoom } from '@/components/RoomContext';
+import { RoomContext, RoomProvider, useRoom } from '@/components/RoomContext';
+import { messageProperties } from '@/components/utils/types';
 
 
 export default function Gameroom(){
     const myPassedRoom = useSelector((state: any) => state.room);
     console.log('now calling useRoom')
-    const {myroom, send} = useContext(RoomContext);
-    console.log('room from context',myroom);
+    const {myroom} = useContext(RoomContext);
+   // console.log('room from context',myroom);
 
    
 
@@ -44,15 +45,21 @@ export default function Gameroom(){
     //used for processing inbound message
     const [currentMessage, setCurrentMessage] = useState('');
     const messagesRef = useRef(new Array())
+    
+   
 
 
 const MessageList  = () => {
-    if(currentMessage){
+      const room = useRoom();
       messagesRef.current
       setWord('');
-      const listItems = messagesRef.current.map(message => <ListItem><ListIcon as={LuMegaphone} color='green.500' />{message}</ListItem>);
+
+      if(room.messages){
+        const listItems = room.messages.map(message => <ListItem><ListIcon as={LuMegaphone} color='green.500' />{message}</ListItem>);
         return <List>{listItems}</List>;
-    }
+      }
+     
+   // }
 }           
   
 
@@ -71,7 +78,7 @@ const MessageList  = () => {
  return (
   
     <Box>
-     
+       <RoomProvider>
 
       <KamNavBar currentPage = "Gameroom"></KamNavBar>
       <Flex bg="#011627" p={4} color="white">
@@ -104,6 +111,7 @@ const MessageList  = () => {
             </Box>
             <Box p={4} borderBottom="1px solid #eee">
                 <Heading size="sm">Players</Heading>
+                <Heading size="sm">{word}</Heading>
                 <Table size='md'>
               <Thead>
                 <Tr>
@@ -124,7 +132,7 @@ const MessageList  = () => {
         </Box>
         
       </Flex>
-     
+      </RoomProvider>
     </Box>
 
 
