@@ -55,7 +55,7 @@ const MessageList  = () => {
      
       if(room.messages){
         const listItems = room.messages.map(message => 
-        <ListItem>
+        <ListItem key={(room.messages?.indexOf(message))}>
           <ListIcon as={message.charAt(0)=='['?IoChatbubbleEllipses:LuMegaphone} color='green.500' />
           {message}
         </ListItem>);

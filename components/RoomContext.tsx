@@ -27,8 +27,6 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
    // const [messageitems, setmessageItems] = useState<string[]>(['test']);
     const [messages, setMessages] = useState<string[]>([]);
 
-
-  
  
     const messagesRef = useRef(new Array())
     const dispatch = useDispatch();
@@ -89,12 +87,10 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
              console.dir(message); 
                  if(message.hasOwnProperty('message')){
                      // messagesText = messagesText + message.message
-                     messageArray.push(message.message);
                      setCurrentMessage(message.message);
                      setMessages(prevItems => [...prevItems, message.message]);
                   
                  }else{
-                     messageArray.push(message);
                      setCurrentMessage(message);
                      setMessages(prevItems => [...prevItems, message]);
                  }
@@ -102,7 +98,6 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
             
              temproom.onMessage("chat", (message) => {
               console.dir(message); 
-                      messageArray.push(message);
                       setCurrentMessage(message);
                       setMessages(prevItems => [...prevItems, message]);
                   
