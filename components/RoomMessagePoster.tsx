@@ -1,5 +1,5 @@
 
-import { Client, Room } from "colyseus.js";
+
 
 import { Box, Container, Flex, IconButton, Input, Textarea, border, color } from '@chakra-ui/react'
 
@@ -14,32 +14,10 @@ export function RoomPoster() {
   const room = useRoom();
   const [value, setValue] = React.useState('')
   const myplayer = useSelector((state: any) => state.player);
-  // const [state, setState] = useState(room.state && room.state.toJSON());
-  // const hasState = (room.state !== null);
 
   const sendMessage = (mymessage: any) => {
-    
 		try {
-			// const now = new Date();
-			// //const payload = JSON.parse(mymessage || "{}");
-      // let mymessageobj = new Object();
-      // mymessageobj = {
-      //   'message': mymessage
-      // }
-
-      // const payload = JSON.stringify(mymessageobj);
-			// const newMessage = { type: 'messages', message: payload, out: true, now, };
-
-      // console.log(payload);
-      //room.myroom?.send(JSON.parse(JSON.stringify(payload)));
-       
       room.myroom?.send("chat", { message: mymessage, name: myplayer.name})
-
-
-     //  room.myroom?.send(JSON.stringify(newMessage));
-       //?? room.send(JSON.stringify(mymessageobj));
-      
-
 		} catch (e: any) {
 			console.log(e.message);
 		}

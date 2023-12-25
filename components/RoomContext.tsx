@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState,useRef, useCallba
 import { Client, Room } from "colyseus.js";
 import {useSelector,useDispatch} from 'react-redux';
 import {SET_ACTIVEROOM} from '../services/reducers/roomSlice'
-import {newMessage, RoomContextType, messageProperties, reservation} from '../components/utils/types'
+import { RoomContextType, reservation} from '../components/utils/types'
 
 // type: 'messages', message: payload, out: true, now,
 

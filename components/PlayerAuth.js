@@ -18,9 +18,7 @@ import {
     Avatar,
     Input,
     Button,
-    Flex,
-    Heading,
-    IconButton
+    Heading
   } from '@chakra-ui/react'
 
   //import {useRef} from 'react'
