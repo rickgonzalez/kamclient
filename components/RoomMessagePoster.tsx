@@ -6,17 +6,19 @@ import { Box, Container, Flex, IconButton, Input, Textarea, border, color } from
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import React, { useState,useEffect,useRef } from 'react';
 import { useRoom } from '@/components/RoomContext';
+import { useSelector, useDispatch } from "react-redux";
 
 
 export function RoomPoster() {
-  
+
   const room = useRoom();
   const [value, setValue] = React.useState('')
-
+  const myplayer = useSelector((state: any) => state.player);
   // const [state, setState] = useState(room.state && room.state.toJSON());
   // const hasState = (room.state !== null);
 
   const sendMessage = (mymessage: any) => {
+    
 		try {
 			// const now = new Date();
 			// //const payload = JSON.parse(mymessage || "{}");
@@ -31,7 +33,7 @@ export function RoomPoster() {
       // console.log(payload);
       //room.myroom?.send(JSON.parse(JSON.stringify(payload)));
        
-      room.myroom?.send("messages", { message: mymessage})
+      room.myroom?.send("chat", { message: mymessage, name: myplayer.name})
 
 
      //  room.myroom?.send(JSON.stringify(newMessage));

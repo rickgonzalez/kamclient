@@ -22,7 +22,8 @@ import {
   Tr
 } from '@chakra-ui/react';
 import { RoomPoster } from '@/components/RoomMessagePoster';
-import { LuMegaphone } from "react-icons/lu";
+import { LuMegaphone,LuSmile  } from "react-icons/lu";
+import { IoChatbubbleEllipses } from "react-icons/io5";
 import React, {useState,useEffect,useRef, useContext } from 'react';
 import {useSelector} from 'react-redux';
 
@@ -51,11 +52,13 @@ export default function Gameroom(){
 
 const MessageList  = () => {
       const room = useRoom();
-      messagesRef.current
-      setWord('');
-
+     
       if(room.messages){
-        const listItems = room.messages.map(message => <ListItem><ListIcon as={LuMegaphone} color='green.500' />{message}</ListItem>);
+        const listItems = room.messages.map(message => 
+        <ListItem>
+          <ListIcon as={message.charAt(0)=='['?IoChatbubbleEllipses:LuMegaphone} color='green.500' />
+          {message}
+        </ListItem>);
         return <List>{listItems}</List>;
       }
      

@@ -94,7 +94,6 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
                      setMessages(prevItems => [...prevItems, message.message]);
                   
                  }else{
-                     console.log('executing')
                      messageArray.push(message);
                      setCurrentMessage(message);
                      setMessages(prevItems => [...prevItems, message]);
@@ -103,7 +102,6 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
             
              temproom.onMessage("chat", (message) => {
               console.dir(message); 
-                     console.log('executing')
                       messageArray.push(message);
                       setCurrentMessage(message);
                       setMessages(prevItems => [...prevItems, message]);
