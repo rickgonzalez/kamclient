@@ -49,10 +49,10 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
         sessionId: myPassedRoom.sessionId
       };
 
-      var temproom = Room.prototype
+     
       useEffect(() => {
         console.log('inside useEffect Now')   
-    
+        var temproom = Room.prototype
     const RoomProcessor = async () => {
         console.log('reservation being consumed: -->', myReservation)   
 
