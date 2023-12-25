@@ -29,7 +29,7 @@ import {useSelector} from 'react-redux';
 
 import MyPlayers from '../components/RoomInfo'
 import { RoomContext, RoomProvider, useRoom } from '@/components/RoomContext';
-import { messageProperties } from '@/components/utils/types';
+
 
 
 export default function Gameroom(){
