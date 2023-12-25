@@ -2,11 +2,30 @@ import React, { createContext, useContext, useEffect, useState,useRef, useCallba
 import { Client, Room } from "colyseus.js";
 import {useSelector,useDispatch} from 'react-redux';
 import {SET_ACTIVEROOM} from '../services/reducers/roomSlice'
-import { RoomContextType, reservation} from '../components/utils/types'
+//import { RoomContextType, reservation} from '../components/utils/Types'
+import * as Colyseus from "colyseus.js"; 
+
 
 // type: 'messages', message: payload, out: true, now,
-
+interface RoomContextType {
+  myroom: Colyseus.Room | null;    //may need to add function for sending too!
+  messages: string[]| null;
+}
   
+interface reservation {
+  room:{
+    clients: number,
+    locked: boolean,
+    private: boolean,
+    maxClients: number,
+    unlisted: boolean,
+    createdAt: string,
+    name: string,
+    processId: string,
+    publicAddress: string,
+    roomId: string,
+}, sessionId: string
+} 
 
 export const RoomContext = createContext<RoomContextType>({
   myroom: null,
