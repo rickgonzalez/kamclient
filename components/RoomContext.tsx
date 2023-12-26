@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState,useRef, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useState} from 'react';
 import { Client, Room } from "colyseus.js";
 import {useSelector,useDispatch} from 'react-redux';
 import {SET_ACTIVEROOM} from '../services/reducers/roomSlice'
@@ -47,7 +47,6 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
     const [messages, setMessages] = useState<string[]>([]);
 
  
-    const messagesRef = useRef(new Array())
     const dispatch = useDispatch();
     var client = new Client('wss://localhost:2567');
     const [myroom, setRoom] = useState<Room | null>(null);

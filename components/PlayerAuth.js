@@ -62,6 +62,9 @@ export default function PlayerAuth() {
                     }));
             });
           });
+
+          onClose();
+
          
       } 
 
@@ -97,6 +100,9 @@ export default function PlayerAuth() {
 
                     <Box>
                     <Heading size='sm'>{value}</Heading>
+                    </Box>
+                    <Box>
+                    <Text fontSize='sm'>{myplayer.name}</Text>
                     </Box>
                     <Box>
                     <Text fontSize='sm'>{myplayer.id}</Text>
