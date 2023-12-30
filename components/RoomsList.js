@@ -21,7 +21,9 @@ import {
 
 export default function RoomsList() {
 
-const { data, error, isLoading  } = useGetRoomsQuery("Rooms");
+const { data, error, isLoading  } = useGetRoomsQuery("Rooms",{
+  pollingInterval: 3000,
+})
 
 const RenderRooms = () => {
   if(!isLoading && !error){

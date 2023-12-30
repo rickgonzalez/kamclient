@@ -119,7 +119,6 @@ const MessageList  = () => {
               <Thead>
                 <Tr>
                   <Th>Players</Th>
-                  <Th>IP Address</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -144,5 +143,3 @@ const MessageList  = () => {
 }
 
 
-
-//messagesText,userMessage,messageArray, messageitems, messagesRef.current,setmessageItems,setUserMessage,currentMessage,currentPost,setCurrentPost

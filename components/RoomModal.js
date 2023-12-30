@@ -56,7 +56,6 @@ import {
               <Thead>
                 <Tr>
                   <Th>Players</Th>
-                  <Th>IP Address</Th>
                 </Tr>
               </Thead>
               <Tbody>

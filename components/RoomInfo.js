@@ -10,7 +10,9 @@ import {useGetRoomInfoQuery} from '@/services/providers'
 
     export default function MyPlayers(myroomid){
       console.log('RoomInfo get', myroomid.myroomid)
-        const { data, error, isLoading  } = useGetRoomInfoQuery(myroomid.myroomid)
+        const { data, error, isLoading  } = useGetRoomInfoQuery(myroomid.myroomid,{
+          pollingInterval: 6000,
+        })
         if(!isLoading && !error){
           const myPlayers = Object.entries(data.state.players).map(e => e[1]);
          // console.log (myPlayers);
@@ -18,10 +20,9 @@ import {useGetRoomInfoQuery} from '@/services/providers'
          // const myKeys =  Object.keys(data.state.players);
     
           return(
-            myPlayers && myPlayers.map(({session, connected, playerName, playerIp}) => {
+            myPlayers && myPlayers.map(({session, connected, playerName}) => {
               return <Tr key={session} >
                 <Td >{playerName}</Td>
-                <Td >{playerIp}</Td>
                 <Td >{connected}</Td>
                 </Tr>
                 })

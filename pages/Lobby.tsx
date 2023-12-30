@@ -6,6 +6,8 @@ import RoomAddDrawer from '../components/RoomAddDrawer';
 
 
 import {
+  Alert,
+  AlertIcon,
   Box,
   Divider,
   Flex,
@@ -17,6 +19,13 @@ import {
 } from '@chakra-ui/react'
 
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+
+
+
+//const myplayer = useSelector((state: any) => state.player);
+
+
 
 export const PostsCountStat = () => {
   // const { data: posts } = useGetPostsQuery()
@@ -32,9 +41,27 @@ export const PostsCountStat = () => {
  }
 
 
+ export function AuthError(){
+ 
+  const myplayer = useSelector((state: any) => state.player);
+  if(!myplayer.isAuthenticated){
+    return (
+      <Alert status='warning'>
+        <AlertIcon />
+            You are not currently logged in. Please click on the round icon in the upper right.
+      </Alert>
+    )
+  }else{
+    return (
+      <></>
+    )
+  }
+ }
+
 
 export default function Lobby() {
   const [count, setCount] = useState(0);
+ 
 
 
  
@@ -52,13 +79,9 @@ export default function Lobby() {
           <PostsCountStat />
         </Box>
       </Flex>
-
-
-      <Divider />
-
-
-      <p>section</p>
-      <Divider />
+   
+      <AuthError></AuthError>
+      
 
       <Flex wrap="wrap">
         <Box flex={1} borderRight="1px solid #eee">
