@@ -17,6 +17,8 @@ import {Image,Flex,Spacer, Box, Container, Text, Center, Stack, Heading, HStack}
                       <Center flexDirection={'row'}>
                        
                         <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/SINGLOGO.png'}></Image>
+
+                        <Image w={['10','16','20']} m={['2','3','5']} src={' https://azariaimages.s3.amazonaws.com/EthLogoBW.png'}></Image>
                         
                         <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/fatmanlogo.png'}></Image>
 
@@ -25,7 +27,7 @@ import {Image,Flex,Spacer, Box, Container, Text, Center, Stack, Heading, HStack}
                 </Stack>
             
           </Center>
-          
+         
          
          
          <Center flexDirection={'row'} bg={'black'}>
