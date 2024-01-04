@@ -16,11 +16,11 @@ import {Image,Flex,Spacer, Box, Container, Text, Center, Stack, Heading, HStack}
                 <Stack spacing='24px'>
                       <Center flexDirection={'row'}>
                        
-                        <Image w={['12','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/SINGLOGO.png'}></Image>
+                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/SINGLOGO.png'}></Image>
                         
-                        <Image w={['12','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/fatmanlogo.png'}></Image>
+                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/fatmanlogo.png'}></Image>
 
-                        <Image w={['12','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/ColyseusBWLogo.png'}></Image>
+                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/ColyseusBWLogo.png'}></Image>
                       </Center>
                 </Stack>
             

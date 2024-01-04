@@ -50,7 +50,7 @@ export default function Home() {
                  
                  <Text  m={8} fontSize={['12px','16px','24px']} color='white'>
                   Recently remastered from its 1997 designs, 
-                  Kamioza brings a simple originality to adventure gaming. It's approachable, mysterious and loads of fun.</Text>
+                  Kamioza brings a simple originality to adventure gaming. It is approachable, mysterious and loads of fun.</Text>
       </Center>
   </Center>
   </Flex>
