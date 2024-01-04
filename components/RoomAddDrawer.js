@@ -73,7 +73,7 @@ export default function RoomAddDrawer() {
           <AccordionItem>
             <h2>
               <AccordionButton>
-                <Box as="span" flex='1' textAlign='left'>
+                <Box color={'white'} as="span" flex='1' textAlign='left'>
                   Add New Room
                 </Box>
                 <AccordionIcon />
@@ -88,7 +88,7 @@ export default function RoomAddDrawer() {
                   <Input placeholder='friendly name' onChange={handleChange} value={friendlyName} />
                   
                   <RadioGroup onChange={setValue} value={value}>
-                      <Stack direction='row'>
+                      <Stack color={'white'} direction='row'>
                         <Radio value='1'>Private</Radio>
                         <Radio value='2'>Public</Radio>
                       </Stack>

@@ -2,8 +2,8 @@
 
 import KamNavBar from '../components/Navbar';
 import {ImageTrain} from '../components/ImageWelcome';
-import{Footer} from '../components/KamFooter'
-import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button } from '@chakra-ui/react'
+import{Footer} from '../components/KamFooter';
+import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button } from '@chakra-ui/react';
 
 
 

@@ -11,23 +11,7 @@ import {Image,Flex,Spacer, Box, Container, Text, Center, Stack, Heading, HStack}
     
       return (
         <Box  bg={'#0a0909'} h={['150','300','600']} >
-         <Center flex={1} flexDirection={'row'} bg={'black'} h={40}>
-                
-                <Stack spacing='24px'>
-                      <Center flexDirection={'row'}>
-                       
-                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/SINGLOGO.png'}></Image>
-
-                        <Image w={['10','16','20']} m={['2','3','5']} src={' https://azariaimages.s3.amazonaws.com/EthLogoBW.png'}></Image>
-                        
-                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/fatmanlogo.png'}></Image>
-
-                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/ColyseusBWLogo.png'}></Image>
-                      </Center>
-                </Stack>
-            
-          </Center>
-         
+        
          
          
          <Center flexDirection={'row'} bg={'black'}>
@@ -39,7 +23,23 @@ import {Image,Flex,Spacer, Box, Container, Text, Center, Stack, Heading, HStack}
             
 
           </Center> 
-          
+          <Center flex={1} flexDirection={'row'} bg={'black'} h={40}>
+                
+                <Stack spacing='24px'>
+                      <Center flexDirection={'row'}>
+                       
+                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/SINGLOGO.png'}></Image>
+
+                        <Image w={['10','20','20']} m={['2','3','5']} src={' https://azariaimages.s3.amazonaws.com/EthLogoBW.png'}></Image>
+                        
+                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/fatmanlogo.png'}></Image>
+
+                        <Image w={['16','40','60']} m={['2','3','5']} src={'https://azariaimages.s3.amazonaws.com/ColyseusBWLogo.png'}></Image>
+                      </Center>
+                </Stack>
+            
+          </Center>
+         
           <Center flex={1}  flexDirection={'row'} bg={'black'} h={40}>
                 <Stack mt='6' spacing='3'>
                   <Heading size='md' color={'white'}>Copyright Detomata 2024</Heading>

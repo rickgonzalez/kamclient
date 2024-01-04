@@ -95,7 +95,7 @@ export default function JoinRoom(myroomid, fname) {
       
        
            return (
-            <Button colorScheme='blue' onClick={() => joined(myroomid)} >Join</Button>
+            <Button onClick={() => joined(myroomid)} >Join</Button>
            )
        
         }

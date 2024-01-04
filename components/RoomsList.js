@@ -38,13 +38,12 @@ const RenderRooms = () => {
        
         let p1roomId = roomId.slice(9)
         let p2roomId = roomId.slice(0, 9)
-      return <tr className="hover:bg-gray-100 dark:hover:bg-gray-700" key={roomId} >
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{p1roomId}</td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{p2roomId}</td>
-        <td className="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{maxClients}</td>
-        <td className="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{clients}</td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200"><RoomModal roomId = {roomId} name = {p2roomId} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></td>
-        </tr>
+      return <Tr key={roomId} >
+        <Td color={'white'}>{p1roomId}</Td>
+        <Td color={'white'}>{p2roomId}</Td>
+        <Td color={'white'}>{clients}</Td>
+        <Td color={'white'}><RoomModal roomId = {roomId} name = {p2roomId} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></Td>
+        </Tr>
       
         })
       )
@@ -54,19 +53,19 @@ const RenderRooms = () => {
 
 
     return (
-      <Box maxW='80%' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+      <Box maxW='80%' borderWidth='1px' borderRadius='lg' overflowX='auto'>
     <TableContainer>
-      <Table variant='striped' colorScheme='grey'>
+      <Table variant='striped' colorScheme='whiteAlpha'>
       <Thead>
-      <Tr m={2}>
+      <Tr m={1}>
         <Th>Name</Th>
         <Th>ID</Th>
-        <Th isNumeric>Max Players</Th>
-        <Th isNumeric>Current Players</Th>
+        <Th>Current Players</Th>
         <Th>Action</Th>
       </Tr>
     </Thead>
-    <Tbody>
+    
+     <Tbody>
              {RenderRooms()}
      </Tbody>        
       </Table>
