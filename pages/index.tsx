@@ -34,9 +34,9 @@ export default function Home() {
                 <Center flexDirection={'column'}>
                  <Text  m={8} fontSize={['12px','16px','24px']} color='white'>
                   Come discover lost treasure, restore ancient artifacts and 
-                  unravel mysteries long forgotten. Enter the beautifully bizzare world of Kamioza
+                  unravel mysteries long forgotten. Enter the beautifully bizzare world of Azaria
                   and claim your destiny.</Text>
-                <Button colorScheme='whiteAlpha'>Sign Up Now</Button>
+                <Button colorScheme='whiteAlpha'>Sign Up for Beta2</Button>
                 </Center>
       </Center>
       
@@ -50,7 +50,7 @@ export default function Home() {
                  
                  <Text  m={8} fontSize={['12px','16px','24px']} color='white'>
                   Recently remastered from its 1997 designs, 
-                  Kamioza brings a simple originality to adventure gaming. It is approachable, mysterious and loads of fun.</Text>
+                  Azaria brings a simple originality to adventure gaming. It is approachable, mysterious and loads of fun.</Text>
       </Center>
   </Center>
   </Flex>

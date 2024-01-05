@@ -93,7 +93,7 @@ export default function Lobby() {
           <NetworkList></NetworkList>
           </Box>
           <Box p={4} borderBottom="1px solid #eee">
-            <Heading size="sm">Selected Network</Heading>
+            <Heading color={'white'} size="sm">Selected Network: Kamserver Development</Heading>
           </Box>
           <Box p={4}>
          <RoomAddDrawer></RoomAddDrawer>

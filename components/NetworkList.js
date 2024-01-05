@@ -28,10 +28,10 @@ const renderProviders = () => {
     myarray = data.Data;
 
     return myarray.map(({id, providerId, providerName, providerUrl, providerPort}) => {
-      return <tr key={id} >
-        <td>{providerName}</td>
-        <td><Button colorScheme='blue' size='xs'>Visit</Button></td>
-        </tr>
+      return <Tr key={id} >
+        <Td color={'white'}>{providerName}</Td>
+        <Td><Button size='xs'>Select</Button></Td>
+        </Tr>
     })
   }
   

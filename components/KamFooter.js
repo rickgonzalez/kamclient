@@ -10,7 +10,7 @@ import {Image,Flex,Spacer, Box, Container, Text, Center, Stack, Heading, HStack}
     
     
       return (
-        <Box  bg={'#0a0909'} h={['150','300','600']} >
+        <Box flex={1} bg={'black'} h={['150','300','600']} w={'100%'}>
         
          
          
@@ -18,12 +18,12 @@ import {Image,Flex,Spacer, Box, Container, Text, Center, Stack, Heading, HStack}
              
             
 
-            <Flex flex={1} m={2} p={20} flexDirection={'column'} bg={'black'} h={['40','100','300']}></Flex>
-            <Flex flex={1} m={2} p={20} flexDirection={'column'} bg={'black'} h={['40','100','300']}></Flex>
+            <Flex flex={1} p={20} mt={5} w={'100%'} flexDirection={'column'} bg={'black'} h={['60','100','300']}></Flex>
+           
             
 
           </Center> 
-          <Center flex={1} flexDirection={'row'} bg={'black'} h={40}>
+          <Center w={'100%'} flex={1} flexDirection={'row'} bg={'black'} h={40}>
                 
                 <Stack spacing='24px'>
                       <Center flexDirection={'row'}>
@@ -40,7 +40,7 @@ import {Image,Flex,Spacer, Box, Container, Text, Center, Stack, Heading, HStack}
             
           </Center>
          
-          <Center flex={1}  flexDirection={'row'} bg={'black'} h={40}>
+          <Center flex={1}  flexDirection={'row'} bg={'black'} h={'40px'} w={'100%'}>
                 <Stack mt='6' spacing='3'>
                   <Heading size='md' color={'white'}>Copyright Detomata 2024</Heading>
                   <Center>

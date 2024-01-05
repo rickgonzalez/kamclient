@@ -3,7 +3,7 @@ import {createSlice, PayloadAction } from '@reduxjs/toolkit';
 const playerSlice = createSlice({
     name: 'player',
     initialState: {
-        name: 'Ralph Machio',
+        name: '?',
         email: 'none',
         id: 'none', 
         playerip:'none',
