@@ -26,7 +26,7 @@ export default function Apothecary() {
 <Flex flex={1} bg={'black'} h={['150','300','800']} flexDirection={{base: 'column', md: 'column', lg:'row'  }}>
 
     <Box m={3} flex={1}>
-    <Text  mt={8} ml={10} fontSize={['12px','16px','24px']} fontWeight='bold' color='white'>Rathe's Apothecary is under construction</Text>
+    <Text  mt={8} ml={10} fontSize={['12px','16px','24px']} fontWeight='bold' color='white'>Rathe&apos;s Apothecary is under construction</Text>
       <Image w={['150','300','400']} src='https://azariaimages.s3.amazonaws.com/bigRathe.png' alt='Rathe' />
     </Box>
     <Box my={8}  mx={6} flex={2}>
