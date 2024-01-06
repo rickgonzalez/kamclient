@@ -3,11 +3,17 @@
 import KamNavBar from '../components/Navbar';
 
 import{Footer} from '../components/KamFooter';
-import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid } from '@chakra-ui/react';
-
+import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
+import JoinRoom from '@/components/JoinAddRoom';
+import MyPlayers from '@/components/RoomInfo';
 
 
 export default function Apothecary() {
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+
  return (
 <Box   w='100%' h='100%' bg={'black'}>
 
@@ -20,7 +26,7 @@ export default function Apothecary() {
 <Flex flex={1} bg={'black'} h={['150','300','800']} flexDirection={{base: 'column', md: 'column', lg:'row'  }}>
 
     <Box m={3} flex={1}>
-    <Text  mt={8} ml={10} fontSize={['12px','16px','24px']} fontWeight='bold' color='white'>Rathe's Apothecary:</Text>
+    <Text  mt={8} ml={10} fontSize={['12px','16px','24px']} fontWeight='bold' color='white'>Rathe's Apothecary is under construction</Text>
       <Image w={['150','300','400']} src='https://azariaimages.s3.amazonaws.com/bigRathe.png' alt='Rathe' />
     </Box>
     <Box my={8}  mx={6} flex={2}>
@@ -30,14 +36,30 @@ export default function Apothecary() {
         <Text  mt={2} mx={2} fontSize={['12px','16px','16px']} fontWeight='bold' color='white'>
         Kamioza Azaria is free to play and we have built it for you to be able to play all the way
         through with items available in the world. These items are here for added game play and are
-        not required to play the game.  To purchase any of these items, you must use Nystrom as 
-        Rathe is not interested in your money.
+        not required to play the game - but they could make it more fun!
         </Text>
         <Box mr={[5,10,20]} h={['50','75','120']}>
-        <Center>
-
-        </Center>
+        
         </Box>
+
+        <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset='slideInBottom' scrollBehavior='inside'>
+          <ModalOverlay />
+          <ModalContent>
+          <ModalHeader>Purchase Nystrom</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>Good for all things - Stripe? Wallet? </Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+ 
+          </ModalFooter>
+          </ModalContent>
+        </Modal>
+
 
     </Box>
 
@@ -45,7 +67,7 @@ export default function Apothecary() {
     <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
       <CardBody>
         <Image
-          src='https://azariaimages.s3.amazonaws.com/Gopabrew.png'
+          src='https://azariaimages.s3.amazonaws.com/items/Gopabrew.png'
           alt='Gopa 3 vials'
           borderRadius='lg'
         />
@@ -55,7 +77,7 @@ export default function Apothecary() {
             Sweet, restorative Gopa!
           </Text>
           <Text color='blue.600' fontSize='2xl'>
-            10 Scoops
+            $2
           </Text>
         </Stack>
       </CardBody>
@@ -73,17 +95,17 @@ export default function Apothecary() {
     <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
       <CardBody>
         <Image
-          src='https://azariaimages.s3.amazonaws.com/Gopabrew.png'
-          alt='Gopa 3 vials'
+          src='https://azariaimages.s3.amazonaws.com/items/magicspell1.png'
+          alt='Spell Pack 1 (3 random spells)'
           borderRadius='lg'
         />
         <Stack mt='6' spacing='3'>
-          <Heading size='md'>3 Vials of Gopa</Heading>
+          <Heading size='md'>Spell Pack 1</Heading>
           <Text>
-            Sweet, restorative Gopa!
+           Get 3 Random spells - all ready to go 
           </Text>
           <Text color='blue.600' fontSize='2xl'>
-            10 Scoops
+            $3
           </Text>
         </Stack>
       </CardBody>
@@ -101,17 +123,17 @@ export default function Apothecary() {
     <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
       <CardBody>
         <Image
-          src='https://azariaimages.s3.amazonaws.com/Gopabrew.png'
-          alt='Gopa 3 vials'
+          src='https://azariaimages.s3.amazonaws.com/items/fishboat.png'
+          alt='fishboat'
           borderRadius='lg'
         />
         <Stack mt='6' spacing='3'>
-          <Heading size='md'>3 Vials of Gopa</Heading>
+          <Heading size='md'>Catch of the day</Heading>
           <Text>
-            Sweet, restorative Gopa!
+            Someone used a boat and caught some fish
           </Text>
           <Text color='blue.600' fontSize='2xl'>
-            10 Scoops
+            $2
           </Text>
         </Stack>
       </CardBody>
@@ -129,17 +151,17 @@ export default function Apothecary() {
     <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
       <CardBody>
         <Image
-          src='https://azariaimages.s3.amazonaws.com/Gopabrew.png'
+          src='https://azariaimages.s3.amazonaws.com/items/Explosionstuff.png'
           alt='Gopa 3 vials'
           borderRadius='lg'
         />
         <Stack mt='6' spacing='3'>
-          <Heading size='md'>3 Vials of Gopa</Heading>
+          <Heading size='md'>Bomb Pack</Heading>
           <Text>
-            Sweet, restorative Gopa!
+            Drop em on all your friends!
           </Text>
           <Text color='blue.600' fontSize='2xl'>
-            10 Scoops
+            $4
           </Text>
         </Stack>
       </CardBody>
@@ -160,9 +182,9 @@ export default function Apothecary() {
 </Flex>
 
 
-<Center w={'100%'} flexDirection={'row'} bg={'black'}>
+<Flex flex={1} w={'100%'}  h={['150','300','800']} flexDirection={'row'} bg={'black'}>
   <Footer></Footer>
-</Center>
+</Flex>
 
 </Flex> 
 
