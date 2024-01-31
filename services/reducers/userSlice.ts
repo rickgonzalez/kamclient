@@ -1,17 +1,16 @@
 import {createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const playerSlice = createSlice({
-    name: 'player',
+const userSlice = createSlice({
+    name: 'user',
     initialState: {
         name: '?',
         email: 'none',
         id: 'none', 
-        playerip:'none',
         verToken: 'none' ,
         isAuthenticated: false 
     },
     reducers: {
-        SET_PLAYER: (state, { payload }) => {
+        SET_USER: (state, { payload }) => {
             console.log({ payload });
            // state = payload;
             return {
@@ -21,5 +20,5 @@ const playerSlice = createSlice({
         }
 }})
 
-export const {SET_PLAYER} = playerSlice.actions;
-export default playerSlice.reducer;
+export const {SET_USER} = userSlice.actions;
+export default userSlice.reducer;
