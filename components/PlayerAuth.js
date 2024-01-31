@@ -23,7 +23,7 @@ import {
 
   //import {useRef} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
-  import {SET_PLAYER} from '../services/reducers/playerSlice'
+  import {SET_USER} from '../services/reducers/userSlice'
  var http = require('http');
 //import {http} from 'http'
 import { useDisclosure } from '@chakra-ui/react';
@@ -36,7 +36,7 @@ export default function PlayerAuth() {
     const btnRef = React.useRef();
     const [value, setValue] = React.useState('');
     const dispatch = useDispatch();
-    const myplayer = useSelector((state) => state.player);
+    const myuser = useSelector((state) => state.user);
     var ipAddress = undefined;
 
 
@@ -45,14 +45,13 @@ export default function PlayerAuth() {
       
           http.get({'host': 'api.ipify.org?format=json', 'port': 80, 'path': '/'}, function(resp) {
             resp.on('data', async function(data) {
-              console.log("My public IP address is: " + String(data));
-                    
+                 
                     let playerId = uuidv4();
                     let playerName = myname;
                     let playerIp = String(data);
                     let playerAuthenticated = true;
                    
-                    dispatch(SET_PLAYER({
+                    dispatch(SET_USER({
                       name: playerName,
                       email: 'bm@tribevest.com',
                       id: playerId, 
@@ -74,7 +73,7 @@ export default function PlayerAuth() {
     return (
         <>
           <WrapItem>
-           <Avatar onClick={onOpen} size='sm' name= {myplayer.name} src='' />
+           <Avatar onClick={onOpen} size='sm' name= {myuser.name} src='' />
           </WrapItem>
           <Drawer
             size={'md'}
@@ -96,19 +95,19 @@ export default function PlayerAuth() {
                    
 
 
-                    <Avatar  size='sm' name={myplayer.name} src='' />
+                    <Avatar  size='sm' name={myuser.name} src='' />
 
                     <Box>
                     <Heading size='sm'>{value}</Heading>
                     </Box>
                     <Box>
-                    <Text fontSize='sm'>{myplayer.name}</Text>
+                    <Text fontSize='sm'>{myuser.name}</Text>
                     </Box>
                     <Box>
-                    <Text fontSize='sm'>{myplayer.id}</Text>
+                    <Text fontSize='sm'>{myuser.id}</Text>
                     </Box>
                     <Box>
-                    <Text  fontSize='sm'>{myplayer.playerip}</Text>
+                    <Text  fontSize='sm'>{myuser.playerip}</Text>
                     </Box>
                     <Box>
                     <Input value={value} onChange={handleChange}  placeholder='Name' />

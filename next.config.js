@@ -2,9 +2,6 @@
 
 
 const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['websocket'],
-  },
   reactStrictMode: true,
   images: {
     remotePatterns: [
