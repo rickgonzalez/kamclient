@@ -85,7 +85,7 @@ export default function RoomAddDrawer() {
             align='stretch'
           >
                   
-                  <Input colorScheme ="whiteAlpha" placeholder='friendly name' onChange={handleChange} value={friendlyName} />
+                  <Input colorScheme ="blackAlpha" textColor={'white'} placeholder='friendly name' onChange={handleChange} value={friendlyName} />
                   
                   <RadioGroup onChange={setValue} value={value}>
                       <Stack color={'white'} direction='row'>
