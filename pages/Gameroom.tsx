@@ -83,7 +83,7 @@ const MessageList  = () => {
     <Box>
        <RoomProvider>
 
-      <KamNavBar currentPage="Gameroom" children={undefined}></KamNavBar>
+      <KamNavBar currentPage="Gameroom"></KamNavBar>
       <Flex bg="#011627" p={4} color="white">
         <Box>
           <Heading size="xl" m={4}>{(myPassedRoom.roomId).slice(9)}</Heading>

@@ -40,10 +40,10 @@ const RenderRooms = () => {
         let p1roomId = roomId.slice(9)
         let p2roomId = roomId.slice(0, 9)
       return <Tr key={roomId} >
-        <Td color={useColorModeValue('gray.800', 'gray.300')}>{p1roomId}</Td>
-        <Td color={useColorModeValue('gray.800', 'gray.300')}>{p2roomId}</Td>
-        <Td color={useColorModeValue('gray.800', 'gray.300')}>{clients}</Td>
-        <Td color={useColorModeValue('gray.800', 'gray.300')}><RoomModal roomId = {roomId} name = {p2roomId} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></Td>
+        <Td _dark={{ bg: "gray.800" }}>{p1roomId}</Td>
+        <Td _dark={{ bg: "gray.800" }}>{p2roomId}</Td>
+        <Td _dark={{ bg: "gray.800" }}>{clients}</Td>
+        <Td _dark={{ bg: "gray.800" }}><RoomModal roomId = {roomId} name = {p2roomId} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></Td>
         </Tr>
       
         })

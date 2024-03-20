@@ -30,7 +30,7 @@ const renderProviders = () => {
 
     return myarray.map(({id, providerId, providerName, providerUrl, providerPort}) => {
       return <Tr key={id} >
-        <Td color={useColorModeValue('gray.800', 'gray.300')}>{providerName}</Td>
+        <Td _dark={{ bg: "gray.900" }}>{providerName}</Td>
         <Td><Button size='xs'>Select</Button></Td>
         </Tr>
     })
