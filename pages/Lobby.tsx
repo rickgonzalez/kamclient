@@ -3,7 +3,7 @@ import NetworkList from '../components/NetworkList';
 import RoomsList from '../components/RoomsList';
 import KamNavBar from '../components/NaviBar';
 import RoomAddDrawer from '../components/RoomAddDrawer';
-import{Footer} from '../components/KamFooter';
+import{Footer} from '../components/Footer';
 
 
 import {

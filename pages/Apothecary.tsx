@@ -2,7 +2,7 @@
 
 import KamNavBar from '../components/NaviBar';
 
-import{Footer} from '../components/KamFooter';
+import{Footer} from '../components/Footer';
 import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
 import JoinRoom from '@/components/JoinAddRoom';
