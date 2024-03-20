@@ -1,6 +1,6 @@
 
 
-import KamNavBar from '../components/Navbar';
+import KamNavBar from '../components/NaviBar';
 
 import{Footer} from '../components/KamFooter';
 import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
@@ -17,7 +17,7 @@ export default function Apothecary() {
  return (
 <Box   w='100%' h='100%' bg={'black'}>
 
-<KamNavBar currentPage = "Apothecary"></KamNavBar>
+<KamNavBar currentPage="Apothecary" children={undefined}></KamNavBar>
 
 <Flex w='100%' bg={'black'} flex={1} m={2} flexDirection={'column'}>
  

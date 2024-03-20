@@ -58,7 +58,7 @@ const imagesList = [
     
      console.log(imageIndex)
       return (
-        <Box>
+        <Box mx={10}>
            <Image src={imagesList[imageIndex].src} alt={imagesList[imageIndex].alt} />
         </Box>
       );

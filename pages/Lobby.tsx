@@ -1,7 +1,7 @@
 // 'use client'
 import NetworkList from '../components/NetworkList';
 import RoomsList from '../components/RoomsList';
-import KamNavBar from '../components/Navbar';
+import KamNavBar from '../components/NaviBar';
 import RoomAddDrawer from '../components/RoomAddDrawer';
 import{Footer} from '../components/KamFooter';
 
@@ -70,7 +70,7 @@ export default function Lobby() {
  return (
   
     <Box bg="black">
-      <KamNavBar currentPage = "Lobby"></KamNavBar>
+      <KamNavBar currentPage="Lobby" children={undefined}></KamNavBar>
       <Flex bg="black" p={4} color="white">
         <Box>
           <Heading size="xl">Azaria Lobby</Heading>
