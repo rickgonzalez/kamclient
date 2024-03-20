@@ -28,13 +28,12 @@ import { useDisclosure } from '@chakra-ui/react';
 import PlayerAuth from '@/./components/PlayerAuth'
 
 interface Props {
-  children: React.ReactNode
   currentPage: string
 }
 
 
 export default function KamNavBar(props: Props) {
-  const { children } = props
+ 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const [value, setValue] = React.useState('');

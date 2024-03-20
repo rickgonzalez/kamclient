@@ -17,7 +17,7 @@ export default function Apothecary() {
  return (
 <Box   w='100%' h='100%' bg={useColorModeValue('gray.400', 'gray.800')}>
 
-<KamNavBar currentPage="Apothecary" children={undefined}></KamNavBar>
+<KamNavBar currentPage="Apothecary"></KamNavBar>
 
   
 

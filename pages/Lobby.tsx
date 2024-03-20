@@ -71,7 +71,7 @@ export default function Lobby() {
  return (
   
     <Box bg={useColorModeValue('gray.300', 'black')}>
-      <KamNavBar currentPage="Lobby" children={undefined}></KamNavBar>
+      <KamNavBar currentPage="Lobby"></KamNavBar>
       <Flex bg={useColorModeValue('gray.400', 'gray.800')} p={4} color="white">
         <Box>
           <Heading color={useColorModeValue('gray.800', 'gray.300')} size="xl">Azaria Lobby</Heading>

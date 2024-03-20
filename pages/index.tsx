@@ -10,7 +10,7 @@ export default function Home() {
  return (
 <section className="Hero relative h-screen w-screen bg-[#000000] bg-opacity-100">
   
-  <KamNavBar children = '' currentPage = "/"></KamNavBar>
+  <KamNavBar currentPage = "/"></KamNavBar>
   
      
 
