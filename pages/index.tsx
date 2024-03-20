@@ -56,7 +56,7 @@ export default function Home() {
   <Box   bg={useColorModeValue('gray.300', 'black')} h={['150','300','800']}>
    <Flex flexDirection={{base: 'column', md: 'column', lg:'row'  }}>
                   <UnorderedList fontSize={['12px','16px','24px']} color={useColorModeValue('gray.800', 'gray.300')} p={[0,0,14]}>
-                  <Text fontSize={['12px','16px','24px']} fontWeight={'bold'} color={'gray.600'}>Gameplay:</Text>
+                  <Text fontSize={['12px','16px','24px']} fontWeight={'bold'} color={useColorModeValue('gray.800', 'gray.300')}>Gameplay:</Text>
                     <ListItem>Unique First Person MMORPG - Supports dozens of players in a game instance</ListItem>
                     <ListItem>Collaborative puzzle solving and micro competition</ListItem>
                     <ListItem>Resource Management of both natural resources and currency</ListItem>

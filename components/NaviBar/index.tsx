@@ -50,9 +50,9 @@ export default function KamNavBar(props: Props) {
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
           <Link className="font-medium text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="" aria-current="page">Home</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Lobby</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Apothecary">Apothecary</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="https://www.kamiozablog.com/">Blog</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Lobby">Lobby</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Apothecary">Market</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>
           <PlayerAuth></PlayerAuth>
         </div>
         )
@@ -63,10 +63,10 @@ export default function KamNavBar(props: Props) {
             <Button mx={4} onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/">Home</Link>
-          <Link className="font-medium text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="" aria-current="page">Lobby</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Apothecary">Apothecary</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="https://www.kamiozablog.com/">Blog</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200 " href="/">Home</Link>
+          <Link className="font-medium text-blue-500" href="" aria-current="page">Lobby</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Apothecary">Market</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>
           <PlayerAuth></PlayerAuth>
         </div>
         )
@@ -77,10 +77,10 @@ export default function KamNavBar(props: Props) {
             <Button mx={4} onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/">Home</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Lobby</Link>
-          <Link className="font-medium text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="" aria-current="page">Apothecary</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="https://www.kamiozablog.com/">Blog</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="/">Home</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Lobby">Lobby</Link>
+          <Link className="font-medium text-blue-500 " href="" aria-current="page">Market</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>
           <PlayerAuth></PlayerAuth>
         </div>
         )
@@ -91,9 +91,9 @@ export default function KamNavBar(props: Props) {
          <Button mx={4} onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Lobby">Lobby</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="Apothecary">Apothecary</Link>
-          <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="https://www.kamiozablog.com/">Blog</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Lobby">Lobby</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Apothecary">Market</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>
           <PlayerAuth></PlayerAuth>
         </div>
         )
@@ -102,7 +102,7 @@ export default function KamNavBar(props: Props) {
   }
   const { colorMode, toggleColorMode } = useColorMode()
     return (
-      <Box bg={useColorModeValue('gray.300', 'gray.900')} p={4}>
+      <Box bg={useColorModeValue('gray.900', 'gray.900')} p={4}>
         <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
           <div className="flex items-center justify-between">
             <Link className="inline-flex items-center gap-x-2 text-xl font-semibold dark:text-white" href="#">
