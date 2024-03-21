@@ -1,5 +1,5 @@
 {
-  "name": "detomata",
+  "name": "Kamioza",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,9 +15,8 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@reduxjs/toolkit": "^1.9.7",
-    "d3": "^7.8.5",
-    "d3-graphviz": "^5.2.0",
     "framer-motion": "^10.16.5",
+    "colyseus.js": "^0.15.14",
     "next": "14.0.2",
     "preline": "^2.0.0",
     "react": "^18",
@@ -25,11 +24,11 @@
     "react-icons": "^4.12.0",
     "react-redux": "^8.1.3",
     "react18-json-view": "^0.2.6",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "websocket": "^1.0.34",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
-    "@types/d3": "^7.4.3",
-    "@types/d3-graphviz": "^2.6.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -7,7 +7,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { store } from '../store'
 import { Provider } from 'react-redux'
 
-
+import { RoomProvider } from '@/components/RoomContext'
+//import { WebSocketProvider} from '@/components/WebSocketContext'
 
 export default function App({ Component, pageProps }: AppProps) {
  
@@ -17,9 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return(
   <Provider store = {store}>
+    <RoomProvider>
     <ChakraProvider>
       <Component {...pageProps} />
     </ChakraProvider> 
+    </RoomProvider>
   </Provider>
 )
 }

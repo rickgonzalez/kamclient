@@ -1,15 +1,17 @@
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { providersApi} from './services/providers'
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer from './services/reducers/userSlice'
-import docReducer from './services/reducers/docSlice'
+import playerReducer from './services/reducers/playerSlice'
+import roomReducer from './services/reducers/roomSlice'
+import reservationReducer from './services/reducers/reservationSlice'
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     [providersApi.reducerPath]: providersApi.reducer,
-    user: userReducer,
-    doc: docReducer
+    player: playerReducer,
+    room: reservationReducer,
+    activeRoom: roomReducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
