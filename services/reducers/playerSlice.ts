@@ -4,7 +4,7 @@ const playerSlice = createSlice({
     name: 'player',
 
     initialState: {
-        name: '?',
+        name: '',
         email: 'none',
         id: 'none', 
         playerip:'none',
