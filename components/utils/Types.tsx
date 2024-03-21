@@ -1,63 +1,33 @@
+import * as Colyseus from "colyseus.js"; 
 
 
 
-export interface program {
-    programId: string,
-    title: string,
-    type: string,
-    owner: string,
-    now: Date,
-    scenes: scene[],
+export interface newMessage {
+    type: string;
+    message: any;
+    out: boolean;
+    now: Date;
 }
 
-export interface scene {
-  programId: string,  
-  title: string,
-  machines: machine[],
-  rigs:rig[],
+export interface RoomContextType {
+    myroom: Colyseus.Room | null;    //may need to add function for sending too!
+    messages: string[]| null;
 }
+export interface reservation {
+    room:{
+      clients: number,
+      locked: boolean,
+      private: boolean,
+      maxClients: number,
+      unlisted: boolean,
+      createdAt: string,
+      name: string,
+      processId: string,
+      publicAddress: string,
+      roomId: string,
+  }, sessionId: string
+  } 
 
-export interface rig  {
-  rigId: string,
-  title: string,
-  machines: machine[],
-  //define where machines integrate?
-}
-
-
-//add z and rotation - change z to zorder
-export interface machine  {
-  id: string,
-  name:string,
-  view_id:number,
-  view_name: string,
-  left:number,
-  right:number,
-  top:number,
-  bottom:number,
-  local_visible:boolean,
-  dfa_name:string,
-  wip1_name:any,
-  wip2_name:any,
-  wip3_name:any,
-  wip4_name:any,
-  z: number  
-}
-export interface automata {
-  name: string,
-  automaton:automaton[],
-}
-//transitions
-export interface automaton {
-  name:string,
-  state:any,
-  new_state:any,
-  opcode:string,
-  param_1:string,
-  param_2:string,
-  code:string,
-  guard:string,
-  doc:string,
-}
-
-
+  export interface messageProperties {
+    message: string;
+  }
