@@ -1,6 +1,6 @@
 
 
-import KamNavBar from '../components/Navbar';
+import KamNavBar from '../components/NaviBar';
 import {
   Box,
   Divider,
@@ -83,7 +83,7 @@ const MessageList  = () => {
     <Box>
        <RoomProvider>
 
-      <KamNavBar currentPage = "Gameroom"></KamNavBar>
+      <KamNavBar currentPage="Gameroom"></KamNavBar>
       <Flex bg="#011627" p={4} color="white">
         <Box>
           <Heading size="xl" m={4}>{(myPassedRoom.roomId).slice(9)}</Heading>

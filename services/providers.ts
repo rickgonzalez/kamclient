@@ -1,6 +1,5 @@
 
 
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 //import type { providers } from './types'
@@ -25,7 +24,7 @@ interface provider {
             locked: boolean
           }
         }
-       
+
         interface newroom {
           playerId: string
           name: string
@@ -33,7 +32,7 @@ interface provider {
           roomId:string
           fname: string
         } 
-             
+
         interface joinroom {
           playerId: string
           name: string
@@ -45,8 +44,6 @@ interface provider {
 
 
 //const providerRespone: provider[];
-
-
 // Define a service using a base URL and expected endpoints
 export const providersApi = createApi({
   reducerPath: 'providersApi',
@@ -80,15 +77,11 @@ export const providersApi = createApi({
      }),
        invalidatesTags: ['RoomDetail'],
      }),
+
   }),
-  
+
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const { useGetProvidersByNameQuery, useGetRoomsQuery, useGetRoomInfoQuery, usePostNewRoomMutation, usePostJoinRoomMutation} = providersApi
-
-// {{base_url}}/colyseus/api/room?roomId=cv-pceGeZ
-
-// `/matchmake/joinById/`,
-//${body.roomId}

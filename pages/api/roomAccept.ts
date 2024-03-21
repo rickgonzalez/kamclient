@@ -9,7 +9,7 @@ export async function ConsumeReservation(reservation: any){
     try {
       const room = await client.consumeSeatReservation(reservation);
       console.log("joined successfully", room);
-    
+
     } catch (e) {
       console.error("join error", e);
     }
@@ -25,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 console.log(myReservation);
                 await ConsumeReservation(myReservation);
                 res.status(200).json({ name: 'good to go' })
-          
+
           } catch (e) {
             console.error("processing error accepting room reservation", e);
             res.status(200).json({error: e })

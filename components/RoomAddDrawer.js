@@ -23,6 +23,7 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  useColorModeValue
   } from '@chakra-ui/react'
 
 import { useDisclosure } from '@chakra-ui/react'
@@ -73,7 +74,7 @@ export default function RoomAddDrawer() {
           <AccordionItem>
             <h2>
               <AccordionButton>
-                <Box color={'white'} as="span" flex='1' textAlign='left'>
+                <Box color={useColorModeValue('gray.800', 'gray.300')} as="span" flex='1' textAlign='left'>
                   Add New Room
                 </Box>
                 <AccordionIcon />
@@ -85,10 +86,10 @@ export default function RoomAddDrawer() {
             align='stretch'
           >
                   
-                  <Input placeholder='friendly name' onChange={handleChange} value={friendlyName} />
+                  <Input color={useColorModeValue('gray.300', 'gray.900')} textColor={useColorModeValue('gray.900', 'gray.200')}  placeholder='friendly name' onChange={handleChange} value={friendlyName} />
                   
                   <RadioGroup onChange={setValue} value={value}>
-                      <Stack color={'white'} direction='row'>
+                      <Stack color={useColorModeValue('gray.800', 'gray.300')} direction='row'>
                         <Radio value='1'>Private</Radio>
                         <Radio value='2'>Public</Radio>
                       </Stack>

@@ -28,6 +28,3 @@ const reservationSlice = createSlice({
 
 export const {SET_RESERVATION} = reservationSlice.actions;
 export default reservationSlice.reducer;
-
-
-

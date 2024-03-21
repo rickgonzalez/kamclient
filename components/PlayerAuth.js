@@ -46,13 +46,13 @@ export default function PlayerAuth() {
           http.get({'host': 'api.ipify.org?format=json', 'port': 80, 'path': '/'}, function(resp) {
             resp.on('data', async function(data) {
               console.log("My public IP address is: " + String(data));
-                    
+
                     let playerId = uuidv4();
                     let playerName = myname;
                     let playerIp = String(data);
                     let playerAuthenticated = true;
                    
-                    dispatch(SET_PLAYER({
+                     dispatch(SET_PLAYER({
                       name: playerName,
                       email: 'bm@tribevest.com',
                       id: playerId, 
@@ -74,7 +74,7 @@ export default function PlayerAuth() {
     return (
         <>
           <WrapItem>
-           <Avatar onClick={onOpen} size='sm' name= {myplayer.name} src='' />
+          <Avatar onClick={onOpen} size='sm' name= {myplayer.name} src='' />
           </WrapItem>
           <Drawer
             size={'md'}
@@ -96,7 +96,7 @@ export default function PlayerAuth() {
                    
 
 
-                    <Avatar  size='sm' name={myplayer.name} src='' />
+                   <Avatar  size='sm' name={myplayer.name} src='' />
 
                     <Box>
                     <Heading size='sm'>{value}</Heading>

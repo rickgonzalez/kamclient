@@ -12,7 +12,8 @@ import {
   Td,
   TableCaption,
   TableContainer,
-  Button
+  Button,
+  useColorModeValue
 } from '@chakra-ui/react'
 
 
@@ -29,7 +30,7 @@ const renderProviders = () => {
 
     return myarray.map(({id, providerId, providerName, providerUrl, providerPort}) => {
       return <Tr key={id} >
-        <Td color={'white'}>{providerName}</Td>
+        <Td _dark={{ bg: "gray.900" }}>{providerName}</Td>
         <Td><Button size='xs'>Select</Button></Td>
         </Tr>
     })

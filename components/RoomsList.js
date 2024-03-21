@@ -14,7 +14,8 @@ import {
   Td,
   TableCaption,
   TableContainer,
-  Box
+  Box,
+  useColorModeValue
 } from '@chakra-ui/react'
 
 
@@ -39,10 +40,10 @@ const RenderRooms = () => {
         let p1roomId = roomId.slice(9)
         let p2roomId = roomId.slice(0, 9)
       return <Tr key={roomId} >
-        <Td color={'white'}>{p1roomId}</Td>
-        <Td color={'white'}>{p2roomId}</Td>
-        <Td color={'white'}>{clients}</Td>
-        <Td color={'white'}><RoomModal roomId = {roomId} name = {p2roomId} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></Td>
+        <Td _dark={{ bg: "gray.800" }}>{p1roomId}</Td>
+        <Td _dark={{ bg: "gray.800" }}>{p2roomId}</Td>
+        <Td _dark={{ bg: "gray.800" }}>{clients}</Td>
+        <Td _dark={{ bg: "gray.800" }}><RoomModal roomId = {roomId} name = {p2roomId} clients = {clients} createdAt = {createdAt} locked ={locked}></RoomModal></Td>
         </Tr>
       
         })
@@ -55,7 +56,7 @@ const RenderRooms = () => {
     return (
       <Box maxW='80%' borderWidth='1px' borderRadius='lg' overflowX='auto'>
     <TableContainer>
-      <Table variant='striped' colorScheme='whiteAlpha'>
+      <Table variant='striped' colorScheme='blackAlpha'>
       <Thead>
       <Tr m={1}>
         <Th>Name</Th>
