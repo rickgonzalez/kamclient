@@ -3,7 +3,12 @@
 import KamNavBar from '../components/NaviBar';
 import {ImageTrain} from '../components/ImageWelcome';
 import{Footer} from '../components/Footer';
+import SubscribeForm from '../components/subscribe';
 import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, useColorModeValue } from '@chakra-ui/react';
+// Import the functions you need from the SDKs you need
+
+
+
 
 
 export default function Home() {
@@ -34,7 +39,7 @@ export default function Home() {
                   Come discover lost treasure, restore ancient artifacts and 
                   unravel mysteries long forgotten. Enter the beautifully bizzare world of Azaria
                   and claim your destiny.</Text>
-                <Button color={'gray.600'}>Sign Up for Beta2</Button>
+               <SubscribeForm></SubscribeForm>
                 </Center>
       </Center>
       
