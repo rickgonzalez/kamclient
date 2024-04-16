@@ -4,12 +4,14 @@ const playerSlice = createSlice({
     name: 'player',
 
     initialState: {
-        name: '',
+        playername: '',
         email: 'none',
         id: 'none', 
         playerip:'none',
         verToken: 'none' ,
-        isAuthenticated: false 
+        isAuthenticated: false,
+        emailValidated: false,
+   
     },
     reducers: {
         SET_PLAYER: (state, { payload }) => {

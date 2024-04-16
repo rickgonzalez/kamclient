@@ -3,10 +3,9 @@
 import KamNavBar from '../components/NaviBar';
 
 import{Footer} from '../components/Footer';
-import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,useColorModeValue} from '@chakra-ui/react';
+import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,useColorModeValue, HStack, VStack, LinkOverlay} from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
-import JoinRoom from '@/components/JoinAddRoom';
-import MyPlayers from '@/components/RoomInfo';
+import StripOrder from '../components/StripeOrder'
 
 
 export default function Apothecary() {
@@ -31,6 +30,53 @@ export default function Apothecary() {
    
     <Box  mt={8} ml={10}>
     <Box m={[5,10,20]}>
+              
+                      <Card bg={'#dbd2d2'} color={'teal'} maxW='md' >
+                          <CardBody>
+                            <HStack mt='6' spacing='3'>
+                            <Image
+                             boxSize='150px'
+                             objectFit='cover'
+                              src='https://azariaimages.s3.amazonaws.com/items/coins.png'
+                              alt='Gopa 3 vials'
+                              borderRadius='lg'
+                            />
+                             <VStack>
+                             <Heading size='md'>Minted Nystrom <br></br> Rathe's favorite currency</Heading>
+                             <Text fontSize='sm'>Not a crypto coin: Use Nystrom Coins to pay for our digital objects.</Text>
+                             </VStack>
+                             
+                            
+                            </HStack>
+                          </CardBody>
+                          <Divider />
+                          <CardFooter>
+                           <HStack>
+                              <VStack px={4}>
+                                <Text fontSize='lg' fontWeight={'bold'} >400 Coins</Text>  
+                                <Text fontWeight={'bold'}>$5</Text>  
+                                <StripOrder productId = {1}></StripOrder>
+                              </VStack>
+                              <VStack px={4}>
+                                <Text fontSize='lg' fontWeight={'bold'} >900 Coins</Text>  
+                                <Text fontWeight={'bold'}>$10</Text>  
+                                <StripOrder productId = {2}></StripOrder>
+                              </VStack>
+                              <VStack px={4}>
+                                <Text fontSize='lg' fontWeight={'bold'} >2200 Coins</Text>  
+                                <Text fontWeight={'bold'}>$20</Text>  
+                                <StripOrder productId = {3}></StripOrder>
+                              </VStack>
+                              
+                           </HStack>
+                            
+                           
+                          </CardFooter>
+                          <Text p={4} fontSize='xs'>When you buy Nystrom Coins you receive only a limited, non-refundable, non-transferable, revocable license to use Nystrom Coins, which have no value in real currency.</Text>
+                        </Card>
+
+
+
       <Text  mt={8} mx={2} fontSize={['12px','16px','24px']} fontWeight='bold' color={useColorModeValue('gray.800', 'gray.300')}>App Items:</Text>
         <Text  mt={2} mx={2} fontSize={['12px','16px','16px']} fontWeight='bold' color={useColorModeValue('gray.800', 'gray.300')}>
         Kamioza Azaria is free to play and we have built it for you to be able to play all the way
@@ -168,3 +214,4 @@ export default function Apothecary() {
   )
 }
 
+{/* <Text fontSize='xs'>When you buy Nystrom Coins you receive only a limited, non-refundable, non-transferable, revocable license to use Nystrom Coins, which have no value in real currency.</Text> */}

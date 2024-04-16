@@ -56,7 +56,7 @@ const imagesList = [
         },8000);
       },[])
     
-     console.log(imageIndex)
+    // console.log(imageIndex)
       return (
         <Box mx={10}>
            <Image src={imagesList[imageIndex].src} alt={imagesList[imageIndex].alt} />
