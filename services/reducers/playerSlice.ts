@@ -11,7 +11,7 @@ const playerSlice = createSlice({
         verToken: 'none' ,
         isAuthenticated: false,
         emailValidated: false,
-   
+        credits: 0,
     },
     reducers: {
         SET_PLAYER: (state, { payload }) => {

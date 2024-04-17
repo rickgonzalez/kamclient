@@ -29,7 +29,7 @@ export default function JoinRoom(myroomid, fname) {
             if (myplayer.isAuthenticated){  
                 let mybody = new Object();
                 mybody.playerId = myplayer.id;
-                mybody.name = myplayer.name;
+                mybody.name = myplayer.playername;
                 mybody.ip = myplayer.playerip;
                 mybody.roomId = myroomid.myroomid;
                 mybody.fname = myroomid.fname;

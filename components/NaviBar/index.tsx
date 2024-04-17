@@ -25,7 +25,7 @@ import {
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { useDisclosure } from '@chakra-ui/react';
-import PlayerAuth from '@/./components/PlayerAuth'
+import PlayerAuth from '@/./components/Player/PlayerAuth'
 
 interface Props {
   currentPage: string

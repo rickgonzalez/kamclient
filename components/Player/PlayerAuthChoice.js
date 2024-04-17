@@ -1,10 +1,12 @@
 import * as React from 'react'
-
+import { NextApiRequest, NextApiResponse } from 'next'
 import {
     Text,
      Box,
     VStack,
     Input,
+    InputGroup,
+    InputLeftElement,
     Button,
     Stack,
     Heading,
@@ -16,13 +18,17 @@ import {
     useColorModeValue,
     HStack,
     FormControl,
-    FormLabel
+    FormLabel,
+    Spacer,
 
   } from '@chakra-ui/react'
 
   //import {useRef} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
-  import {SET_PLAYER} from '../services/reducers/playerSlice'
+  import {SET_PLAYER} from '../../services/reducers/playerSlice'
+  import { EmailIcon } from '@chakra-ui/icons';
+
+
  var http = require('http');
 
 
@@ -32,23 +38,22 @@ export default function PlayerAuthChoice() {
     const dispatch = useDispatch();
     const [value, setValue] = React.useState('');
     const [playername, setplayername] = React.useState('');
-
     const [email, setemail] = React.useState('');
+
     const myplayer = useSelector((state) => state.player);
 
-
-
-    const handleChange = (event) => setValue(event.target.value)
     const handleplayerNameChange = (event) => setplayername(event.target.value)
-  
     const handleEmailChange = (event) => setemail(event.target.value)
 
 
-    const handleSubmit = async () => {
+    const handleRegister = async () => {
       console.log('Registering Player');
       let myplayer = {
         playername: playername,
-        email: email
+        email: email,
+        emailValidated: false,
+        credits: 0
+      
       }
 
           try {
@@ -71,7 +76,8 @@ export default function PlayerAuthChoice() {
                   playerip: '',
                   verToken: 'ver100001000',
                   isAuthenticated: true,  // Todo - validate email and then can login
-                  emailValidated: false
+                  emailValidated: false,
+                  credits: 0  
                 }));
 
 
@@ -79,12 +85,40 @@ export default function PlayerAuthChoice() {
               } 
              
         } catch (error) {
-            console.log('error happened!....',error)
-            setEmail('oops please try again');
+            console.log('error happened creating player!....',error)
+            
         }
     };
 
-
+    const handleLogin = async (myemail) => {
+      console.log('Logging in Player');
+          try {
+            const response = await fetch('/api/player?'+ new URLSearchParams({
+              email: myemail
+              }));
+              //MUST await the json 
+              const myjson = await response.json();
+            
+              if (myjson){
+                
+                console.log('fuck me! ', myjson);
+                // Add player to redux
+                dispatch(SET_PLAYER({
+                  playername: myjson.playername,
+                  email: myjson.email,
+                  id: myjson.id, 
+                  playerip: '',
+                  verToken: 'ver100001000',
+                  isAuthenticated: true,  // Todo - validate email and then can login
+                  emailValidated: myjson.emailValidated,
+                  credits: myjson.credits 
+                }));
+              } 
+             
+        } catch (error) {
+            console.log('error happened Logging in player!....',error)
+        }
+    };
 
     
     return (
@@ -128,7 +162,7 @@ export default function PlayerAuthChoice() {
                             <Stack spacing={10} pt={2}>
                               <Button
                                 loadingText="Submitting"
-                                onClick={() =>  handleSubmit()}
+                                onClick={() =>  handleRegister()}
                                 size="lg"
                                 bg={'blue.400'}
                                 color={'white'}
@@ -157,15 +191,34 @@ export default function PlayerAuthChoice() {
                     <Box>
                                     <Heading size='sm'>{value}</Heading>
                                     </Box>
+                                    
                                     <Box>
-                                    <Text fontSize='sm'>{myplayer.name}</Text>
-                                    </Box>
-                                   
-                                    <Box>
-                                    <Text  fontSize='sm'>{myplayer.playerip}</Text>
-                                    </Box>
-                                    <Box>
-                                    <Input value={value} onChange={handleChange}  placeholder='Name' />
+                                    <Text p={6}>To login, please have the game open, enter your email and select Verify.</Text>
+                                    <FormControl id="email" isRequired>
+                                      <FormLabel>Email address</FormLabel>
+                                      <InputGroup>
+                                      <InputLeftElement pointerEvents='none'>
+                                        <EmailIcon color='gray.300' />
+                                      </InputLeftElement>
+                                      <Input type="email" onChange={handleEmailChange} placeholder='email'/>
+                                      </InputGroup>
+                                    </FormControl>
+                                    
+                                      
+                            
+                                    <Stack spacing={10} pt={2}>
+                                    <Button
+                                      loadingText="Submitting"
+                                      onClick={() => handleLogin(email)}
+                                      size="lg"
+                                      bg={'blue.400'}
+                                      color={'white'}
+                                      _hover={{
+                                        bg: 'blue.500',
+                                      }}>
+                                      Verify
+                                    </Button>
+                            </Stack>
                                     </Box>
                     </AccordionPanel>
                   </AccordionItem>

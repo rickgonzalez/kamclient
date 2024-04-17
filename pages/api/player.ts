@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-
+import { promises as fs } from 'fs';
 import { customInitApp } from "@/lib/firebase-admin-config";
-import { getFirestore, Timestamp, FieldValue, Filter } from 'firebase-admin/firestore';
+import { getFirestore, Timestamp, FieldValue, Filter  } from 'firebase-admin/firestore';
 import {useSelector, useDispatch} from 'react-redux'
 import {SET_PLAYER} from '../../services/reducers/playerSlice'
 
@@ -22,26 +22,39 @@ const db = getFirestore();
 
 
 export async function CapturePlayer(player: any){
- 
   try {
-      const data = player
+      const data = player //this stuff should already be in player
       data.ts_added = Date.now();
       data.emailValidated = false;
       data.publickey = '';
       data.ip = '';
-      
-      const res = await db.collection('players').doc(player.email).set(data);
-     
-     
+      data.credits = 0;
+      const res = await db.collection('players').doc(player.email).set(data); 
       return res;
-
     } catch (e) {
-      console.error("join error", e);
+      console.error("player creation error", e);
       return;
     }
-  
   }
 
+
+export async function GetPlayer(myemail: any){
+  try {
+    const playersRef = db.collection('players').doc(myemail);;
+    const doc = await playersRef.get();
+
+    if (!doc.exists) {
+      console.log('No such Player!');
+    } else {
+      console.log('Document data:', doc.data());
+    }
+    return doc.data();
+
+    } catch (e) {
+      console.error("error getting player by email", e);
+      return;
+    }
+  }
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -58,7 +71,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           }
 
     } else if (req.method === 'GET') {
-      //Query database and return public key
-      res.status(400).json({ name: 'only takes post' })
+          try {
+            const myemail = req.query.email as string
+            const myplayer: any = await GetPlayer(myemail) 
+            const jsonData = JSON.parse(JSON.stringify(myplayer));
+            res.status(200).json(jsonData)
+            //res.status(200).send({'result': myplayer })
+             } catch (e) {
+              console.error("processing error Getting player", e);
+              res.status(500).json({error: e })
+            }
     }
   }
