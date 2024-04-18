@@ -34,33 +34,32 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function StripeOrder(productid) {
 
-  const [clientSecret, setClientSecret] = useState('');  
-  
-
-
+  //const [clientSecret, setClientSecret] = useState('');  
   const { isOpen, onOpen, onClose } = useDisclosure();
 
 
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
 
-  React.useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch("/api/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: productid }] }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
-  }, []);
+  // React.useEffect(() => {
+  //   // Create PaymentIntent as soon as the page loads
+  //   fetch("/api/create-payment-intent", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ items: [{ id: productid }] }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => setClientSecret(data.clientSecret));
+  // }, []);
 
   const appearance = {
     theme: 'stripe',
   };
   const options = {
-    clientSecret,
-    appearance,
+    mode: 'setup',
+    currency: 'usd',
+    // Fully customizable with appearance API.
+    appearance: {/*...*/},
   };
  
     
@@ -68,7 +67,7 @@ export default function StripeOrder(productid) {
 
   return (
     <>
-      <Button colorScheme='blackAlpha' size='sm' onClick={() => { onOpen() }}>Buy</Button>
+      <Button colorScheme='whiteAlpha' size='sm' onClick={() => { onOpen() }}>Buy</Button>
     
           <Modal
             initialFocusRef={initialRef}
@@ -88,21 +87,12 @@ export default function StripeOrder(productid) {
             rounded={'lg'}
             p={6}>
            <div className="App">
-                {clientSecret && (
-                    <Elements options={options} stripe={stripePromise}>
-                    <CheckoutForm />
-                    </Elements>
-                )}
+              <Elements stripe={stripePromise} options={options}>
+                  <CheckoutForm />
+              </Elements>
              </div>
           </Container>
               </ModalBody>
-
-              {/* <ModalFooter>
-                <Button colorScheme='blue' mr={3}>
-                  Save
-                </Button>
-                <Button onClick={onClose}>Cancel</Button>
-              </ModalFooter> */}
             </ModalContent>
           </Modal>
     </>
@@ -112,3 +102,10 @@ export default function StripeOrder(productid) {
 
 
 
+// <div className="App">
+//                 {clientSecret && (
+//                     <Elements options={options} stripe={stripePromise}>
+//                     <CheckoutForm />
+//                     </Elements>
+//                 )}
+//              </div>

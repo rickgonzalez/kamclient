@@ -3,10 +3,27 @@
 import KamNavBar from '../components/NaviBar';
 
 import{Footer} from '../components/Footer';
-import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,useColorModeValue, HStack, VStack, LinkOverlay} from '@chakra-ui/react';
+import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,useColorModeValue, HStack, VStack, LinkOverlay, Alert, AlertIcon} from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
 import StripOrder from '../components/StripeOrder'
+import { useSelector } from 'react-redux';
 
+export function AuthError(){
+ 
+  const myplayer = useSelector((state: any) => state.player);
+  if(!myplayer.isAuthenticated){
+    return (
+      <Alert status='warning'>
+        <AlertIcon />
+            You are not currently logged in. Please click on the round icon from the navigation menu.
+      </Alert>
+    )
+  }else{
+    return (
+      <></>
+    )
+  }
+ }
 
 export default function Apothecary() {
 
@@ -18,7 +35,7 @@ export default function Apothecary() {
 
 <KamNavBar currentPage="Apothecary"></KamNavBar>
 
-  
+<AuthError></AuthError>
 
     <Flex flex={2} flexDirection={{base: 'column', md: 'column', lg:'row'  }}>
     

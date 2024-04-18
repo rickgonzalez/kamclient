@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, {useState} from 'react';
 import {
   PaymentElement,
   useStripe,
@@ -9,90 +10,68 @@ export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
+  const [errorMessage, setErrorMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
-  const [message, setMessage] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const handleError = (error) => {
+    setLoading(false);
+    setErrorMessage(error.message);
+  }
 
-  React.useEffect(() => {
+  const handleSubmit = async (event) => {
+    // We don't want to let default form submission happen here,
+    // which would refresh the page.
+    event.preventDefault();
+
     if (!stripe) {
-      return;
-    }
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
-
-    if (!clientSecret) {
-      return;
-    }
-
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!");
-          
-          break;
-        case "processing":
-          setMessage("Your payment is processing.");
-          break;
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
-          break;
-        default:
-          setMessage("Something went wrong.");
-          break;
-      }
-    });
-  }, [stripe]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
 
-    setIsLoading(true);
+    setLoading(true);
 
-    const { error } = await stripe.confirmPayment({
+    // Trigger form validation and wallet collection
+    const {error: submitError} = await elements.submit();
+    if (submitError) {
+      handleError(submitError);
+      return;
+    }
+
+    // Create the PaymentIntent and obtain clientSecret
+    const res = await fetch("/api/create-payment-intent", {
+      method: "POST",
+    });
+
+    const {client_secret: clientSecret} = await res.json();
+
+    // Confirm the PaymentIntent using the details collected by the Payment Element
+    const {error} = await stripe.confirmPayment({
       elements,
+      clientSecret,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: 'http://localhost/Apothecary',
       },
     });
 
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
+    if (error) {
+      // This point is only reached if there's an immediate error when
+      // confirming the payment. Show the error to your customer (for example, payment details incomplete)
+      handleError(error);
     } else {
-      setMessage("An unexpected error occurred.");
+      // Your customer is redirected to your `return_url`. For some payment
+      // methods like iDEAL, your customer is redirected to an intermediate
+      // site first to authorize the payment, then redirected to the `return_url`.
     }
-
-    setIsLoading(false);
-  };
-
-  const paymentElementOptions = {
-    layout: "tabs",
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
+    <form onSubmit={handleSubmit}>
+      <PaymentElement />
+      <button type="submit" disabled={!stripe || loading}>
+        Submit Payment
       </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
+      {errorMessage && <div>{errorMessage}</div>}
     </form>
   );
 }
