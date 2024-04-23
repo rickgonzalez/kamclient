@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { promises as fs } from 'fs';
 import { customInitApp } from "@/lib/firebase-admin-config";
 import { getFirestore, Timestamp, FieldValue, Filter  } from 'firebase-admin/firestore';
-import {useSelector, useDispatch} from 'react-redux'
-import {SET_PLAYER} from '../../services/reducers/playerSlice'
+
+
 
 var http = require('http');
-
+import { v4 as uuidv4 } from 'uuid';
 
 
 customInitApp();
@@ -26,7 +25,6 @@ export async function CapturePlayer(player: any){
       const data = player //this stuff should already be in player
       data.ts_added = Date.now();
       data.emailValidated = false;
-      data.publickey = '';
       data.ip = '';
       data.credits = 0;
       const res = await db.collection('players').doc(player.email).set(data); 
@@ -36,6 +34,19 @@ export async function CapturePlayer(player: any){
       return;
     }
   }
+
+  export async function UpdatePlayer(player: any){
+    try {
+        const data = player //this stuff should already be in player
+        const res = await db.collection('players').doc(player.email).update(data); 
+        return res;
+      } catch (e) {
+        console.error("player Update error", e);
+        return;
+      }
+    }
+
+
 
 
 export async function GetPlayer(myemail: any){
@@ -81,5 +92,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               console.error("processing error Getting player", e);
               res.status(500).json({error: e })
             }
-    }
+    } else if (req.method === 'PUT') {
+      try {
+             let myPlayer = req.body
+             console.log('myPlayer update -->', myPlayer)
+             let result = await UpdatePlayer(myPlayer);
+             res.status(200).json({ 'result': result })
+
+       } catch (e) {
+         console.error("processing error updating player", e);
+         res.status(500).json({error: e })
+       }
+
+ }
   }

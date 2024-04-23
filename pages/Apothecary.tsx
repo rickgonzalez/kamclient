@@ -5,7 +5,7 @@ import KamNavBar from '../components/NaviBar';
 import{Footer} from '../components/Footer';
 import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,useColorModeValue, HStack, VStack, LinkOverlay, Alert, AlertIcon} from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
-import StripOrder from '../components/StripeOrder'
+import StripeOrder from '../components/StripeOrder'
 import { useSelector } from 'react-redux';
 
 export function AuthError(){
@@ -15,7 +15,7 @@ export function AuthError(){
     return (
       <Alert status='warning'>
         <AlertIcon />
-            You are not currently logged in. Please click on the round icon from the navigation menu.
+            You must have an active logged in account to purchase. Please click on the round icon from the navigation menu.
       </Alert>
     )
   }else{
@@ -72,17 +72,17 @@ export default function Apothecary() {
                               <VStack px={4}>
                                 <Text fontSize='lg' fontWeight={'bold'} >400 Coins</Text>  
                                 <Text fontWeight={'bold'}>$5</Text>  
-                                <StripOrder productId = {1}></StripOrder>
+                                <StripeOrder productId = {1} price = {500}></StripeOrder>
                               </VStack>
                               <VStack px={4}>
                                 <Text fontSize='lg' fontWeight={'bold'} >900 Coins</Text>  
                                 <Text fontWeight={'bold'}>$10</Text>  
-                                <StripOrder productId = {2}></StripOrder>
+                                <StripeOrder productId = {2} price = {1000}></StripeOrder>
                               </VStack>
                               <VStack px={4}>
                                 <Text fontSize='lg' fontWeight={'bold'} >2200 Coins</Text>  
                                 <Text fontWeight={'bold'}>$20</Text>  
-                                <StripOrder productId = {3}></StripOrder>
+                                <StripeOrder productId = {3} price = {2000}></StripeOrder>
                               </VStack>
                               
                            </HStack>

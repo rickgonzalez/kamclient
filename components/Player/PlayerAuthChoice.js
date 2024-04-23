@@ -27,7 +27,8 @@ import {
   import {useSelector, useDispatch} from 'react-redux'
   import {SET_PLAYER} from '../../services/reducers/playerSlice'
   import { EmailIcon } from '@chakra-ui/icons';
-
+  import { v4 as uuidv4 } from 'uuid';
+import { m } from 'framer-motion'
 
  var http = require('http');
 
@@ -52,8 +53,9 @@ export default function PlayerAuthChoice() {
         playername: playername,
         email: email,
         emailValidated: false,
-        credits: 0
-      
+        credits: 0,
+        stripeid: '',
+        id: uuidv4()
       }
 
           try {
@@ -72,7 +74,7 @@ export default function PlayerAuthChoice() {
                 dispatch(SET_PLAYER({
                   playername: myplayer.playername,
                   email: myplayer.email,
-                  id: '', 
+                  id: myplayer.id, 
                   playerip: '',
                   verToken: 'ver100001000',
                   isAuthenticated: true,  // Todo - validate email and then can login

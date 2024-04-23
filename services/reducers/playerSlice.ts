@@ -11,6 +11,7 @@ const playerSlice = createSlice({
         verToken: 'none' ,
         isAuthenticated: false,
         emailValidated: false,
+        stripeid: '',
         credits: 0,
     },
     reducers: {
