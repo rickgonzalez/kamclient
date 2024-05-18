@@ -1,5 +1,7 @@
+'use client'
+
 import * as React from 'react'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { useSession, signIn, signOut } from "next-auth/react"
 import {
     Text,
      Box,
@@ -26,25 +28,29 @@ import {
   //import {useRef} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
   import {SET_PLAYER} from '../../services/reducers/playerSlice'
-  import { EmailIcon } from '@chakra-ui/icons';
+  //import { EmailIcon } from '@chakra-ui/icons';
   import { v4 as uuidv4 } from 'uuid';
-import { m } from 'framer-motion'
+  import { usePathname } from 'next/navigation'
 
- var http = require('http');
-
-
+ 
 
 export default function PlayerAuthChoice() {
-    
+    const { data: session } = useSession()
     const dispatch = useDispatch();
     const [value, setValue] = React.useState('');
     const [playername, setplayername] = React.useState('');
     const [email, setemail] = React.useState('');
-
+    const pathname = usePathname();
+    console.log(pathname);
     const myplayer = useSelector((state) => state.player);
-
+  
     const handleplayerNameChange = (event) => setplayername(event.target.value)
     const handleEmailChange = (event) => setemail(event.target.value)
+
+   // let prefix = 'localhost:3000'
+
+   // const [returnpath, setreturnpath] = React.useState(prefix + pathname);
+
 
 
     const handleRegister = async () => {
@@ -92,36 +98,19 @@ export default function PlayerAuthChoice() {
         }
     };
 
-    const handleLogin = async (myemail) => {
-      console.log('Logging in Player');
-          try {
-            const response = await fetch('/api/player?'+ new URLSearchParams({
-              email: myemail
-              }));
-              //MUST await the json 
-              const myjson = await response.json();
-            
-              if (myjson){
-                
-                console.log('fuck me! ', myjson);
-                // Add player to redux
-                dispatch(SET_PLAYER({
-                  playername: myjson.playername,
-                  email: myjson.email,
-                  id: myjson.id, 
-                  playerip: '',
-                  verToken: 'ver100001000',
-                  isAuthenticated: true,  // Todo - validate email and then can login
-                  emailValidated: myjson.emailValidated,
-                  credits: myjson.credits 
-                }));
-              } 
-             
+
+    const handleLogin = async () => {
+        try {
+        signIn('credentials', {
+            callbackUrl: pathname,
+            })
+         
         } catch (error) {
-            console.log('error happened Logging in player!....',error)
+            console.log('error happened calling signin!....',error)
+            
         }
     };
-
+  
     
     return (
         <>
@@ -180,53 +169,22 @@ export default function PlayerAuthChoice() {
                     </AccordionPanel>
                   </AccordionItem>
 
-                  <AccordionItem>
-                    <h2>
-                      <AccordionButton>
-                        <Box as='span' flex='1' textAlign='left'>
-                          Login
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                    <Box>
-                                    <Heading size='sm'>{value}</Heading>
-                                    </Box>
-                                    
-                                    <Box>
-                                    <Text p={6}>To login, please have the game open, enter your email and select Verify.</Text>
-                                    <FormControl id="email" isRequired>
-                                      <FormLabel>Email address</FormLabel>
-                                      <InputGroup>
-                                      <InputLeftElement pointerEvents='none'>
-                                        <EmailIcon color='gray.300' />
-                                      </InputLeftElement>
-                                      <Input type="email" onChange={handleEmailChange} placeholder='email'/>
-                                      </InputGroup>
-                                    </FormControl>
-                                    
-                                      
-                            
-                                    <Stack spacing={10} pt={2}>
-                                    <Button
-                                      loadingText="Submitting"
-                                      onClick={() => handleLogin(email)}
-                                      size="lg"
-                                      bg={'blue.400'}
-                                      color={'white'}
-                                      _hover={{
-                                        bg: 'blue.500',
-                                      }}>
-                                      Verify
-                                    </Button>
-                            </Stack>
-                                    </Box>
-                    </AccordionPanel>
-                  </AccordionItem>
+                 
                   </Accordion>
+                  <Button
+                    loadingText="Submitting"
+                    onClick={() => handleLogin()}
+                    size="lg"
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }}>
+                    Login
+                  </Button>
                 </VStack> 
         </>
       )
   }
 
+  //callbackUrl: new URL(returnpath, window.location.href).href,

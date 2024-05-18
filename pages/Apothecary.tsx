@@ -6,7 +6,13 @@ import{Footer} from '../components/Footer';
 import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,useColorModeValue, HStack, VStack, LinkOverlay, Alert, AlertIcon} from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
 import StripeOrder from '../components/StripeOrder'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { authOptions } from "../pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth/next"
+
+import {SET_PLAYER} from '@/services/reducers/playerSlice'
+
 
 export function AuthError(){
  
@@ -25,10 +31,34 @@ export function AuthError(){
   }
  }
 
+ export async function getServerSideProps(context: any) {
+
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  if (!session) {
+    console.log('No sesseion');
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    }
+  }
+  console.log('session is',session)
+  return {
+    
+    props: {
+      session,
+    },
+  }
+}
+
+
+
 export default function Apothecary() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+ 
 
  return (
 <Box   w='100%' h='100%' bg={useColorModeValue('gray.400', 'gray.800')}>
@@ -232,3 +262,7 @@ export default function Apothecary() {
 }
 
 {/* <Text fontSize='xs'>When you buy Nystrom Coins you receive only a limited, non-refundable, non-transferable, revocable license to use Nystrom Coins, which have no value in real currency.</Text> */}
+
+function dispatch(arg0: { payload: any; type: "player/SET_PLAYER"; }) {
+  throw new Error('Function not implemented.');
+}

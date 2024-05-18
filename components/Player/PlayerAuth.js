@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import {
-    Text,
     Drawer,
     DrawerBody,
     DrawerFooter,
@@ -9,29 +8,11 @@ import {
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
-    Box,
-    Container,
-    Wrap,
     WrapItem,
-    Center,
     VStack,
     Avatar,
-    Input,
-    Button,
-    Stack,
-    Heading,
-    Accordion,
-    AccordionPanel,
-    AccordionIcon,
-    AccordionButton,
-    AccordionItem,
-    useColorModeValue,
-    HStack,
-    FormControl,
-    FormLabel,
-    InputGroup,
-
-  } from '@chakra-ui/react'
+    Button
+   } from '@chakra-ui/react'
 
   //import {useRef} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
@@ -39,7 +20,6 @@ import {
  var http = require('http');
 //import {http} from 'http'
 import { useDisclosure } from '@chakra-ui/react';
-import { v4 as uuidv4 } from 'uuid';
 
 import PlayerAuthChoice from './PlayerAuthChoice'
 import PlayerInfoPanel from './PlayerInfoPanel'
@@ -49,7 +29,7 @@ export default function PlayerAuth() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
     const [value, setValue] = React.useState('');
-    const [connectedAccount, setConnectedAccount] = React.useState('null');
+   
     const myplayer = useSelector((state) => state.player);
     const handleChange = (event) => setValue(event.target.value)
     
