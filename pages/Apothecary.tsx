@@ -3,37 +3,23 @@
 import KamNavBar from '../components/NaviBar';
 
 import{Footer} from '../components/Footer';
-import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,useColorModeValue, HStack, VStack, LinkOverlay, Alert, AlertIcon} from '@chakra-ui/react';
-import { useDisclosure } from '@chakra-ui/react';
+import { Flex, Text, Box,Image, Heading, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, useColorModeValue, HStack, VStack} from '@chakra-ui/react';
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+
 import StripeOrder from '../components/StripeOrder'
-import { useDispatch, useSelector } from 'react-redux';
 
 import { authOptions } from "../pages/api/auth/[...nextauth]"
 import { getServerSession } from "next-auth/next"
+import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
+import { propagateServerField } from 'next/dist/server/lib/render-server';
+import { Session } from 'inspector';
 
-import {SET_PLAYER} from '@/services/reducers/playerSlice'
 
-
-export function AuthError(){
- 
-  const myplayer = useSelector((state: any) => state.player);
-  if(!myplayer.isAuthenticated){
-    return (
-      <Alert status='warning'>
-        <AlertIcon />
-            You must have an active logged in account to purchase. Please click on the round icon from the navigation menu.
-      </Alert>
-    )
-  }else{
-    return (
-      <></>
-    )
-  }
- }
 
  export async function getServerSideProps(context: any) {
-
+  
   const session = await getServerSession(context.req, context.res, authOptions)
+  var localplayer:any;
 
   if (!session) {
     console.log('No sesseion');
@@ -45,27 +31,31 @@ export function AuthError(){
     }
   }
   console.log('session is',session)
+  localplayer = session;
+
   return {
-    
+   
     props: {
-      session,
+      user: localplayer.user,
+      userid: localplayer.id,
+      isAuthenticated: localplayer.isAuthenticated,
+      stripeid: localplayer.stripeid
     },
   }
 }
 
 
 
-export default function Apothecary() {
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
- 
+export default function Apothecary({
+  user, userid, isAuthenticated, stripeid
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
  return (
 <Box   w='100%' h='100%' bg={useColorModeValue('gray.400', 'gray.800')}>
 
 <KamNavBar currentPage="Apothecary"></KamNavBar>
-
-<AuthError></AuthError>
+<Text  fontSize={['12px','16px','24px']} fontWeight='bold' color={useColorModeValue('gray.800', 'gray.300')}>{user?.name}</Text>
+<PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid}></PlayerAuthCheck>
 
     <Flex flex={2} flexDirection={{base: 'column', md: 'column', lg:'row'  }}>
     
@@ -262,7 +252,3 @@ export default function Apothecary() {
 }
 
 {/* <Text fontSize='xs'>When you buy Nystrom Coins you receive only a limited, non-refundable, non-transferable, revocable license to use Nystrom Coins, which have no value in real currency.</Text> */}
-
-function dispatch(arg0: { payload: any; type: "player/SET_PLAYER"; }) {
-  throw new Error('Function not implemented.');
-}

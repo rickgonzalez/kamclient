@@ -1,5 +1,5 @@
 import * as React from 'react'
-
+import { signOut } from "next-auth/react"
 import {
     Drawer,
     DrawerBody,
@@ -34,10 +34,11 @@ export default function PlayerAuth() {
     const handleChange = (event) => setValue(event.target.value)
     
     const handleLogout = async () => {
-      dispatch(SET_PLAYER({
-        isAuthenticated: false  // Todo - validate email and then can login
-      }));
-        onClose();
+      console.log('logging out!')
+      // dispatch(SET_PLAYER({
+      //   isAuthenticated: false  // Todo - validate email and then can login
+      // }));
+      signOut({ callbackUrl: 'http://localhost:3000/' })
       }
 
     return (
@@ -67,7 +68,7 @@ export default function PlayerAuth() {
                     <Avatar  size='lg' name= {myplayer.isAuthenticated ? myplayer.playername : ''}  src='' />
         
                    {/* {state === 'success' ? <CheckIcon /> : 'Submit'} */}
-                   {!myplayer.isAuthenticated ? <PlayerAuthChoice/> : <><PlayerInfoPanel /><Button bg={'blue.400'} color={'white'} _hover={{   bg: 'blue.500', }} size='sm' onClick={() => { handleLogout(); } }>Log Out</Button></>}
+                   {!myplayer.isAuthenticated ? <PlayerAuthChoice/> : <><PlayerInfoPanel /><Button bg={'blue.400'} color={'white'} _hover={{   bg: 'blue.500', }} size='sm' onClick={() => { handleLogout() } }>Log Out</Button></>}
                    
    
                 </VStack> 

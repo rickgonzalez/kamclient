@@ -53,7 +53,7 @@ export default function Home() {
                  
                  <Text  m={8} fontSize={['12px','16px','20px']} color={useColorModeValue('gray.800', 'gray.300')}>
                   Recently remastered from its 1997 designs, 
-                  Azaria brings a simple originality to adventure gaming. It is approachable, mysterious and loads of fun.</Text>
+                  Azaria brings a simple originality to adventure gaming. It is approachable, mysterious and consuming.</Text>
       </Center>
   </Center>
   </Flex>

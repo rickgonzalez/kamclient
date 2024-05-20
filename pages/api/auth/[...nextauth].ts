@@ -1,7 +1,33 @@
 import NextAuth from "next-auth"
 import type { Account, NextAuthOptions, Profile, User } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import PlayerActivate from '../../../components/Player/PlayerActivate'
+
+export interface returneduser
+{
+  credits: number | null,
+  stripeid: string | null,
+  ts_added: number | null,
+  ip: string | null,
+  playername: string | null,
+  id: string,
+  emailValidated: boolean,
+  email: string | null,
+  name: string | null,
+  image: string | null,
+  isAuthenticated: boolean
+}
+export interface Session
+
+{
+  playername: string | null,
+  id: string,
+  stripeid: string | null,
+  emailValidated: boolean,
+  email: string | null,
+  name: string | null,
+  image: string | null,
+  isAuthenticated: boolean
+}
 
 export const authOptions: NextAuthOptions = {
 
@@ -38,7 +64,7 @@ export const authOptions: NextAuthOptions = {
              user.name = user.playername;
              user.image = null;
              user.isAuthenticated = true;
-            cant poupulate session so - so cant add to redux !!! Right here
+            //cant poupulate session so - so cant add to redux !!! Right here
 
 
             return user
@@ -97,16 +123,25 @@ export const authOptions: NextAuthOptions = {
       else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
-    
-    // async session(session: any, user: { name: any; playername: any; image: null }) {
-      
-    //   user.name = user.playername
-    //   user.image = null;
-    //   return session
-    // }
-    // async jwt(token, user, account, profile, isNewUser) {
-    //   return token
-    // }
+    async jwt({ user,token, account, profile }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (user) {
+        let returneduser: any = user;
+        console.log('jwt sees this user: ', returneduser.playername)
+        token.id = returneduser.id;
+        token.stripeid = returneduser.stripeid;
+        token.credits = returneduser.credits;
+      }
+      return token
+    },
+    async session({session, token }:any) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      session.id= token.id
+      session.stripeid = token.stripeid;
+      session.isAuthenticated = true;
+      //session.credits = token.credits;
+      return session
+    }
   }
   
   
