@@ -4,49 +4,50 @@ import KamNavBar from '../components/NaviBar';
 
 import{Footer} from '../components/Footer';
 import { Flex, Text, Box,Image, Heading, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, useColorModeValue, HStack, VStack} from '@chakra-ui/react';
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-
 import StripeOrder from '../components/StripeOrder'
 
+//Authentication Imports
+import type { InferGetServerSidePropsType} from 'next'
 import { authOptions } from "../pages/api/auth/[...nextauth]"
 import { getServerSession } from "next-auth/next"
 import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
-import { propagateServerField } from 'next/dist/server/lib/render-server';
-import { Session } from 'inspector';
 
 
+//---------------------------------
+// getServerSideProps needs to be a part of each session protected page
+// in order to get the session properties and authentication from the session
+// callback from [...nextauth].ts
 
  export async function getServerSideProps(context: any) {
   
   const session = await getServerSession(context.req, context.res, authOptions)
   var localplayer:any;
 
-  if (!session) {
-    console.log('No sesseion');
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    }
-  }
-  console.log('session is',session)
-  localplayer = session;
-
-  return {
-   
-    props: {
-      user: localplayer.user,
-      userid: localplayer.id,
-      isAuthenticated: localplayer.isAuthenticated,
-      stripeid: localplayer.stripeid
-    },
-  }
+        if (!session) {
+          console.log('No sesseion');
+          return {
+            redirect: {
+              destination: "",
+              permanent: false,
+            },
+          }
+        }
+       // console.log('session is',session)
+        localplayer = session;
+        return {
+          props: {
+            user: localplayer.user,
+            userid: localplayer.id,
+            isAuthenticated: localplayer.isAuthenticated,
+            stripeid: localplayer.stripeid
+          },
+        }
 }
 
 
 
 export default function Apothecary({
+  //these are the props from getServerSideProps
   user, userid, isAuthenticated, stripeid
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
@@ -54,7 +55,6 @@ export default function Apothecary({
 <Box   w='100%' h='100%' bg={useColorModeValue('gray.400', 'gray.800')}>
 
 <KamNavBar currentPage="Apothecary"></KamNavBar>
-<Text  fontSize={['12px','16px','24px']} fontWeight='bold' color={useColorModeValue('gray.800', 'gray.300')}>{user?.name}</Text>
 <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid}></PlayerAuthCheck>
 
     <Flex flex={2} flexDirection={{base: 'column', md: 'column', lg:'row'  }}>

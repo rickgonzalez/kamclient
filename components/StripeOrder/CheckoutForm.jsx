@@ -114,8 +114,9 @@ export default function CheckoutForm(props) {
     const {client_secret: clientSecret} = await myres.json();
     console.log('clientSecret',clientSecret);
    
-
-
+  //To Do - Problem:
+  //fix the return_url to take an environment var
+  
     // Confirm the PaymentIntent using the details collected by the Payment Element
     const {error} = await stripe.confirmPayment({
       elements,

@@ -54,7 +54,7 @@ export const authOptions: NextAuthOptions = {
        if(credentials){
         try {
           console.log('trying to authorize here...')
-          const response = await fetch('http://localhost:3000/api/player?'+ new URLSearchParams({
+          const response = await fetch(process.env.NEXTAUTH_URL +  '/api/player?'+ new URLSearchParams({
             email: credentials.email
             }));
             //MUST await the json 
@@ -100,7 +100,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/auth/signin',
-    signOut: '/auth/signout',
+    //signOut: '/auth/signout',
     error: '/auth/error', // Error code passed in query string as ?error=
     verifyRequest: '/auth/verify-request' // (used for check email message)
    // newUser: null // If set, new users will be directed here on first sign in

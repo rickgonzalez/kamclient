@@ -38,7 +38,7 @@ export default function PlayerAuth() {
       // dispatch(SET_PLAYER({
       //   isAuthenticated: false  // Todo - validate email and then can login
       // }));
-      signOut({ callbackUrl: 'http://localhost:3000/' })
+      signOut({ callbackUrl: '/' })
       }
 
     return (
