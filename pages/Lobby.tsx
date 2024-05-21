@@ -23,9 +23,44 @@ import {
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
+//Authentication Imports
+import type { InferGetServerSidePropsType} from 'next'
+import { authOptions } from "../pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth/next"
+import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
 
 
-//const myplayer = useSelector((state: any) => state.player);
+//---------------------------------
+// getServerSideProps needs to be a part of each session protected page
+// in order to get the session properties and authentication from the session
+// callback from [...nextauth].ts
+
+export async function getServerSideProps(context: any) {
+  
+  const session = await getServerSession(context.req, context.res, authOptions)
+  var localplayer:any;
+
+        if (!session) {
+          console.log('No sesseion');
+          return {
+            redirect: {
+              destination: "",
+              permanent: false,
+            },
+          }
+        }
+       // console.log('session is',session)
+        localplayer = session;
+        return {
+          props: {
+            user: localplayer.user,
+            userid: localplayer.id,
+            isAuthenticated: localplayer.isAuthenticated,
+            stripeid: localplayer.stripeid
+          },
+        }
+}
+
 
 
 
@@ -43,35 +78,18 @@ export const PostsCountStat = () => {
  }
 
 
- export function AuthError(){
- 
-  const myplayer = useSelector((state: any) => state.player);
-  if(!myplayer.isAuthenticated){
-    return (
-      <Alert status='warning'>
-        <AlertIcon />
-            You are not currently logged in. Please click on the round icon from the navigation menu.
-      </Alert>
-    )
-  }else{
-    return (
-      <></>
-    )
-  }
- }
-
-
-export default function Lobby() {
-  const [count, setCount] = useState(0);
  
 
-
- 
+ export default function Lobby({
+  //these are the props from getServerSideProps
+  user, userid, isAuthenticated, stripeid
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
  return (
   
     <Box bg={useColorModeValue('gray.300', 'black')}>
       <KamNavBar currentPage="Lobby"></KamNavBar>
+     
       <Flex bg={useColorModeValue('gray.400', 'gray.800')} p={4} color="white">
         <Box>
           <Heading color={useColorModeValue('gray.800', 'gray.300')} size="xl">Azaria Lobby</Heading>
@@ -81,8 +99,9 @@ export default function Lobby() {
           <PostsCountStat />
         </Box>
       </Flex>
-   
-      <AuthError></AuthError>
+      <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid}></PlayerAuthCheck>
+
+
       
 
       <Flex bg={useColorModeValue('gray.350', 'black')} wrap="wrap">

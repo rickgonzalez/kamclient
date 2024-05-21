@@ -3,39 +3,59 @@
 import KamNavBar from '../components/NaviBar';
 
 import{Footer} from '../components/Footer';
-import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,useColorModeValue, HStack, VStack, LinkOverlay, Alert, AlertIcon} from '@chakra-ui/react';
-import { useDisclosure } from '@chakra-ui/react';
+import { Flex, Text, Box,Image, Heading, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Stack, SimpleGrid, useColorModeValue, HStack, VStack} from '@chakra-ui/react';
 import StripeOrder from '../components/StripeOrder'
-import { useSelector } from 'react-redux';
 
-export function AuthError(){
- 
-  const myplayer = useSelector((state: any) => state.player);
-  if(!myplayer.isAuthenticated){
-    return (
-      <Alert status='warning'>
-        <AlertIcon />
-            You must have an active logged in account to purchase. Please click on the round icon from the navigation menu.
-      </Alert>
-    )
-  }else{
-    return (
-      <></>
-    )
-  }
- }
+//Authentication Imports
+import type { InferGetServerSidePropsType} from 'next'
+import { authOptions } from "../pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth/next"
+import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
 
-export default function Apothecary() {
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+//---------------------------------
+// getServerSideProps needs to be a part of each session protected page
+// in order to get the session properties and authentication from the session
+// callback from [...nextauth].ts
 
+ export async function getServerSideProps(context: any) {
+  
+  const session = await getServerSession(context.req, context.res, authOptions)
+  var localplayer:any;
+
+        if (!session) {
+          console.log('No sesseion');
+          return {
+            redirect: {
+              destination: "",
+              permanent: false,
+            },
+          }
+        }
+       // console.log('session is',session)
+        localplayer = session;
+        return {
+          props: {
+            user: localplayer.user,
+            userid: localplayer.id,
+            isAuthenticated: localplayer.isAuthenticated,
+            stripeid: localplayer.stripeid
+          },
+        }
+}
+
+
+
+export default function Apothecary({
+  //these are the props from getServerSideProps
+  user, userid, isAuthenticated, stripeid
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
  return (
 <Box   w='100%' h='100%' bg={useColorModeValue('gray.400', 'gray.800')}>
 
 <KamNavBar currentPage="Apothecary"></KamNavBar>
-
-<AuthError></AuthError>
+<PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid}></PlayerAuthCheck>
 
     <Flex flex={2} flexDirection={{base: 'column', md: 'column', lg:'row'  }}>
     

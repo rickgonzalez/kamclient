@@ -50,6 +50,7 @@ export async function CapturePlayer(player: any){
 
 
 export async function GetPlayer(myemail: any){
+ console.log('email passed to authenticate: ', myemail)
   try {
     const playersRef = db.collection('players').doc(myemail);;
     const doc = await playersRef.get();
