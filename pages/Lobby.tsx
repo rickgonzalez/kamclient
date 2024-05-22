@@ -1,8 +1,8 @@
 // 'use client'
-import NetworkList from '../components/NetworkList';
-import RoomsList from '../components/RoomsList';
+import NetworkList from '../components/Room/NetworkList';
+import RoomsList from '../components/Room/RoomsList';
 import KamNavBar from '../components/NaviBar';
-import RoomAddDrawer from '../components/RoomAddDrawer';
+import RoomAddDrawer from '../components/Room/RoomAddDrawer';
 import{Footer} from '../components/Footer';
 
 

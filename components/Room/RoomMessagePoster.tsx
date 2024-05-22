@@ -5,7 +5,7 @@ import { Box, Container, Flex, IconButton, Input, Textarea, border, color } from
 
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import React, { useState,useEffect,useRef } from 'react';
-import { useRoom } from '@/components/RoomContext';
+import { useRoom } from '@/components/Room/RoomContext';
 import { useSelector, useDispatch } from "react-redux";
 
 
