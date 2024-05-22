@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
         res.status(200).json({ client_secret: paymentIntent.client_secret })
     } catch (e) {
-      console.error("error adding a PAYMENT INTENT ", e);
+      console.error("error adding a PAYMENT INTENT NOW ", e);
       res.status(500).json({error: e })
     }
 
