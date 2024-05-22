@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { SessionProvider } from "next-auth/react"
 
 
-import { RoomProvider } from '@/components/RoomContext'
+import { RoomProvider } from '@/components/Room/RoomContext'
 //import { WebSocketProvider} from '@/components/WebSocketContext'
 
 export default function App({Component, pageProps: { session, ...pageProps }}: AppProps) {

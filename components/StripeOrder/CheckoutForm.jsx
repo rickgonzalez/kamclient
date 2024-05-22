@@ -5,7 +5,7 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
-import MyPlayers from '../RoomInfo';
+import MyPlayers from '../Room/RoomInfo';
 import {useSelector, useDispatch} from 'react-redux'
 import {SET_PLAYER} from '../../services/reducers/playerSlice'
 

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState} from 'react';
 import { Client, Room } from "colyseus.js";
 import {useSelector,useDispatch} from 'react-redux';
-import {SET_ACTIVEROOM} from '../services/reducers/roomSlice'
+import {SET_ACTIVEROOM} from '../../services/reducers/roomSlice'
 //import { RoomContextType, reservation} from '../components/utils/Types'
 import * as Colyseus from "colyseus.js"; 
 

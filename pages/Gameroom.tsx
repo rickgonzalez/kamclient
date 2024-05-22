@@ -21,14 +21,14 @@ import {
   Thead,
   Tr
 } from '@chakra-ui/react';
-import { RoomPoster } from '@/components/RoomMessagePoster';
+import { RoomPoster } from '@/components/Room/RoomMessagePoster';
 import { LuMegaphone,LuSmile  } from "react-icons/lu";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import React, {useState,useEffect,useRef, useContext } from 'react';
 import {useSelector} from 'react-redux';
 
-import MyPlayers from '../components/RoomInfo'
-import { RoomContext, RoomProvider, useRoom } from '@/components/RoomContext';
+import MyPlayers from '../components/Room/RoomInfo'
+import { RoomContext, RoomProvider, useRoom } from '@/components/Room/RoomContext';
 
 
 
