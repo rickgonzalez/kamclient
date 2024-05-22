@@ -17,6 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Testtable.js", "pages/api/stripe/create-payment-intent.ts", "pages/CheckoutPage.js", "components/StripeOrder/index.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Testtable.js", "pages/api/stripe/create-payment-intent.ts", "pages/CheckoutPage.js", "components/StripeOrder/index.jsx", "lib/firebase-admin-config.js"],
   "exclude": ["node_modules"]
 }
