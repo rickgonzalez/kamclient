@@ -41,7 +41,7 @@ export default function PlayerAuthChoice() {
     const [playername, setplayername] = React.useState('');
     const [email, setemail] = React.useState('');
     const pathname = usePathname();
-    console.log(pathname);
+   // console.log(pathname);
    // const myplayer = useSelector((state) => state.player);
   
     const handleplayerNameChange = (event) => setplayername(event.target.value)
@@ -54,7 +54,7 @@ export default function PlayerAuthChoice() {
 
 
     const handleRegister = async () => {
-      console.log('Registering Player');
+     // console.log('Registering Player');
       let myplayer = {
         playername: playername,
         email: email,
@@ -72,9 +72,9 @@ export default function PlayerAuthChoice() {
                 },
                 body: JSON.stringify(myplayer),
               });
-              console.log(response);
+             // console.log(response);
               if (response.status == 200){
-                console.log('success');
+               // console.log('success');
                 //Take away  registration option here
                 // Add player to redux
                 dispatch(SET_PLAYER({

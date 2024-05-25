@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
        try {
           
         const player  = req.body;
-        console.log('player is ', player);    
+     //   console.log('player is ', player);    
          
         const returnedcustomer = await stripe.customers.create({
               name: player.name,

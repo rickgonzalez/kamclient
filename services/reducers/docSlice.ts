@@ -9,7 +9,7 @@ const docSlice = createSlice({
     },
     reducers: {
         SET_DOC: (state, { payload }) => {
-            console.log({ payload });
+           // console.log({ payload });
            // state = payload;
             return {
                 ...state,

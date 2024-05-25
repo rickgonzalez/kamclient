@@ -45,11 +45,11 @@ export default function PurchaseButton(props){
 
 
   async function buy(){
-    console.log(props);
+   // console.log(props);
     let activeCredits = session.credits
 
     if(props.authenticated){
-      console.log('buying: ', props.product, ' for ', props.price);
+     
       //check balance
         if(activeCredits >= props.price){
          
@@ -61,7 +61,6 @@ export default function PurchaseButton(props){
             email: props.myuser.email,
             credits: newbalance
           }
-          console.log('new purchase balance', player)
           
           try {
           

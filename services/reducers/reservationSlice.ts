@@ -17,7 +17,7 @@ const reservationSlice = createSlice({
     },
     reducers: {
         SET_RESERVATION: (state, { payload }) => {
-            console.log({ payload });
+          //  console.log({ payload });
            // state = payload;
             return {
                 ...state,

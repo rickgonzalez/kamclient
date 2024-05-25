@@ -9,7 +9,7 @@ import {useGetRoomInfoQuery} from '@/services/providers'
 
 
     export default function MyPlayers(myroomid){
-      console.log('RoomInfo get', myroomid.myroomid)
+     // console.log('RoomInfo get', myroomid.myroomid)
         const { data, error, isLoading  } = useGetRoomInfoQuery(myroomid.myroomid,{
           pollingInterval: 6000,
         })

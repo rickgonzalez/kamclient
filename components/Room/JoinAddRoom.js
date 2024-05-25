@@ -35,7 +35,7 @@ export default function JoinRoom(myroomid, fname) {
                 mybody.fname = myroomid.fname;
                 
 
-                console.log('looking to join room ', mybody)
+               // console.log('looking to join room ', mybody)
                
                 try {
 

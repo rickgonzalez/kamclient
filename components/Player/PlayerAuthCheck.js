@@ -28,7 +28,7 @@ export default function PlayerAuthCheck(props) {
               
             if(props.isAuthenticated){
               setauth(true);
-              console.log('looks like props.isAuthenticated is true')
+         
               
               dispatch(SET_PLAYER({
                 playername: props.user.name,

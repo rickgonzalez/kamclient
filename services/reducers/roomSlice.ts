@@ -13,7 +13,7 @@ const roomSlice = createSlice({
     },
     reducers: {
         SET_ACTIVEROOM: (state, { payload }) => {
-            console.log({ payload });
+          //  console.log({ payload });
            // state = payload;
             return {
                 ...state,

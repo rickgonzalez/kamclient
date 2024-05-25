@@ -17,7 +17,7 @@ const playerSlice = createSlice({
     reducers: {
         SET_PLAYER: (state, { payload }) => {
     
-            console.log({ payload });
+         //   console.log({ payload });
             return {
                 ...state,
                 ...payload
