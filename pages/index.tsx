@@ -39,6 +39,7 @@ export async function getServerSideProps(context: any) {
             userid: localplayer.id,
             isAuthenticated: localplayer.isAuthenticated,
             stripeid: localplayer.stripeid,
+            credits:localplayer.credits
            
           },
         }
@@ -48,14 +49,14 @@ export async function getServerSideProps(context: any) {
 
 export default function Home({
   //these are the props from getServerSideProps
-  user, userid, isAuthenticated, stripeid
+  user, userid, isAuthenticated, stripeid, credits
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
  return (
 <section className="Hero relative h-screen w-screen bg-[#000000] bg-opacity-100">
   
   <KamNavBar currentPage = "/"></KamNavBar>
   
-  <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid}></PlayerAuthCheck>
+  <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid} credits = {credits}></PlayerAuthCheck>
 
 
      

@@ -39,7 +39,7 @@ export default function PlayerAuthCheck(props) {
                 stripeid: props.stripeid,
                 isAuthenticated: true,  // Todo - validate email and then can login
                 emailValidated: false,
-                credits: player.credits
+                credits: props.credits
               }));
              
           

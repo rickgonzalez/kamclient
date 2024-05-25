@@ -57,6 +57,7 @@ export async function getServerSideProps(context: any) {
             userid: localplayer.id,
             isAuthenticated: localplayer.isAuthenticated,
             stripeid: localplayer.stripeid,
+            credits: localplayer.credits
           },
         }
 }
@@ -82,7 +83,7 @@ export const PostsCountStat = () => {
 
  export default function Lobby({
   //these are the props from getServerSideProps
-  user, userid, isAuthenticated, stripeid
+  user, userid, isAuthenticated, stripeid, credits
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
  return (
@@ -99,7 +100,7 @@ export const PostsCountStat = () => {
           <PostsCountStat />
         </Box>
       </Flex>
-      <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid} ></PlayerAuthCheck>
+      <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid} credits = {credits} ></PlayerAuthCheck>
 
 
       

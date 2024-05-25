@@ -41,7 +41,7 @@ import PurchaseButton from '@/components/Shop/PurchaseItem';
             userid: localplayer.id,
             isAuthenticated: localplayer.isAuthenticated,
             stripeid: localplayer.stripeid,
-            //credits: localplayer.credits
+            credits: localplayer.credits
           },
         }
 }
@@ -54,14 +54,14 @@ import PurchaseButton from '@/components/Shop/PurchaseItem';
 export default function Apothecary({
   
   //these are the props from getServerSideProps
-  user, userid, isAuthenticated, stripeid
+  user, userid, isAuthenticated, stripeid, credits
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
  
  return (
 <Box   w='100%' h='100%' bg={useColorModeValue('gray.400', 'gray.800')}>
 
 <KamNavBar currentPage="Apothecary"></KamNavBar>
-<PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid}></PlayerAuthCheck>
+<PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid} credits={credits}></PlayerAuthCheck>
 
     <Flex flex={2} flexDirection={{base: 'column', md: 'column', lg:'row'  }}>
     
