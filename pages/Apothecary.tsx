@@ -154,7 +154,7 @@ export default function Apothecary({
             <Divider />
             <CardFooter>
               <ButtonGroup spacing='2'>
-                <PurchaseButton myuser = {user} product = 'gopa' price = '150' authenticated = {isAuthenticated} ></PurchaseButton>
+                <PurchaseButton myuser = {user} product = '3 Vials of Gopa' price = '150' authenticated = {isAuthenticated} ></PurchaseButton>
               </ButtonGroup>
             </CardFooter>
           </Card>
@@ -179,9 +179,7 @@ export default function Apothecary({
             <Divider />
             <CardFooter>
               <ButtonGroup spacing='2'>
-                <Button variant='solid' colorScheme='blue'>
-                Purchase
-                </Button>
+              <PurchaseButton myuser = {user} product = 'Spell Pack 1' price = '400' authenticated = {isAuthenticated} ></PurchaseButton>
               
               </ButtonGroup>
             </CardFooter>
@@ -207,10 +205,7 @@ export default function Apothecary({
             <Divider />
             <CardFooter>
               <ButtonGroup spacing='2'>
-                <Button variant='solid' colorScheme='blue'>
-                Purchase
-                </Button>
-              
+              <PurchaseButton myuser = {user} product = 'Catch of the day' price = '100' authenticated = {isAuthenticated} ></PurchaseButton>
               </ButtonGroup>
             </CardFooter>
           </Card>
@@ -235,10 +230,7 @@ export default function Apothecary({
             <Divider />
             <CardFooter>
               <ButtonGroup spacing='2'>
-                <Button variant='solid' colorScheme='blue'>
-                Purchase
-                </Button>
-              
+              <PurchaseButton myuser = {user} product = 'Bomb Pack' price = '500' authenticated = {isAuthenticated} ></PurchaseButton>
               </ButtonGroup>
             </CardFooter>
           </Card>

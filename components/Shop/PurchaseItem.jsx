@@ -1,5 +1,17 @@
 
-import {Button} from '@chakra-ui/react';
+import {
+  Button,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+  useDisclosure,
+  Stack, 
+  Text
+} from '@chakra-ui/react'
 
 
 import { SET_PLAYER } from '@/services/reducers/playerSlice';
@@ -15,6 +27,8 @@ export default function PurchaseButton(props){
   const [productState , setProductState] = useState(props)
 
   const { data: session, status, update } = useSession()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
  
   useEffect(() => {
     setProductState(props);
@@ -68,6 +82,7 @@ export default function PurchaseButton(props){
                             }));
                           
                             update();
+                            onClose();
                     }    
             } catch (error) {
                 console.log('error happened updating player info!....',error)
@@ -84,9 +99,39 @@ export default function PurchaseButton(props){
  
    return (
     <>
-    <Button  onClick={buy}  variant='solid' colorScheme='blue'>
+    <Button  onClick={onOpen}  variant='solid' colorScheme='blue'>
                 Purchase
     </Button>
+    <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Complete Purchase
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              <Stack>
+              <Text> Item Purchase: {props.product}</Text>
+              <Text>Price: {props.price}</Text>
+              </Stack>
+              
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button colorScheme='green' onClick={buy} ml={3}>
+                Buy
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </>
     
    
