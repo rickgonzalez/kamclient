@@ -4,9 +4,6 @@ import { getFirestore, Timestamp, FieldValue, Filter  } from 'firebase-admin/fir
 
 
 
-var http = require('http');
-import { v4 as uuidv4 } from 'uuid';
-
 
 customInitApp();
 const db = getFirestore();
@@ -85,9 +82,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     } else if (req.method === 'GET') {
           try {
-            //console.log('request is',req);
+            console.log('request is',req.query);
 
             const myemail = req.query.email as string
+
+
             const myplayer: any = await GetPlayer(myemail) 
             const jsonData = JSON.parse(JSON.stringify(myplayer));
             res.status(200).json(jsonData)

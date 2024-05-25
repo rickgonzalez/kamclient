@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
        console.log('credentials passed to authorize', credentials);
-       console.log('request', req);
+       console.log('request', req.headers);
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
         // that is false/null if the credentials are invalid.
@@ -59,9 +59,7 @@ export const authOptions: NextAuthOptions = {
         console.log('NEXTAUTH_URL',process.env.NEXTAUTH_URL)
         try {
           console.log('trying to authorize here...')
-          const response = await fetch(process.env.NEXTAUTH_URL +  '/api/player?'+ new URLSearchParams({
-            email: credentials.email
-            }));
+          const response = await fetch(process.env.NEXTAUTH_URL +  '/api/player?'+ new URLSearchParams({email: credentials.email}));
             //MUST await the json 
             const user = await response.json();
           

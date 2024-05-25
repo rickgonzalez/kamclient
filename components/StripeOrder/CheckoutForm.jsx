@@ -141,8 +141,11 @@ export default function CheckoutForm(props) {
       });
       //console.log('Confrimation ->',myconfirmation);
       if(myconfirmation.paymentIntent.status == "succeeded"){
+        
         console.log('player at purchase is', player);
-        //console.log('purchased new amount', myconfirmation.paymentIntent.amount)
+       //To Do! credits in session showing up as 0 !! fix
+
+
         let spent = myconfirmation.paymentIntent.amount
         console.log('spent is: ', spent)
         
@@ -158,6 +161,9 @@ export default function CheckoutForm(props) {
 
 
         console.log('NewCredits is: ',newCredits)
+
+
+
         let creditBalance = (newCredits + player.credits)
         console.log('credits will now be: ', creditBalance);
             let myplayer = {
