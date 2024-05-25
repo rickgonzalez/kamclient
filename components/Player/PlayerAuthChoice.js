@@ -65,7 +65,7 @@ export default function PlayerAuthChoice() {
       }
 
           try {
-            const response = await fetch('/api/player/', {
+            const response = await fetch(process.env.NEXT_PUBLIC_URL +'/api/player/', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

@@ -54,7 +54,8 @@ export const authOptions: NextAuthOptions = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-       if(credentials){
+       
+        if(credentials){
         console.log('NEXTAUTH_URL',process.env.NEXTAUTH_URL)
         try {
           console.log('trying to authorize here...')

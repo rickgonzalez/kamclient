@@ -70,7 +70,8 @@ export async function GetPlayer(myemail: any){
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === 'POST') {
+  
+  if (req.method === 'POST') {
          try {
                 let myPlayer = req.body
                 console.log('myPlayer to the database is -->', myPlayer)

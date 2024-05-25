@@ -46,7 +46,7 @@ export default function SubscribeForm() {
       console.log('sending email');
 
           try {
-            const response = await fetch('/api/registration/', {
+            const response = await fetch(process.env.NEXT_PUBLIC_URL +'/api/registration/', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

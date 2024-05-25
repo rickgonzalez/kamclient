@@ -63,7 +63,7 @@ export default function CheckoutForm(props) {
     if(!props.stripeid){
       
           try {
-            const myresult =  await fetch("/api/stripe/stripe-customer", {
+            const myresult =  await fetch(process.env.NEXT_PUBLIC_URL +"/api/stripe/stripe-customer", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ name: props.playername, email: props.email }),
@@ -80,7 +80,7 @@ export default function CheckoutForm(props) {
             stripeid: customer.result.id
           }
           try {
-            const response = await fetch('/api/player/', {
+            const response = await fetch(process.env.NEXT_PUBLIC_URL +'/api/player/', {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ export default function CheckoutForm(props) {
   }else{stripeid = customer.result.id}
 
 
-  const myres =  await fetch("/api/stripe/create-payment-intent", {
+  const myres =  await fetch(process.env.NEXT_PUBLIC_URL +"/api/stripe/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: myid, stripeid: stripeid}),
@@ -166,7 +166,7 @@ export default function CheckoutForm(props) {
             }
             
             try {
-              const response = await fetch('/api/player/', {
+              const response = await fetch(process.env.NEXT_PUBLIC_URL +'/api/player/', {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',

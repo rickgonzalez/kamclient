@@ -65,7 +65,7 @@ export default function PurchaseButton(props){
           
           try {
           
-                  const response = await fetch('/api/player/', {
+                  const response = await fetch(process.env.NEXT_PUBLIC_URL +'/api/player/', {
                       method: 'PUT',
                       headers: {
                         'Content-Type': 'application/json',
