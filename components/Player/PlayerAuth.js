@@ -14,25 +14,24 @@ import {
     Button
    } from '@chakra-ui/react'
 
-  //import {useRef} from 'react'
+
   import {useSelector, useDispatch} from 'react-redux'
   import {SET_PLAYER} from '../../services/reducers/playerSlice'
  var http = require('http');
-//import {http} from 'http'
-import { useDisclosure } from '@chakra-ui/react';
 
+import { useDisclosure } from '@chakra-ui/react';
 import PlayerAuthChoice from './PlayerAuthChoice'
 import PlayerInfoPanel from './PlayerInfoPanel'
 
 export default function PlayerAuth() {
-    const dispatch = useDispatch();
+
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
-    const [value, setValue] = React.useState('');
    
     const myplayer = useSelector((state) => state.player);
-    const handleChange = (event) => setValue(event.target.value)
-    
+    const dispatch = useDispatch();
+
+
     const handleLogout = async () => {
       console.log('logging out!')
       // dispatch(SET_PLAYER({
@@ -68,7 +67,7 @@ export default function PlayerAuth() {
                     <Avatar  size='lg' name= {myplayer.isAuthenticated ? myplayer.playername : ''}  src='' />
         
                    {/* {state === 'success' ? <CheckIcon /> : 'Submit'} */}
-                   {!myplayer.isAuthenticated ? <PlayerAuthChoice/> : <><PlayerInfoPanel /><Button bg={'blue.400'} color={'white'} _hover={{   bg: 'blue.500', }} size='sm' onClick={() => { handleLogout() } }>Log Out</Button></>}
+                   {!myplayer.isAuthenticated ? <PlayerAuthChoice/> : <><PlayerInfoPanel/><Button bg={'blue.400'} color={'white'} _hover={{   bg: 'blue.500', }} size='sm' onClick={() => { handleLogout() } }>Log Out</Button></>}
                    
    
                 </VStack> 

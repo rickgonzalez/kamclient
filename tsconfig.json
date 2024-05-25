@@ -17,6 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Testtable.js", "pages/api/stripe/create-payment-intent.ts", "pages/CheckoutPage.js", "components/StripeOrder/index.jsx", "lib/firebase-admin-config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Testtable.js", "pages/api/stripe/create-payment-intent.ts", "pages/CheckoutPage.js", "components/StripeOrder/index.jsx", "lib/firebase-admin-config.js", "components/Shop/PurchaseItem.js", "components/Shop/PurchaseItem.jsx"],
   "exclude": ["node_modules"]
 }

@@ -56,7 +56,7 @@ export async function getServerSideProps(context: any) {
             user: localplayer.user,
             userid: localplayer.id,
             isAuthenticated: localplayer.isAuthenticated,
-            stripeid: localplayer.stripeid
+            stripeid: localplayer.stripeid,
           },
         }
 }
@@ -99,7 +99,7 @@ export const PostsCountStat = () => {
           <PostsCountStat />
         </Box>
       </Flex>
-      <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid}></PlayerAuthCheck>
+      <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid} ></PlayerAuthCheck>
 
 
       

@@ -7,16 +7,57 @@ import SubscribeForm from '../components/subscribe';
 import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, useColorModeValue } from '@chakra-ui/react';
 // Import the functions you need from the SDKs you need
 
+//Authentication Imports
+import type { InferGetServerSidePropsType} from 'next'
+import { authOptions } from "../pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth/next"
+import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
+
+
+export async function getServerSideProps(context: any) {
+  
+  const session = await getServerSession(context.req, context.res, authOptions)
+  var localplayer:any;
+
+        if (!session) {
+          console.log('No sesseion');
+          localplayer = {}
+          return {
+            props: {
+              user: '',
+              userid: '',
+              isAuthenticated: false,
+              stripeid: ''
+            },
+          }
+        }
+       // console.log('session is',session)
+        localplayer = session;
+        return {
+          props: {
+            user: localplayer.user,
+            userid: localplayer.id,
+            isAuthenticated: localplayer.isAuthenticated,
+            stripeid: localplayer.stripeid,
+           
+          },
+        }
+}
 
 
 
-
-export default function Home() {
+export default function Home({
+  //these are the props from getServerSideProps
+  user, userid, isAuthenticated, stripeid
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
  return (
 <section className="Hero relative h-screen w-screen bg-[#000000] bg-opacity-100">
   
   <KamNavBar currentPage = "/"></KamNavBar>
   
+  <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid}></PlayerAuthCheck>
+
+
      
 
 

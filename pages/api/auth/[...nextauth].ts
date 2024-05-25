@@ -26,7 +26,9 @@ export interface Session
   email: string | null,
   name: string | null,
   image: string | null,
-  isAuthenticated: boolean
+  isAuthenticated: boolean,
+  credits: number | null
+
 }
 
 export const authOptions: NextAuthOptions = {
@@ -64,6 +66,7 @@ export const authOptions: NextAuthOptions = {
              user.name = user.playername;
              user.image = null;
              user.isAuthenticated = true;
+             
             //cant poupulate session so - so cant add to redux !!! Right here
 
 
@@ -123,7 +126,7 @@ export const authOptions: NextAuthOptions = {
       else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
-    async jwt({ user,token, account, profile }) {
+    async jwt({ user,token,trigger,session}) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (user) {
         let returneduser: any = user;
@@ -132,6 +135,10 @@ export const authOptions: NextAuthOptions = {
         token.stripeid = returneduser.stripeid;
         token.credits = returneduser.credits;
       }
+      if (trigger === "update" && session?.credits) {
+        // Note, that `session` can be any arbitrary object, remember to validate it!
+        token.credits = session.credits
+      }
       return token
     },
     async session({session, token }:any) {
@@ -139,7 +146,8 @@ export const authOptions: NextAuthOptions = {
       session.id= token.id
       session.stripeid = token.stripeid;
       session.isAuthenticated = true;
-      //session.credits = token.credits;
+      session.credits = token.credits;
+      console.log('session is:', session)
       return session
     }
   }

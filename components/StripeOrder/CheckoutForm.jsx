@@ -1,13 +1,21 @@
 
 import React, {useState} from 'react';
 import {
+ Center,
+ Flex,
+ Text,
+ Box,
+ Stack
+} from '@chakra-ui/react'
+import {
   PaymentElement,
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
-import MyPlayers from '../Room/RoomInfo';
+
 import {useSelector, useDispatch} from 'react-redux'
 import {SET_PLAYER} from '../../services/reducers/playerSlice'
+import { useSession} from "next-auth/react"
 
 export default function CheckoutForm(props) {
   
@@ -16,11 +24,12 @@ export default function CheckoutForm(props) {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
-
+  const { data: session, status, update } = useSession()
   const [errorMessage, setErrorMessage] = useState();
   const [stripecustomer, setstripecustomer] = useState();
+  const [PaymentSuccess, setPaymentSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const player = useSelector((state) => state.player);
 
 
   const handleError = (error) => {
@@ -79,14 +88,17 @@ export default function CheckoutForm(props) {
                 body: JSON.stringify(myplayer),
               });
               console.log('response from player update',response);
+              
               if (response.status == 200){
                 console.log('success');
-                //Take away  registration option here
-                // Add player to redux
+               
                 dispatch(SET_PLAYER({
                   stripeid: customer.result.id,
                 }));
+
                 setstripecustomer(customer.result.id);
+               
+
               }    
             } catch (error) {
                 console.log('error happened updating player info!....',error)
@@ -112,49 +124,120 @@ export default function CheckoutForm(props) {
     })
    
     const {client_secret: clientSecret} = await myres.json();
-    console.log('clientSecret',clientSecret);
+    //console.log('clientSecret',clientSecret);
    
-  //To Do - Problem:
-  //fix the return_url to take an environment var
+
   
     // Confirm the PaymentIntent using the details collected by the Payment Element
-    const {error} = await stripe.confirmPayment({
-      elements,
-      clientSecret,
-      confirmParams: {
-        return_url: 'http://localhost:3000/Apothecary',
-      },
-    });
+    try {
+      let returnurl = process.env.NEXT_PUBLIC_STRIPE_SUCCESS_URL
+     let myconfirmation = await stripe.confirmPayment({
+        elements,
+        clientSecret,
+        confirmParams: {
+          return_url: returnurl,
+        },
+        redirect: "if_required"
+      });
+      //console.log('Confrimation ->',myconfirmation);
+      if(myconfirmation.paymentIntent.status == "succeeded"){
+        console.log('player at purchase is', player);
+        //console.log('purchased new amount', myconfirmation.paymentIntent.amount)
+        let spent = myconfirmation.paymentIntent.amount
+        console.log('spent is: ', spent)
+        
+        var newCredits = 0;
+
+        if(spent == 500){
+          newCredits = 400;
+        }else if(spent == 1000){
+            newCredits = 900;
+        }else if(spent == 2000){
+              newCredits = 2200;
+        }
+
+
+        console.log('NewCredits is: ',newCredits)
+        let creditBalance = (newCredits + player.credits)
+        console.log('credits will now be: ', creditBalance);
+            let myplayer = {
+              email: props.email,
+              credits: creditBalance
+            }
+            
+            try {
+              const response = await fetch('/api/player/', {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(myplayer),
+                });
+                console.log('response from player update',response);
+                if (response.status == 200){
+                  console.log('success');
+                  await update({ credits: creditBalance })
+                  dispatch(SET_PLAYER({
+                    credits: creditBalance,
+                  }));
+                  update();
+                  console.log('Yay Success ->',myconfirmation);
+                  setPaymentSuccess(true);
+                }    
+              } catch (error) {
+                  console.log('error happened updating player info!....',error)
+              }
+          
+      }
+
+
+
+    } catch (error) {
+      handleError(error);
+    }
+    //Update of coins is made to the player collection via a player update
+    // current value of coins (and the new value too) need to be read from redux store
+    // as it maintains the active state - then on each new purchase or spend it should update
+    // coins in the player collection of firebase
    
   
-    if (error) {
-      // This point is only reached if there's an immediate error when
-      // confirming the payment. Show the error to your customer (for example, payment details incomplete)
-      handleError(error);
-    } else {
-      // Your customer is redirected to your `return_url`. For some payment
-      // methods like iDEAL, your customer is redirected to an intermediate
-      // site first to authorize the payment, then redirected to the `return_url`.
-
-      console.log("Now WHATA?");
+    console.log("Now WHATA?");
       
 
-
-    }
   };
 
   const paymentElementOptions = {
     layout: "tabs",
   };
 
+
+  function MyPaymentform(){
+    if(PaymentSuccess){
+      return ( 
+        <><Center bg='green' h='100px' color='white'>
+         <Stack>
+         <Text as='b' fontSize='2xl'>Success!!</Text>
+         <Text fontSize='xl'>Your new Nycoin balance is: {player.credits}</Text>
+         </Stack>
+         
+        </Center></> 
+    
+    )
+    }
+
+  }
+
+
   return (
-    <form onSubmit={handleSubmit}>
+   
+    <><Box><MyPaymentform PaymentSuccess = {PaymentSuccess} /><form onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button type="submit" disabled={!stripe || loading}>
         Submit Payment
       </button>
       {errorMessage && <div>{errorMessage}</div>}
-    </form>
+    </form></Box></>
   );
 }
 
+// 

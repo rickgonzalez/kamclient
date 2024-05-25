@@ -1,5 +1,5 @@
 
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {SET_PLAYER} from '../../services/reducers/playerSlice'
 import { Alert, AlertIcon} from '@chakra-ui/react';
 import React, { useEffect, useState} from 'react';
@@ -7,6 +7,7 @@ import React, { useEffect, useState} from 'react';
 
 export default function PlayerAuthCheck(props) {
   const dispatch = useDispatch();
+  const player = useSelector((state) => state.player);
   const [auth, setauth] = useState(false);
 
   function AuthError({ auth}) {
@@ -14,7 +15,7 @@ export default function PlayerAuthCheck(props) {
       return (
             <Alert status='warning'>
               <AlertIcon />
-                  You must have an active, logged in account to participate on this page. Please click on the round icon from the navigation menu.
+                  You are not currently logged in. Some actions may not be available to you. Please click on the round icon from the navigation menu.
             </Alert>
           )
     }
@@ -37,7 +38,8 @@ export default function PlayerAuthCheck(props) {
                 verToken: '',
                 stripeid: props.stripeid,
                 isAuthenticated: true,  // Todo - validate email and then can login
-                emailValidated: false
+                emailValidated: false,
+                credits: player.credits
               }));
              
           

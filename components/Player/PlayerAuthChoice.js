@@ -42,7 +42,7 @@ export default function PlayerAuthChoice() {
     const [email, setemail] = React.useState('');
     const pathname = usePathname();
     console.log(pathname);
-    const myplayer = useSelector((state) => state.player);
+   // const myplayer = useSelector((state) => state.player);
   
     const handleplayerNameChange = (event) => setplayername(event.target.value)
     const handleEmailChange = (event) => setemail(event.target.value)

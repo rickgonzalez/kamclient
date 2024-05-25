@@ -11,6 +11,7 @@ import type { InferGetServerSidePropsType} from 'next'
 import { authOptions } from "../pages/api/auth/[...nextauth]"
 import { getServerSession } from "next-auth/next"
 import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
+import PurchaseButton from '@/components/Shop/PurchaseItem';
 
 
 //---------------------------------
@@ -39,18 +40,23 @@ import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
             user: localplayer.user,
             userid: localplayer.id,
             isAuthenticated: localplayer.isAuthenticated,
-            stripeid: localplayer.stripeid
+            stripeid: localplayer.stripeid,
+            //credits: localplayer.credits
           },
         }
 }
 
 
 
+
+
+
 export default function Apothecary({
+  
   //these are the props from getServerSideProps
   user, userid, isAuthenticated, stripeid
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-
+ 
  return (
 <Box   w='100%' h='100%' bg={useColorModeValue('gray.400', 'gray.800')}>
 
@@ -121,8 +127,13 @@ export default function Apothecary({
         not required to play the game - but they could make it more fun!
       </Text>
     </Box>
+    </Box>
 
-    <SimpleGrid m={50} columns={{ sm: 1, md: 2, lg: 3 }} spacing={5} templateColumns='repeat(auto-fill, minmax(220px, 1fr))'>
+
+
+    </Flex>
+    <Box>
+<SimpleGrid m={50} columns={{ sm: 1, md: 2, lg: 3 }} spacing={5} templateColumns='repeat(auto-fill, minmax(220px, 1fr))'>
           <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
             <CardBody>
               <Image
@@ -136,17 +147,14 @@ export default function Apothecary({
                   Sweet, restorative Gopa!
                 </Text>
                 <Text color='blue.600' fontSize='2xl'>
-                  $2
+                  150 Coins
                 </Text>
               </Stack>
             </CardBody>
             <Divider />
             <CardFooter>
               <ButtonGroup spacing='2'>
-                <Button variant='solid' colorScheme='blue'>
-                Purchase
-                </Button>
-              
+                <PurchaseButton myuser = {user} product = 'gopa' price = '150' authenticated = {isAuthenticated} ></PurchaseButton>
               </ButtonGroup>
             </CardFooter>
           </Card>
@@ -164,7 +172,7 @@ export default function Apothecary({
                 Get 3 Random spells - all ready to go 
                 </Text>
                 <Text color='blue.600' fontSize='2xl'>
-                  $3
+                  400 Coins
                 </Text>
               </Stack>
             </CardBody>
@@ -192,7 +200,7 @@ export default function Apothecary({
                   Someone used a boat and caught some fish
                 </Text>
                 <Text color='blue.600' fontSize='2xl'>
-                  $2
+                  100 Coins
                 </Text>
               </Stack>
             </CardBody>
@@ -220,7 +228,7 @@ export default function Apothecary({
                   Drop em on all your friends!
                 </Text>
                 <Text color='blue.600' fontSize='2xl'>
-                  $4
+                  500 Coins
                 </Text>
               </Stack>
             </CardBody>
@@ -236,11 +244,7 @@ export default function Apothecary({
           </Card>
           {/*******---------------------------------- */}
     </SimpleGrid>  
-    </Box>
-
-
-    </Flex>
-
+</Box>
   <Footer></Footer>
 
 
