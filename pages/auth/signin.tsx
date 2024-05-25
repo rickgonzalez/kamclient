@@ -23,7 +23,7 @@ import type {
         
         <Heading fontSize={'2xl'}>Sign in to your account</Heading>
         
-        <form method="post" action="/api/auth/callback/credentials">
+        <form method="post" action="/api/auth/callback/kamioza_login">
           <Input name="csrfToken" type="hidden" defaultValue={csrfToken} /> 
           <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>

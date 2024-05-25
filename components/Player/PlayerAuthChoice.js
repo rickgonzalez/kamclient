@@ -101,7 +101,7 @@ export default function PlayerAuthChoice() {
 
     const handleLogin = async () => {
         try {
-        signIn('credentials', {
+        signIn('kamioza_login', {
             callbackUrl: pathname,
             })
          
