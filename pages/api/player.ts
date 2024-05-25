@@ -84,6 +84,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     } else if (req.method === 'GET') {
           try {
+            console.log('request is',req);
+
             const myemail = req.query.email as string
             const myplayer: any = await GetPlayer(myemail) 
             const jsonData = JSON.parse(JSON.stringify(myplayer));
