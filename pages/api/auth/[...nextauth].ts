@@ -43,10 +43,11 @@ export const authOptions: NextAuthOptions = {
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        email: { label: "Email", type: "email" }
+        email: { label: "email", type: "email" }
       },
       async authorize(credentials, req) {
-       
+       console.log('credentials passed to authorize', credentials);
+       console.log('request', req);
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
         // that is false/null if the credentials are invalid.
@@ -54,6 +55,7 @@ export const authOptions: NextAuthOptions = {
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
        if(credentials){
+        console.log('NEXTAUTH_URL',process.env.NEXTAUTH_URL)
         try {
           console.log('trying to authorize here...')
           const response = await fetch(process.env.NEXTAUTH_URL +  '/api/player?'+ new URLSearchParams({

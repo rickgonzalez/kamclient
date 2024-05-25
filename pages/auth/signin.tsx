@@ -7,7 +7,7 @@ import type {
   import { getCsrfToken } from "next-auth/react"
   
   export default function SignIn({
-    csrfToken,
+    csrfToken
   }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     
     
