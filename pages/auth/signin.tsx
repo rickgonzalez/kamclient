@@ -18,7 +18,9 @@ import type {
     const handleSubmit = (e: { preventDefault: () => void; }) => {
       e.preventDefault();
       // "username-login" matches the id for the credential
-      signIn("kamioza_login", {email});
+      console.log('email is: ',email);
+    
+      signIn("kamioza_login", {email, callbackUrl: '/' });
     };
 
 
@@ -32,7 +34,7 @@ import type {
         
         <Heading fontSize={'2xl'}>Sign in to your account</Heading>
         
-        <form method="post" action="/api/auth/callback/kamioza_login">
+        <form onSubmit={handleSubmit}>
           <Input name="csrfToken" type="hidden" defaultValue={csrfToken} /> 
           <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
@@ -67,4 +69,4 @@ import type {
   }
 
   //        <form method="post" action="/api/auth/callback/kamioza_login">
-  // onSubmit={handleSubmit}
+  //  <form onSubmit={handleSubmit}>
