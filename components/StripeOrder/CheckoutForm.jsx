@@ -119,6 +119,8 @@ export default function CheckoutForm(props) {
 
   const myres =  await fetch(process.env.NEXT_PUBLIC_URL +"/api/stripe/create-payment-intent", {
       method: "POST",
+      mode: "same-origin", // no-cors, *cors, same-origin
+      credentials: "same-origin", // include, *same-origin, omit
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: myid, stripeid: stripeid}),
     })
