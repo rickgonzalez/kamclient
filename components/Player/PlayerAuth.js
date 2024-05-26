@@ -43,7 +43,7 @@ export default function PlayerAuth() {
     return (
         <>
           <WrapItem>
-          <Avatar onClick={onOpen} size='md' src='https://bit.ly/broken-link' name= {myplayer.isAuthenticated ? myplayer.playername : ''} />
+          <Avatar onClick={onOpen} size='md' src='' name= {myplayer.isAuthenticated ? myplayer.playername : ''} />
           </WrapItem>
 
           <Drawer
