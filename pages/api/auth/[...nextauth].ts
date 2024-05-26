@@ -75,6 +75,7 @@ export const authOptions: NextAuthOptions = {
 
              
             }else{
+              console.error('failure to call fetch for player info to authenticate', response)
               return null
             } 
            
@@ -104,9 +105,9 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/auth/signin',
-    //signOut: '/auth/signout',
+    signOut: '/auth/signout',
     error: '/auth/error', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/verify-request' // (used for check email message)
+   // verifyRequest: '/auth/verify-request' // (used for check email message)
    // newUser: null // If set, new users will be directed here on first sign in
   },
   secret: process.env.NEXTAUTH_SECRET,
@@ -148,7 +149,7 @@ export const authOptions: NextAuthOptions = {
       session.stripeid = token.stripeid;
       session.isAuthenticated = true;
       session.credits = token.credits;
-      console.log('session is:', session)
+     // console.log('session is:', session)
       return session
     }
   }

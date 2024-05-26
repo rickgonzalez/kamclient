@@ -4,7 +4,7 @@ import type {
     GetServerSidePropsContext,
     InferGetServerSidePropsType,
   } from "next"
-  import { getCsrfToken } from "next-auth/react"
+  import { getCsrfToken, signIn } from "next-auth/react"
   
   export default function SignIn({
     csrfToken
@@ -13,7 +13,16 @@ import type {
     
     const [email, setemail] = React.useState('');
 
-    const handleEmailChange = (event: { target: { value: React.SetStateAction<string> } }) => setemail(event.target.value)
+   // const handleEmailChange = (event: { target: { value: React.SetStateAction<string> } }) => setemail(event.target.value)
+
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
+      e.preventDefault();
+      // "username-login" matches the id for the credential
+      signIn("kamioza_login", {email});
+    };
+
+
+
 
     return (
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
@@ -27,7 +36,7 @@ import type {
           <Input name="csrfToken" type="hidden" defaultValue={csrfToken} /> 
           <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input name="email" value={email} type="email" onChange={handleEmailChange} />
+              <Input name="email" value={email} type="email" onChange={(e) => setemail(e.target.value)}/>
           </FormControl>
 
           <Button marginY={6} colorScheme={'blue'} variant={'solid'} type="submit">Sign in</Button>
@@ -56,3 +65,6 @@ import type {
       },
     }
   }
+
+  //        <form method="post" action="/api/auth/callback/kamioza_login">
+  // onSubmit={handleSubmit}
