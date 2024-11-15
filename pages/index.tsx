@@ -3,7 +3,7 @@
 import KamNavBar from '../components/NaviBar';
 import {ImageTrain} from '../components/ImageWelcome';
 import{Footer} from '../components/Footer';
-import SubscribeForm from '../components/subscribe';
+import SubscribeForm from '../components/emailsubscribe';
 import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, UnorderedList, Button, useColorModeValue } from '@chakra-ui/react';
 // Import the functions you need from the SDKs you need
 

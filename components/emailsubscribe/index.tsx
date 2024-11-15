@@ -149,7 +149,7 @@ export default function SubscribeForm() {
             <Text mt={2} textAlign={'center'} color={error ? 'red.500' : 'gray.500'}>
               {error
                 ? 'Oh no an error occured! 😢 Please try again later.'
-                : "You won't receive any spam! ✌️"}
+                : ""}
             </Text>
           </Container>
               </ModalBody>

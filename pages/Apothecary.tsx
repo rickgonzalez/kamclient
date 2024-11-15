@@ -11,7 +11,7 @@ import type { InferGetServerSidePropsType} from 'next'
 import { authOptions } from "../pages/api/auth/[...nextauth]"
 import { getServerSession } from "next-auth/next"
 import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
-import PurchaseButton from '@/components/Shop/PurchaseItem';
+import ItemList from '@/components/Shop/ItemList';
 
 
 //---------------------------------
@@ -21,7 +21,10 @@ import PurchaseButton from '@/components/Shop/PurchaseItem';
 
  export async function getServerSideProps(context: any) {
   
+  
+
   const session = await getServerSession(context.req, context.res, authOptions)
+ 
   var localplayer:any;
 
         if (!session) {
@@ -35,17 +38,16 @@ import PurchaseButton from '@/components/Shop/PurchaseItem';
         }
        // console.log('session is',session)
         localplayer = session;
-        return {
+      return {
           props: {
             user: localplayer.user,
             userid: localplayer.id,
             isAuthenticated: localplayer.isAuthenticated,
             stripeid: localplayer.stripeid,
-            credits: localplayer.credits
+            credits: localplayer.credits,
           },
         }
 }
-
 
 
 
@@ -132,111 +134,7 @@ export default function Apothecary({
 
 
     </Flex>
-    <Box>
-<SimpleGrid m={50} columns={{ sm: 1, md: 2, lg: 3 }} spacing={5} templateColumns='repeat(auto-fill, minmax(220px, 1fr))'>
-          <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
-            <CardBody>
-              <Image
-                src='https://azariaimages.s3.amazonaws.com/items/Gopabrew.png'
-                alt='Gopa 3 vials'
-                borderRadius='lg'
-              />
-              <Stack mt='6' spacing='3'>
-                <Heading size='md'>3 Vials of Gopa</Heading>
-                <Text>
-                  Sweet, restorative Gopa!
-                </Text>
-                <Text color='blue.600' fontSize='2xl'>
-                  150 Coins
-                </Text>
-              </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              <ButtonGroup spacing='2'>
-                <PurchaseButton myuser = {user} product = '3 Vials of Gopa' price = '150' authenticated = {isAuthenticated} ></PurchaseButton>
-              </ButtonGroup>
-            </CardFooter>
-          </Card>
-          {/*******---------------------------------- */}
-          <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
-            <CardBody>
-              <Image
-                src='https://azariaimages.s3.amazonaws.com/items/magicspell1.png'
-                alt='Spell Pack 1 (3 random spells)'
-                borderRadius='lg'
-              />
-              <Stack mt='6' spacing='3'>
-                <Heading size='md'>Spell Pack 1</Heading>
-                <Text>
-                Get 3 Random spells - all ready to go 
-                </Text>
-                <Text color='blue.600' fontSize='2xl'>
-                  400 Coins
-                </Text>
-              </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              <ButtonGroup spacing='2'>
-              <PurchaseButton myuser = {user} product = 'Spell Pack 1' price = '400' authenticated = {isAuthenticated} ></PurchaseButton>
-              
-              </ButtonGroup>
-            </CardFooter>
-          </Card>
-          {/*******---------------------------------- */}
-          <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
-            <CardBody>
-              <Image
-                src='https://azariaimages.s3.amazonaws.com/items/fishboat.png'
-                alt='fishboat'
-                borderRadius='lg'
-              />
-              <Stack mt='6' spacing='3'>
-                <Heading size='md'>Catch of the day</Heading>
-                <Text>
-                  Someone used a boat and caught some fish
-                </Text>
-                <Text color='blue.600' fontSize='2xl'>
-                  100 Coins
-                </Text>
-              </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              <ButtonGroup spacing='2'>
-              <PurchaseButton myuser = {user} product = 'Catch of the day' price = '100' authenticated = {isAuthenticated} ></PurchaseButton>
-              </ButtonGroup>
-            </CardFooter>
-          </Card>
-          {/*******---------------------------------- */}
-          <Card bg={'#dbd2d2'} color={'teal'} maxW='sm'>
-            <CardBody>
-              <Image
-                src='https://azariaimages.s3.amazonaws.com/items/Explosionstuff.png'
-                alt='Gopa 3 vials'
-                borderRadius='lg'
-              />
-              <Stack mt='6' spacing='3'>
-                <Heading size='md'>Bomb Pack</Heading>
-                <Text>
-                  Drop em on all your friends!
-                </Text>
-                <Text color='blue.600' fontSize='2xl'>
-                  500 Coins
-                </Text>
-              </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              <ButtonGroup spacing='2'>
-              <PurchaseButton myuser = {user} product = 'Bomb Pack' price = '500' authenticated = {isAuthenticated} ></PurchaseButton>
-              </ButtonGroup>
-            </CardFooter>
-          </Card>
-          {/*******---------------------------------- */}
-    </SimpleGrid>  
-</Box>
+  <ItemList user={user} isAuthenticated = {isAuthenticated}></ItemList>
   <Footer></Footer>
 
 

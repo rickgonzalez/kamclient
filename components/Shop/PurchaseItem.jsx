@@ -81,6 +81,17 @@ export default function PurchaseButton(props){
                             }));
                           
                             update();
+                           
+                           ///Add the item to the db for the player//////////////
+                            try {
+                              
+                            } catch (error) {
+                              
+                            }
+                           
+
+
+                           ////
                             onClose();
                     }    
             } catch (error) {
