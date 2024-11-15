@@ -49,6 +49,22 @@ export default function KamNavBar(props: Props) {
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
           <Link className="font-medium text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="" aria-current="page">Home</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Privacy">Privacy</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Lobby">Lobby</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Apothecary">Market</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>
+          <PlayerAuth></PlayerAuth>
+        </div>
+        )
+
+        case "Privacy":
+        return(
+          <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
+            <Button mx={4} onClick={toggleColorMode}>
+                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              </Button>
+          <Link className="font-medium text-gray-400 hover:text-gray-200 " href="/">Home</Link>
+          <Link className="font-medium text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="" aria-current="page">Privacy</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="Lobby">Lobby</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="Apothecary">Market</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>
@@ -63,6 +79,7 @@ export default function KamNavBar(props: Props) {
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
           <Link className="font-medium text-gray-400 hover:text-gray-200 " href="/">Home</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Privacy">Privacy</Link>
           <Link className="font-medium text-blue-500" href="" aria-current="page">Lobby</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="Apothecary">Market</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>
@@ -77,6 +94,7 @@ export default function KamNavBar(props: Props) {
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="/">Home</Link>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Privacy">Privacy</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="Lobby">Lobby</Link>
           <Link className="font-medium text-blue-500 " href="" aria-current="page">Market</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>
@@ -90,6 +108,7 @@ export default function KamNavBar(props: Props) {
          <Button mx={4} onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
+          <Link className="font-medium text-gray-400 hover:text-gray-200" href="Privacy">Privacy</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="Lobby">Lobby</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="Apothecary">Market</Link>
           <Link className="font-medium text-gray-400 hover:text-gray-200" href="https://www.kamiozablog.com/">Blog</Link>

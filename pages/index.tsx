@@ -27,7 +27,8 @@ export async function getServerSideProps(context: any) {
               user: '',
               userid: '',
               isAuthenticated: false,
-              stripeid: ''
+              stripeid: '',
+              credits:'0'
             },
           }
         }
@@ -71,7 +72,7 @@ export default function Home({
   </Center>
 
   <Center flex='1' flexDirection={'column'}  bg={useColorModeValue('gray.300', 'black')}>
-      <Center p={4} m={[0,0,8]} h={['100','200','380']} bgImage={{base: '', md: '', lg:"url('https://azariaimages.s3.amazonaws.com/frame1.png')" }}
+      <Center p={4} m={[0,0,8]} h={['100','200','380']} bgImage={{base: '', md: '', lg: '', xl:"url('https://azariaimages.s3.amazonaws.com/frame1.png')" }}
               bgPosition="center"
               bgRepeat="no-repeat"
               backgroundSize="contain"
@@ -86,7 +87,7 @@ export default function Home({
       </Center>
       
 
-      <Center p={4} m={[0,0,8]} h={['100','200','380']} bgImage={{base: '', md: '', lg:"url('https://azariaimages.s3.amazonaws.com/frame1.png')" }}
+      <Center p={4} m={[0,0,8]} h={['100','200','380']} bgImage={{base: '', md: '', lg:'', xl:"url('https://azariaimages.s3.amazonaws.com/frame1.png')" }}
               bgPosition="center"
               bgRepeat="no-repeat"
               backgroundSize="contain"
