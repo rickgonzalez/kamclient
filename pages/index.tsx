@@ -12,7 +12,7 @@ import type { InferGetServerSidePropsType} from 'next'
 import { authOptions } from "../pages/api/auth/[...nextauth]"
 import { getServerSession } from "next-auth/next"
 import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
-
+import type { Metadata } from 'next'
 
 export async function getServerSideProps(context: any) {
   
@@ -47,7 +47,61 @@ export async function getServerSideProps(context: any) {
 }
 
 
+// Metadata for the page
+export const metadata: Metadata = {
+  title: 'Kamioza Ch1 Azaria',
+  description: 'Kamioza Chapter 1: Azaria is a unique first-person massively multi-player adventure game that invites players to discover lost treasures, restore ancient artifacts, and unravel mysteries long forgotten. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world.',
+  openGraph: {
+    title: 'Kamioza Chapter 1: Azaria',
+    description: 'Kamioza Chapter 1: Azaria is a unique first-person massively multi-player adventure game that invites players to discover lost treasures, restore ancient artifacts, and unravel mysteries long forgotten. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world.',
+    url: 'https://kamioza.com', // URL of the page
+    siteName: 'Kamioza Ch1 Azaria',
+    images: [
+      {
+        url: '/azstore_cap2.png', // URL of the image for Open Graph
+        alt: 'Kamioza Chapter 1: Azaria',
+      },
+    ],
+    locale: 'en_US', // Language of the page
+    type: 'website', // Type of the page (e.g., website, article)
+  },robots: {
+    index: true,
+    follow: true, //
+    nocache: true, 
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: true, // This tells Google not to index images on the page
+      // Additional Googlebot directives
+      'noarchive': false, // Prevents Google from caching the page
+      'nosnippet': false, // Allows Google to show a snippet of the page in search results
+      // This tells Google not to show a cached version of the page in search results
+      'max-video-preview': -1, // This tells Google to allow video previews in search results
+      // This tells Google to allow a large image preview in search results 
+      'max-image-preview': 'large',
+      'max-snippet': -1, 
+    },
+  }}
+            
 
+//   <div>
+//   <Head>
+//     <meta property="og:title" content="SoloStream - Goals" />
+//     <meta property="og:image" content="/opengraph-image.jpg" />
+//     <meta property="og:type" content="website" />
+//     <meta
+//       property="og:description"
+//       content="This is the SoloStream Saving Goals for banking customers."
+//     />
+//   </Head>
+//   {/* Rest of your page content */}
+// </div>
+
+
+
+
+
+  
 export default function Home({
   //these are the props from getServerSideProps
   user, userid, isAuthenticated, stripeid, credits
@@ -106,7 +160,7 @@ export default function Home({
    <Flex flexDirection={{base: 'column', md: 'column', lg:'row'  }}>
                   <UnorderedList fontSize={['12px','16px','24px']} color={useColorModeValue('gray.800', 'gray.300')} p={[0,0,14]}>
                   <Text fontSize={['12px','16px','24px']} fontWeight={'bold'} color={useColorModeValue('gray.800', 'gray.300')}>Gameplay:</Text>
-                    <ListItem>Unique First Person MMORPG - Supports dozens of players in a game instance</ListItem>
+                    <ListItem>Unique First Person massively multi-player adventure - Supports dozens of players in a game instance</ListItem>
                     <ListItem>Collaborative puzzle solving and micro competition</ListItem>
                     <ListItem>Resource Management of both natural resources and currency</ListItem>
                     <ListItem>Spell and item creation system - Drop evil spells and bombs on your friends</ListItem>
