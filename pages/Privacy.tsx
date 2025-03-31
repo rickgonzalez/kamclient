@@ -65,7 +65,7 @@ We may update this policy from time to time. When we make changes, we will updat
 
 <Heading mt={6} size="md">7. Contact Us</Heading>
 
-If you have any questions about this policy, please contact us at support@iometics.info.
+If you have any questions about this policy, please contact us at support@kamioza.com.
 
 </Text>
               

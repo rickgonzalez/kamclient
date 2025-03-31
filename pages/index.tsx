@@ -82,7 +82,8 @@ export default function Home({
                   Come discover lost treasure, restore ancient artifacts and 
                   unravel mysteries long forgotten. Enter the beautifully bizzare world of Azaria
                   and claim your destiny.</Text>
-               <SubscribeForm></SubscribeForm>
+                  {/*<SubscribeForm></SubscribeForm>  */}
+                  <Button colorScheme='yellow' onClick={() => {window.location.href = 'https://store.steampowered.com/app/3522380/Kamioza_Ch1_Azaria/'}}>Wishlist Us on Steam!</Button>
                 </Center>
       </Center>
       

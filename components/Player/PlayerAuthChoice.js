@@ -153,14 +153,14 @@ export default function PlayerAuthChoice() {
                             <Stack spacing={10} pt={2}>
                               <Button
                                 loadingText="Submitting"
-                                onClick={() =>  handleRegister()}
+                                // onClick={() =>  handleRegister()}
                                 size="lg"
                                 bg={'blue.400'}
                                 color={'white'}
                                 _hover={{
                                   bg: 'blue.500',
                                 }}>
-                                Sign up
+                                Not Taking Sign Ups Yet
                               </Button>
                             </Stack>
                           
