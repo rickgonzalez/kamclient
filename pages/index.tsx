@@ -103,6 +103,7 @@ export default function Home({
     <meta property="og:title" content="Kamioza Ch1 Azaria" />
     <meta property="og:image" content="/opengraph-image.jpg" />
     <meta property="og:type" content="website" />
+    <meta name="keywords" content="multiplayer, adventure games, mobile game, co-op game, meflin"></meta>
     <meta
       property="og:description"
       content="Kamioza is a unique multi-player adventure game that can support loads of playersDiscover lost treasure, restore ancient artifacts and unravel forgotten mysteries in this unique First Person multiplayer adventure. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world."
