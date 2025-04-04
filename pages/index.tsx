@@ -8,7 +8,7 @@ import { Flex, Square, Text, Center, Box,Spacer, Image, Heading, ListItem, Unord
 // Import the functions you need from the SDKs you need
 
 //Authentication Imports
-import type { InferGetServerSidePropsType} from 'next'
+import type { InferGetServerSidePropsType, Metadata} from 'next'
 import { authOptions } from "../pages/api/auth/[...nextauth]"
 import { getServerSession } from "next-auth/next"
 import PlayerAuthCheck from '../components/Player/PlayerAuthCheck'
@@ -48,41 +48,41 @@ export async function getServerSideProps(context: any) {
 }
 
 
-// Metadata for the page
-// export const metadata: Metadata = {
-//   title: 'Kamioza Ch1 Azaria',
-//   description: 'Kamioza Chapter 1: Azaria is a unique first-person massively multi-player adventure game that invites players to discover lost treasures, restore ancient artifacts, and unravel mysteries long forgotten. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world.',
-//   openGraph: {
-//     title: 'Kamioza Chapter 1: Azaria',
-//     description: 'Kamioza Chapter 1: Azaria is a unique first-person massively multi-player adventure game that invites players to discover lost treasures, restore ancient artifacts, and unravel mysteries long forgotten. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world.',
-//     url: 'https://kamioza.com', // URL of the page
-//     siteName: 'Kamioza Ch1 Azaria',
-//     images: [
-//       {
-//         url: '/azstore_cap2.png', // URL of the image for Open Graph
-//         alt: 'Kamioza Chapter 1: Azaria',
-//       },
-//     ],
-//     locale: 'en_US', // Language of the page
-//     type: 'website', // Type of the page (e.g., website, article)
-//   },robots: {
-//     index: true,
-//     follow: true, //
-//     nocache: true, 
-//     googleBot: {
-//       index: true,
-//       follow: true,
-//       noimageindex: true, // This tells Google not to index images on the page
-//       // Additional Googlebot directives
-//       'noarchive': false, // Prevents Google from caching the page
-//       'nosnippet': false, // Allows Google to show a snippet of the page in search results
-//       // This tells Google not to show a cached version of the page in search results
-//       'max-video-preview': -1, // This tells Google to allow video previews in search results
-//       // This tells Google to allow a large image preview in search results 
-//       'max-image-preview': 'large',
-//       'max-snippet': -1, 
-//     },
-//   }}
+//Metadata for the page
+export const metadata: Metadata = {
+  title: 'Kamioza Ch1 Azaria',
+  description: 'Kamioza Chapter 1: Azaria is a unique first-person massively multi-player adventure game that invites players to discover lost treasures, restore ancient artifacts, and unravel mysteries long forgotten. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world.',
+  openGraph: {
+    title: 'Kamioza Chapter 1: Azaria',
+    description: 'Kamioza Chapter 1: Azaria is a unique first-person massively multi-player adventure game that invites players to discover lost treasures, restore ancient artifacts, and unravel mysteries long forgotten. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world.',
+    url: 'https://kamioza.com', // URL of the page
+    siteName: 'Kamioza Ch1 Azaria',
+    images: [
+      {
+        url: '/azstore_cap2.png', // URL of the image for Open Graph
+        alt: 'Kamioza Chapter 1: Azaria',
+      },
+    ],
+    locale: 'en_US', // Language of the page
+    type: 'website', // Type of the page (e.g., website, article)
+  },robots: {
+    index: true,
+    follow: true, //
+    nocache: true, 
+    googleBot: {
+      'index': true,
+      'follow': true,
+      'noimageindex': true, // This tells Google not to index images on the page
+      // Additional Googlebot directives
+      'noarchive': false, // Prevents Google from caching the page
+      'nosnippet': false, // Allows Google to show a snippet of the page in search results
+      // This tells Google not to show a cached version of the page in search results
+      'max-video-preview': -1, // This tells Google to allow video previews in search results
+      // This tells Google to allow a large image preview in search results 
+      'max-image-preview': 'large',
+      'max-snippet': -1, 
+    },
+  }}
             
 
 
@@ -98,19 +98,7 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
  return (
 <section className="Hero relative h-screen w-screen bg-[#000000] bg-opacity-100">
-<div>
-  <Head>
-    <meta property="og:title" content="Kamioza Ch1 Azaria" />
-    <meta property="og:image" content="/opengraph-image.jpg" />
-    <meta property="og:type" content="website" />
-    <meta name="keywords" content="multiplayer, adventure games, mobile game, co-op game, meflin"></meta>
-    <meta
-      property="og:description"
-      content="Kamioza is a unique multi-player adventure game that can support loads of playersDiscover lost treasure, restore ancient artifacts and unravel forgotten mysteries in this unique First Person multiplayer adventure. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world."
-    />
-  </Head>
-  {/* Rest of your page content */}
-</div>
+
   <KamNavBar currentPage = "/"></KamNavBar>
   
   <PlayerAuthCheck user = {user} userid = {userid} isAuthenticated = {isAuthenticated} stripeid = {stripeid} credits = {credits}></PlayerAuthCheck>
@@ -188,3 +176,18 @@ export default function Home({
   )
 }
 
+
+
+{/* <div>
+  <Head>
+    <meta property="og:title" content="Kamioza Ch1 Azaria" />
+    <meta property="og:image" content="/opengraph-image.jpg" />
+    <meta property="og:type" content="website" />
+    <meta name="keywords" content="multiplayer, adventure games, mobile game, co-op game, meflin"></meta>
+    <meta
+      property="og:description"
+      content="Kamioza is a unique multi-player adventure game that can support loads of playersDiscover lost treasure, restore ancient artifacts and unravel forgotten mysteries in this unique First Person multiplayer adventure. A retro game with co-op puzzle solving, micro competitions and resource management. Create powerful spells to protect and thrive in this beautifully crafted world."
+    />
+  </Head>
+  {/* Rest of your page content */}
+//</div> */}
