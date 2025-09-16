@@ -61,7 +61,11 @@ export default function PlayerAuthChoice() {
         emailValidated: false,
         credits: 0,
         stripeid: '',
-        id: uuidv4()
+        id: uuidv4(),
+        trustedDevices: [{
+          deviceName: 'website',
+          pairedAt: new Date()
+        }]
       }
 
           try {
@@ -85,7 +89,9 @@ export default function PlayerAuthChoice() {
                   verToken: 'ver100001000',
                   isAuthenticated: true,  // Todo - validate email and then can login
                   emailValidated: false,
-                  credits: 0  
+                  credits: 0,
+                  stripeid: '',
+                  trustedDevices: myplayer.trustedDevices
                 }));
 
 
@@ -160,6 +166,7 @@ export default function PlayerAuthChoice() {
                                 _hover={{
                                   bg: 'blue.500',
                                 }}>
+                                Register
                                 {/* Not Taking Sign Ups Yet */}
                               </Button>
                             </Stack>

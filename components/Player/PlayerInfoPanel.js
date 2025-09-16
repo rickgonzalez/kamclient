@@ -16,7 +16,7 @@ import {
 
   //import {useRef} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
-  import {SET_PLAYER} from '../../services/reducers/playerSlice'
+
 
  var http = require('http');
 
