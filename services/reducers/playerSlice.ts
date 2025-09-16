@@ -13,6 +13,9 @@ const playerSlice = createSlice({
         emailValidated: false,
         stripeid: '',
         credits: 0,
+        trustedDevices:[
+                {address:'',deviceName:'none', pairedAt:'', lastSeen:'never'}
+            ]
     },
     reducers: {
         SET_PLAYER: (state, { payload }) => {
