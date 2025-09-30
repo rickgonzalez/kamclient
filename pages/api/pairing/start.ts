@@ -33,13 +33,13 @@ export default async function handler(
 
   const { publicKey, deviceInfo } = req.body as PairingStartRequest;
 
-  // Validate public key format (Ethereum address)
-  if (!publicKey || !publicKey.match(/^0x[a-fA-F0-9]{40}$/)) {
-    return res.status(400).json({ 
-      success: false, 
-      message: 'Invalid public key format' 
-    });
-  }
+  // // Validate public key format (Ethereum address)
+  // if (!publicKey || !publicKey.match(/^0x[a-fA-F0-9]{40}$/)) {
+  //   return res.status(400).json({ 
+  //     success: false, 
+  //     message: 'Invalid public key format' 
+  //   });
+  // }
 
   try {
     // Generate 4-digit code
