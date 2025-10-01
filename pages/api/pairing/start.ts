@@ -33,6 +33,7 @@ export default async function handler(
 
  // const { publicKey, deviceInfo } = req.body as PairingStartRequest;
  const myRequest: PairingStartRequest  = req.body;
+ console.log("myRequest-------->", myRequest);
   // // Validate public key format (Ethereum address)
   // if (!publicKey || !publicKey.match(/^0x[a-fA-F0-9]{40}$/)) {
   //   return res.status(400).json({ 
