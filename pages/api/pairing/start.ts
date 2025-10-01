@@ -31,8 +31,8 @@ export default async function handler(
   //   return res.status(405).json({ success: false, message: 'Method not allowed' });
   // }
 
-  const { publicKey, deviceInfo } = req.body as PairingStartRequest;
-
+ // const { publicKey, deviceInfo } = req.body as PairingStartRequest;
+ const myRequest: PairingStartRequest  = req.body;
   // // Validate public key format (Ethereum address)
   // if (!publicKey || !publicKey.match(/^0x[a-fA-F0-9]{40}$/)) {
   //   return res.status(400).json({ 
@@ -46,7 +46,8 @@ export default async function handler(
     const pairingCode = Math.floor(1000 + Math.random() * 9000).toString();
     const now = new Date();
     const expiresAt = new Date(now.getTime() + 5 * 60 * 1000); // 5 minutes
-
+    const publicKey = myRequest.publicKey;
+    const deviceInfo = myRequest.deviceInfo;
     // Store pending pairing in Firestore
     await db.collection('devicePairings').doc(pairingCode).set({
       pairingCode,
