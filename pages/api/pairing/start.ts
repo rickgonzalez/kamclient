@@ -3,6 +3,16 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { customInitApp } from '../../../lib/firebase-admin-config';
 import { getFirestore } from 'firebase-admin/firestore';
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '1mb',
+    },
+  },
+};
+
+
+
 customInitApp();
 const db = getFirestore();
 
@@ -33,8 +43,16 @@ export default async function handler(
 
  // const { publicKey, deviceInfo } = req.body as PairingStartRequest;
  const myRequest: PairingStartRequest  = req.body;
- console.log("request body -------->", req.body);
+ console.log('Content-Type:', req.headers['content-type']);
+ console.log('Raw body:', req.body);
  console.log("myRequest-------->", myRequest);
+  console.log('=== Pairing Start Request ===');
+  console.log('Method:', req.method);
+  console.log('Headers:', JSON.stringify(req.headers, null, 2));
+  console.log('Body type:', typeof req.body);
+  console.log('Body:', req.body);
+  console.log('Query:', req.query);
+  console.log('===========================');
   // // Validate public key format (Ethereum address)
   // if (!publicKey || !publicKey.match(/^0x[a-fA-F0-9]{40}$/)) {
   //   return res.status(400).json({ 
